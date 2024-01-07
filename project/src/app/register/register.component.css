@@ -1,0 +1,18 @@
+.register_cont {
+  max-width: 400px;
+}
+
+.register_cont form {
+  display: flex;
+  flex-direction: column;
+}
+form mat-form-field mat-label {
+  color: green;
+}
+form mat-form-field mat-error {
+  color: red;
+  font-size: 0.75rem;
+}
+form mat-form-field {
+  background-color: rgba(0, 136, 255, 0);
+}

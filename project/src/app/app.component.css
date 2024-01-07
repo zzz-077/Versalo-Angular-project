@@ -1,0 +1,46 @@
+nav {
+  background-color: white;
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+}
+.navbar {
+  max-width: 1440px;
+  display: flex;
+  margin: 0 auto;
+  padding: 0.25rem 0;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .Homepage a {
+  font-size: 2rem;
+  color: crimson;
+  text-decoration: none;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  font-size: 1.25rem;
+}
+.navbar ul li {
+  padding: 2px 8px;
+  border-radius: 0.25rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.navbar ul li:hover {
+  background-color: black;
+}
+.navbar ul li:hover a {
+  color: white;
+}
+.navbar ul li a {
+  transition: all 0.3s;
+  text-decoration: none;
+  color: black;
+}
+.navbar ul li a.navcolor {
+  color: crimson;
+}

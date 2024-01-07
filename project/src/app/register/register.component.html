@@ -1,0 +1,57 @@
+<div class="register_cont">
+  <form [formGroup]="RegisterForm">
+    <mat-form-field appearance="fill">
+      <mat-label> Name </mat-label>
+      <input type="text" matInput formControlName="Name" />
+      <mat-error *ngIf="Name && Name.invalid">incorrect Name form</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label> lastName </mat-label>
+      <input type="text" matInput formControlName="LastName" />
+      <mat-error *ngIf="LastName && LastName.invalid"
+        >incorrect LastName form</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label> Email </mat-label>
+      <input type="email" matInput formControlName="Email" />
+      <mat-error *ngIf="Email && Email.invalid">incorrect Email form</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label> Password </mat-label>
+      <input type="password" matInput formControlName="Password" />
+      <mat-error *ngIf="Password && Password.invalid"
+        >incorrect Password form</mat-error
+      >
+    </mat-form-field>
+    <br />
+
+    <mat-form-field appearance="fill">
+      <mat-label> Confirm Password </mat-label>
+      <input type="password" matInput formControlName="ConfirmPassword" />
+      <mat-error
+        *ngIf="
+          RegisterForm.hasError('Mustmatch', ['ConfirmPassword']) &&
+          ConfirmPassword?.touched
+        "
+      >
+        Passwords do not match
+      </mat-error>
+      <mat-error
+        *ngIf="
+          !RegisterForm.hasError('Mustmatch', ['ConfirmPassword']) &&
+          ConfirmPassword?.invalid &&
+          ConfirmPassword?.touched
+        "
+      >
+        incorrect Confirm password form
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button>Register</button>
+    </div>
+  </form>
+</div>

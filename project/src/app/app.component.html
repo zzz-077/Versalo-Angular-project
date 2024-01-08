@@ -1,14 +1,22 @@
 <nav>
   <div class="navbar">
     <div class="Homepage">
-      <a routerLink="">Home</a>
+      <img
+        routerLink="/"
+        class="logo"
+        src="/assets/full-logo.svg"
+        alt="Versalo"
+      />
     </div>
     <ul>
-      <li>
+      <li *ngIf="activeRoute === '/signup'">
         <a routerLink="signin">Sign In</a>
       </li>
-      <li>
-        <a routerLink="register">Register</a>
+      <li *ngIf="activeRoute === '/signin'">
+        <a routerLink="signup">Sign up</a>
+      </li>
+      <li *ngIf="activeRoute === '/'">
+        <a (click)="logOut()" routerLink="signin">Log out</a>
       </li>
     </ul>
   </div>

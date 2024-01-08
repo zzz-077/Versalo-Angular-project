@@ -1,20 +1,32 @@
 <div class="register_cont">
   <form>
-    <mat-form-field appearance="fill">
-      <mat-label> Email </mat-label>
-      <input type="email" matInput />
-      <mat-error>incorrect Email form</mat-error>
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="fill">
-      <mat-label> Password </mat-label>
-      <input type="password" matInput />
-      <mat-error>incorrect Password form</mat-error>
-    </mat-form-field>
-    <br />
-
-    <div>
-      <button>SignIn</button>
+    <div class="form-field">
+      <label for="email" class="form-field-label">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="form-field-input"
+        placeholder="example@gmail.com"
+      />
     </div>
+    <div class="form-field">
+      <label for="password" class="form-field-label">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        class="form-field-input"
+        placeholder="********"
+      />
+    </div>
+
+    <button mat-raised-button color="primary" class="signin-btn">
+      Sign In
+    </button>
+    <p class="no-account-text">
+      Don't have an account?
+      <a class="signup-link" href="/signup">Sign up now</a>
+    </p>
   </form>
 </div>

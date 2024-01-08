@@ -6,58 +6,59 @@ import {
   ValidatorFn,
   AbstractControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  constructor() {}
+  constructor(private router: Router) {}
   /*==============================*/
   /*====CREATING REGISTER FORM====*/
   /*==============================*/
   RegisterForm = new FormGroup(
     {
-      Name: new FormControl('', [
+      name: new FormControl('', [
         Validators.required,
         Validators.pattern('[a-zA-Z]+$'),
       ]),
-      LastName: new FormControl('', [
+      lastname: new FormControl('', [
         Validators.required,
         Validators.pattern('[a-zA-Z]+$'),
       ]),
-      Email: new FormControl('', [
+      email: new FormControl('', [
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
       ]),
-      Password: new FormControl('', [
+      password: new FormControl('', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.pattern(/^(?=.*\d).{8,}$/),
       ]),
-      ConfirmPassword: new FormControl('', [
+      confirmPassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.pattern(/^(?=.*\d).{8,}$/),
       ]),
     },
-    { validators: this.Mustmatch('Password', 'ConfirmPassword') }
+    { validators: this.Mustmatch('password', 'confirmPassword') }
   );
   /*==============================*/
   /*====GIVING FORM TO INPUTS ====*/
   /*==============================*/
   get Name() {
-    return this.RegisterForm.get('Name');
+    return this.RegisterForm.get('name');
   }
   get LastName() {
-    return this.RegisterForm.get('LastName');
+    return this.RegisterForm.get('lastname');
   }
   get Email() {
-    return this.RegisterForm.get('Email');
+    return this.RegisterForm.get('email');
   }
   get Password() {
-    return this.RegisterForm.get('Password');
+    return this.RegisterForm.get('password');
   }
   get ConfirmPassword() {
-    return this.RegisterForm.get('ConfirmPassword');
+    return this.RegisterForm.get('confirmPassword');
   }
   /*==================================*/
   /*====PASSWORD CONFIRMATION LOGIC ====*/
@@ -73,18 +74,25 @@ export class RegisterComponent {
 
       if (
         ConfirmPasswordControl.errors &&
-        !ConfirmPasswordControl.errors['Mustmatch']
+        !ConfirmPasswordControl.errors['passwordMismatch']
       ) {
         return null;
       }
 
       if (ConfirmPasswordControl.value !== PasswordControl.value) {
-        ConfirmPasswordControl.setErrors({ Mustmatch: true });
+        ConfirmPasswordControl.setErrors({ passwordMismatch: true });
       } else {
         ConfirmPasswordControl.setErrors(null);
       }
 
       return null;
     };
+  }
+
+  onSignup() {
+    if (this.RegisterForm.valid) {
+      localStorage.setItem('isLogged', JSON.stringify(true));
+      this.router.navigate(['/']);
+    }
   }
 }

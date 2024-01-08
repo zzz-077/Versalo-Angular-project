@@ -1,57 +1,209 @@
 <div class="register_cont">
   <form [formGroup]="RegisterForm">
-    <mat-form-field appearance="fill">
-      <mat-label> Name </mat-label>
-      <input type="text" matInput formControlName="Name" />
-      <mat-error *ngIf="Name && Name.invalid">incorrect Name form</mat-error>
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="fill">
-      <mat-label> lastName </mat-label>
-      <input type="text" matInput formControlName="LastName" />
-      <mat-error *ngIf="LastName && LastName.invalid"
-        >incorrect LastName form</mat-error
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="fill">
-      <mat-label> Email </mat-label>
-      <input type="email" matInput formControlName="Email" />
-      <mat-error *ngIf="Email && Email.invalid">incorrect Email form</mat-error>
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="fill">
-      <mat-label> Password </mat-label>
-      <input type="password" matInput formControlName="Password" />
-      <mat-error *ngIf="Password && Password.invalid"
-        >incorrect Password form</mat-error
-      >
-    </mat-form-field>
-    <br />
-
-    <mat-form-field appearance="fill">
-      <mat-label> Confirm Password </mat-label>
-      <input type="password" matInput formControlName="ConfirmPassword" />
-      <mat-error
+    <div class="form-field">
+      <label for="name" class="form-field-label">Name</label>
+      <input
+        type="name"
+        formControlName="name"
+        id="name"
+        class="form-field-input"
+        placeholder="Adolf"
+      />
+      <div
         *ngIf="
-          RegisterForm.hasError('Mustmatch', ['ConfirmPassword']) &&
-          ConfirmPassword?.touched
+          RegisterForm.get('name')?.invalid &&
+          (RegisterForm.get('name')?.dirty || RegisterForm.get('name')?.touched)
         "
       >
-        Passwords do not match
-      </mat-error>
-      <mat-error
-        *ngIf="
-          !RegisterForm.hasError('Mustmatch', ['ConfirmPassword']) &&
-          ConfirmPassword?.invalid &&
-          ConfirmPassword?.touched
-        "
-      >
-        incorrect Confirm password form
-      </mat-error>
-    </mat-form-field>
-    <div>
-      <button>Register</button>
+        <mat-error>
+          <span *ngIf="RegisterForm.get('name')?.hasError('required')"
+            >Name is required</span
+          >
+          <span *ngIf="RegisterForm.get('name')?.hasError('pattern')"
+            >Incorrect Name format</span
+          >
+        </mat-error>
+      </div>
     </div>
+    <div class="form-field">
+      <label for="lastname" class="form-field-label">Lastname</label>
+      <input
+        type="lastname"
+        formControlName="lastname"
+        id="lastname"
+        class="form-field-input"
+        placeholder="Hitler"
+      />
+      <div
+        *ngIf="
+          RegisterForm.get('lastname')?.invalid &&
+          (RegisterForm.get('lastname')?.dirty ||
+            RegisterForm.get('lastname')?.touched)
+        "
+      >
+        <mat-error>
+          <span *ngIf="RegisterForm.get('lastname')?.hasError('required')"
+            >Lastname is required</span
+          >
+          <span *ngIf="RegisterForm.get('lastname')?.hasError('pattern')"
+            >Incorrect Lastname format</span
+          >
+        </mat-error>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="email" class="form-field-label">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        id="email"
+        class="form-field-input"
+        placeholder="example@gmail.com"
+      />
+      <div
+        *ngIf="
+          RegisterForm.get('email')?.invalid &&
+          (RegisterForm.get('email')?.dirty ||
+            RegisterForm.get('email')?.touched)
+        "
+      >
+        <mat-error>
+          <span *ngIf="RegisterForm.get('email')?.hasError('required')"
+            >Email is required</span
+          >
+          <span *ngIf="RegisterForm.get('email')?.hasError('pattern')"
+            >Incorrect Email format</span
+          >
+        </mat-error>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="password" class="form-field-label">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        id="password"
+        class="form-field-input"
+        placeholder="********"
+      />
+      <div
+        *ngIf="
+          RegisterForm.get('password')?.invalid &&
+          (RegisterForm.get('password')?.dirty ||
+            RegisterForm.get('password')?.touched)
+        "
+      >
+        <mat-error>
+          <span *ngIf="RegisterForm.get('password')?.hasError('required')"
+            >Password is required</span
+          >
+          <span *ngIf="RegisterForm.get('password')?.hasError('pattern')"
+            >At least 8 characters</span
+          >
+        </mat-error>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="confirmPassword" class="form-field-label"
+        >Confirm Password</label
+      >
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        id="confirmPassword"
+        class="form-field-input"
+        placeholder="********"
+      />
+      <div
+        *ngIf="
+          RegisterForm.get('confirmPassword')?.invalid &&
+          (RegisterForm.get('confirmPassword')?.dirty ||
+            RegisterForm.get('confirmPassword')?.touched)
+        "
+      >
+        <mat-error>
+          <span
+            *ngIf="RegisterForm.get('confirmPassword')?.hasError('required')"
+            >Confirmation is required</span
+          >
+          <span *ngIf="RegisterForm.get('confirmPassword')?.hasError('pattern')"
+            >At least 8 characters</span
+          >
+          <span
+            *ngIf="
+              !RegisterForm.get('confirmPassword')?.hasError('required') &&
+              !RegisterForm.get('confirmPassword')?.hasError('pattern') &&
+              RegisterForm.get('confirmPassword') !==
+                RegisterForm.get('password')
+            "
+            >Password does not match</span
+          >
+        </mat-error>
+      </div>
+    </div>
+
+    <button
+      [disabled]="!this.RegisterForm.valid"
+      mat-raised-button
+      color="primary"
+      class="signin-btn"
+      (click)="onSignup()"
+    >
+      Sign Up
+    </button>
   </form>
 </div>
+
+<!-- <mat-form-field appearance="fill">
+  <mat-label> Name </mat-label>
+  <input type="text" matInput formControlName="Name" />
+  <mat-error *ngIf="Name && Name.invalid">incorrect Name form</mat-error>
+</mat-form-field>
+<br />
+<mat-form-field appearance="fill">
+  <mat-label> lastName </mat-label>
+  <input type="text" matInput formControlName="LastName" />
+  <mat-error *ngIf="LastName && LastName.invalid"
+    >incorrect LastName form</mat-error
+  >
+</mat-form-field>
+<br />
+<mat-form-field appearance="fill">
+  <mat-label> Email </mat-label>
+  <input type="email" matInput formControlName="Email" />
+  <mat-error *ngIf="Email && Email.invalid">incorrect Email form</mat-error>
+</mat-form-field>
+<br />
+<mat-form-field appearance="fill">
+  <mat-label> Password </mat-label>
+  <input type="password" matInput formControlName="Password" />
+  <mat-error *ngIf="Password && Password.invalid"
+    >incorrect Password form</mat-error
+  >
+</mat-form-field>
+<br />
+
+<mat-form-field appearance="fill">
+  <mat-label> Confirm Password </mat-label>
+  <input type="password" matInput formControlName="ConfirmPassword" />
+  <mat-error
+    *ngIf="
+      RegisterForm.hasError('Mustmatch', ['ConfirmPassword']) &&
+      ConfirmPassword?.touched
+    "
+  >
+    Passwords do not match
+  </mat-error>
+  <mat-error
+    *ngIf="
+      !RegisterForm.hasError('Mustmatch', ['ConfirmPassword']) &&
+      ConfirmPassword?.invalid &&
+      ConfirmPassword?.touched
+    "
+  >
+    incorrect Confirm password form
+  </mat-error>
+</mat-form-field>
+<div>
+  <button>Register</button>
+</div> -->

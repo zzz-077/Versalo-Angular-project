@@ -4,43 +4,52 @@ nav {
   z-index: 100;
   position: fixed;
 }
+
 .navbar {
   max-width: 1440px;
   display: flex;
   margin: 0 auto;
-  padding: 0.25rem 0;
+  padding: 0.25rem 4rem;
   justify-content: space-between;
   align-items: center;
 }
-.navbar .Homepage a {
-  font-size: 2rem;
-  color: crimson;
-  text-decoration: none;
+
+.navbar .Homepage {
+  height: 50px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
+
+
+.navbar .Homepage .logo {
+  width: 100%;
+  object-fit: contain;
+}
+
 .navbar ul {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 3rem;
-  font-size: 1.25rem;
+  gap: 0.4rem;
 }
-.navbar ul li {
-  padding: 2px 8px;
-  border-radius: 0.25rem;
-  transition: all 0.3s;
-  cursor: pointer;
-}
-.navbar ul li:hover {
-  background-color: black;
-}
-.navbar ul li:hover a {
-  color: white;
-}
+
 .navbar ul li a {
   transition: all 0.3s;
   text-decoration: none;
-  color: black;
+  color: rgb(32, 32, 33);
+  border: 1px solid rgb(51, 51, 166);
+  color: blue;
 }
+
+.navbar ul li a:hover {
+  border-color: rgb(4, 50, 121);
+  color: rgb(4, 50, 121);
+  background-color: rgb(238, 244, 252);
+}
+
 .navbar ul li a.navcolor {
   color: crimson;
 }

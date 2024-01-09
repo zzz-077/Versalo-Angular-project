@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { regInterface } from '../data/registerInterface';
+import { DataService } from '../data/data.service';
+
 import {
   FormGroup,
   FormControl,
@@ -13,7 +16,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  constructor(private router: Router) {}
+  RegUser: regInterface[] = [];
+
+  constructor(private router: Router, private services: DataService) {}
   /*==============================*/
   /*====CREATING REGISTER FORM====*/
   /*==============================*/
@@ -33,11 +38,11 @@ export class RegisterComponent {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^(?=.*\d).{8,}$/),
+        Validators.pattern(/^.{8,}$/),
       ]),
       confirmPassword: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^(?=.*\d).{8,}$/),
+        Validators.pattern(/^.{8,}$/),
       ]),
     },
     { validators: this.Mustmatch('password', 'confirmPassword') }
@@ -45,21 +50,7 @@ export class RegisterComponent {
   /*==============================*/
   /*====GIVING FORM TO INPUTS ====*/
   /*==============================*/
-  get Name() {
-    return this.RegisterForm.get('name');
-  }
-  get LastName() {
-    return this.RegisterForm.get('lastname');
-  }
-  get Email() {
-    return this.RegisterForm.get('email');
-  }
-  get Password() {
-    return this.RegisterForm.get('password');
-  }
-  get ConfirmPassword() {
-    return this.RegisterForm.get('confirmPassword');
-  }
+
   /*==================================*/
   /*====PASSWORD CONFIRMATION LOGIC ====*/
   /*====================================*/
@@ -88,11 +79,23 @@ export class RegisterComponent {
       return null;
     };
   }
-
+  /*==================================*/
+  /*====SAVING USER DATA IN JSON====*/
+  /*====================================*/
   onSignup() {
+    this.services
+      .RegisteredData({
+        id: '',
+        userName: this.RegisterForm.value.name as string,
+        userLastName: this.RegisterForm.value.lastname as string,
+        userEmail: this.RegisterForm.value.email as string,
+        userPassword: this.RegisterForm.value.password as string,
+      })
+      .subscribe();
+
     if (this.RegisterForm.valid) {
       localStorage.setItem('isLogged', JSON.stringify(true));
-      this.router.navigate(['/']);
+      this.router.navigate(['/signin']);
     }
   }
 }

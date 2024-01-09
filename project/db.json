@@ -1,0 +1,53 @@
+{
+  "register": [
+    {
+      "id": 1,
+      "userName": "vaska",
+      "userLastName": "zardiashvili",
+      "userEmail": "vaska2004@gmail.com",
+      "userPassword": "12345678"
+    },
+    {
+      "id": 2,
+      "userName": "guja",
+      "userLastName": "gujejiani",
+      "userEmail": "gujeqsdzlieri@gmail.ru",
+      "userPassword": "magarkacagujeja"
+    },
+    {
+      "id": 3,
+      "userName": "sasha",
+      "userLastName": "shumaxeri",
+      "userEmail": "sasha@gmail.ru",
+      "userPassword": "12345678"
+    },
+    {
+      "id": 4,
+      "userName": "john",
+      "userLastName": "doe",
+      "userEmail": "johndoe123@busines.com",
+      "userPassword": "john123doe456"
+    },
+    {
+      "id": 5,
+      "userName": "luka",
+      "userLastName": "adeshidze",
+      "userEmail": "lukson@gmail.com",
+      "userPassword": "123lukadzlieri123"
+    },
+    {
+      "id": 6,
+      "userName": "adolf",
+      "userLastName": "hitler",
+      "userEmail": "saponi@gmail.ger",
+      "userPassword": "doichlan"
+    },
+    {
+      "id": 7,
+      "userName": "Nikvardi",
+      "userLastName": "eliashvili",
+      "userEmail": "gori+vashli@gmail.com",
+      "userPassword": "stalinithegod"
+    }
+  ]
+}

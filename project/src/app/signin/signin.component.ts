@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { regInterface } from '../data/registerInterface';
-import { DataService } from '../data/data.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { userInterface } from '../data-service/registerInterface';
+import { DataService } from '../data-service/data.service';
 import { Router } from '@angular/router';
 import {
   FormGroup,
@@ -8,6 +8,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { LocalStorageService } from '../local-storage-service/local-storage.service';
 
 @Component({
   selector: 'app-signin',
@@ -15,14 +16,18 @@ import {
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent {
-  constructor(private router: Router, private services: DataService) {}
-  user: regInterface[] = [];
+  constructor(
+    private router: Router,
+    private services: DataService,
+    private localStorageService: LocalStorageService
+  ) {}
+  user: userInterface[] = [];
   checkIfExists = true;
   /*==============================*/
   /*====SIGNIN FORM====*/
   /*==============================*/
   signinForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -49,10 +54,12 @@ export class SigninComponent {
         }
       }
       this.checkIfExists = foundError;
-      console.log('yourSignInAnswerIs: ' + this.checkIfExists);
+      setTimeout(() => {
+        this.checkIfExists = true;
+      }, 3000);
       if (this.checkIfExists == true) {
-        localStorage.setItem('isLogged', JSON.stringify(true));
-        this.router.navigate(['']);
+        this.localStorageService.setIsLogged(true);
+        this.router.navigate(['/']);
       }
     }
   }

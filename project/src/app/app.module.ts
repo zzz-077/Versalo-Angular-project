@@ -16,6 +16,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CarCardComponent } from './car-card/car-card.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
+import { CarsPageComponent } from './cars-page/cars-page.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     SigninComponent,
     HomePageComponent,
     NotFoundComponent,
+    CarCardComponent,
+    AboutPageComponent,
+    MyProfilePageComponent,
+    CarsPageComponent,
   ],
   imports: [
     BrowserModule,

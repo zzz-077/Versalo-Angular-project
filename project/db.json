@@ -1,5 +1,5 @@
 {
-  "register": [
+  "users": [
     {
       "id": 1,
       "userName": "vaska",
@@ -48,6 +48,13 @@
       "userLastName": "eliashvili",
       "userEmail": "gori+vashli@gmail.com",
       "userPassword": "stalinithegod"
+    },
+    {
+      "id": 8,
+      "userName": "Nika",
+      "userLastName": "Eliashvili",
+      "userEmail": "nika@gmail.com",
+      "userPassword": "123123123"
     }
   ]
 }

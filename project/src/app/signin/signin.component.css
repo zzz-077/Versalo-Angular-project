@@ -34,7 +34,7 @@
   border: none;
   background: whitesmoke;
   border-radius: 0.35rem;
-  animation: showup 1.5s ease-out 0s;
+  animation: showup 1s ease-out 0s;
 }
 
 .form-field-input::placeholder {
@@ -65,16 +65,17 @@
   margin-left: 0.3rem;
   text-decoration: underline;
 }
+
 .error_message {
-  padding: 0.25rem 0.5rem;
+  padding: 0.35rem 0.5rem;
   border-radius: 0.25rem;
   display: flex;
   align-items: center;
   text-align: left;
-  background-color: rgb(190, 53, 53);
-  color: white;
-  font-size: 0.75rem;
+  background-color: rgba(190, 53, 53, 0.1);
+  font-size: 1.05rem;
   border: 1px solid rgb(220, 7, 7);
+  color: rgb(255, 0, 0);
   transition: all 0.3s;
 }
 

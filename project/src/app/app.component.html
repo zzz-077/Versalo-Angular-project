@@ -9,14 +9,52 @@
       />
     </div>
     <ul>
-      <li *ngIf="activeRoute === '/signup'">
-        <a routerLink="signin">Sign In</a>
+      <li>
+        <a
+          class="nav-link"
+          routerLink=""
+          routerLinkActive="activeLink"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
       </li>
-      <li *ngIf="activeRoute === '/signin'">
-        <a routerLink="signup">Sign up</a>
+      <li>
+        <a class="nav-link" routerLink="about" routerLinkActive="activeLink"
+          >About</a
+        >
       </li>
-      <li *ngIf="activeRoute === '/'">
-        <a (click)="logOut()" routerLink="signin">Log out</a>
+      <li>
+        <a class="nav-link" routerLink="cars" routerLinkActive="activeLink"
+          >Cars</a
+        >
+      </li>
+      <li>
+        <a class="nav-link" routerLink="profile" routerLinkActive="activeLink"
+          >Profile</a
+        >
+      </li>
+      <li class="sign-btns">
+        <a
+          *ngIf="
+            !isLogged &&
+            (activeRoute === '/signup' ||
+              (activeRoute !== '/signup' && activeRoute !== '/signin'))
+          "
+          class="btn"
+          (click)="signIn()"
+          >Sign In</a
+        >
+        <a
+          *ngIf="
+            !isLogged &&
+            (activeRoute === '/signin' ||
+              (activeRoute !== '/signup' && activeRoute !== '/signin'))
+          "
+          class="btn"
+          (click)="signUp()"
+          >Sign up</a
+        >
+        <a *ngIf="isLogged" class="btn" (click)="logOut()">Log out</a>
       </li>
     </ul>
   </div>

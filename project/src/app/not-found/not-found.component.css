@@ -8,15 +8,20 @@
   color: white;
   text-align: center;
 }
+
 .doesnot_exist_page h1 {
   font-size: 12rem;
   color: crimson;
 }
+
 .doesnot_exist_page h3 {
+  color: black;
   font-size: 1.25rem;
   margin-bottom: 10px;
 }
+
 .doesnot_exist_page p {
+  color: black;
   font-size: 1rem;
   text-transform: lowercase;
 }

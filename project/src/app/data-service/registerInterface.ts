@@ -1,4 +1,4 @@
-export interface regInterface {
+export interface userInterface {
   id: string;
   userName: string;
   userLastName: string;

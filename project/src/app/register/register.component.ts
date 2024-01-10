@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { regInterface } from '../data/registerInterface';
-import { DataService } from '../data/data.service';
+import { userInterface } from '../data-service/registerInterface';
+import { DataService } from '../data-service/data.service';
 
 import {
   FormGroup,
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  RegUser: regInterface[] = [];
+  RegUser: userInterface[] = [];
 
   constructor(private router: Router, private services: DataService) {}
   /*==============================*/
@@ -47,9 +47,6 @@ export class RegisterComponent {
     },
     { validators: this.Mustmatch('password', 'confirmPassword') }
   );
-  /*==============================*/
-  /*====GIVING FORM TO INPUTS ====*/
-  /*==============================*/
 
   /*==================================*/
   /*====PASSWORD CONFIRMATION LOGIC ====*/

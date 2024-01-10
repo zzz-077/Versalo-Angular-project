@@ -33,23 +33,96 @@ nav {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 1.25rem;
 }
 
-.navbar ul li a {
-  transition: all 0.3s;
+.navbar ul li a.btn {
+  height: fit-content;
+  font-size: 1rem;
   text-decoration: none;
   color: rgb(32, 32, 33);
   border: 1px solid rgb(51, 51, 166);
   color: blue;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+  transition-delay: 0.1s;
 }
 
-.navbar ul li a:hover {
-  border-color: rgb(4, 50, 121);
-  color: rgb(4, 50, 121);
-  background-color: rgb(238, 244, 252);
+.navbar ul li a.btn:hover {
+  color: white;
 }
 
-.navbar ul li a.navcolor {
+.navbar ul li a.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgb(51, 51, 166);
+  transition: 0.3s ease-in-out;
+  transition-delay: 0.1s;
+}
+
+.navbar ul li a.btn:hover:before {
+  width: 100%;
+}
+
+.navbar ul li .nav-link {
+  all: unset;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: rgb(29, 29, 29);
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s linear;
+}
+
+.navbar ul li .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  width: 0;
+  height: 3px;
+  border-radius: 1rem;
+  background-color: crimson;
+  transition: 0.25s linear;
+
+}
+
+.navbar ul li .nav-link:hover {
   color: crimson;
+}
+
+.navbar ul li .nav-link:hover::before {
+  width: 100%;
+}
+
+
+.navbar ul li .nav-link.activeLink {
+  color: crimson;
+  position: relative;
+}
+
+.navbar ul li .nav-link.activeLink::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 3px;
+  border-radius: 1rem;
+  background-color: crimson;
+  transition: 0.25s linear;
+
+}
+
+
+.sign-btns {
+  margin-left: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }

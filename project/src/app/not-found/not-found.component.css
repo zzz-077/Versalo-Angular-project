@@ -5,23 +5,22 @@
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  color: white;
   text-align: center;
 }
 
 .doesnot_exist_page h1 {
   font-size: 12rem;
-  color: crimson;
+  color: var(--navbar_links__color_hovered);
 }
 
 .doesnot_exist_page h3 {
-  color: black;
+  color: var(--navbar_links__color);
   font-size: 1.25rem;
   margin-bottom: 10px;
 }
 
 .doesnot_exist_page p {
-  color: black;
+  color: var(--navbar_links__color);
   font-size: 1rem;
   text-transform: lowercase;
 }

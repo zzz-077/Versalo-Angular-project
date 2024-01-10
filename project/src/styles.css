@@ -1,21 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-:root {}
-
-
+:root {
+  --navbar_links__color: #1d1d1d;
+  --navbar_links__color_hovered: crimson;
+  --sign_btn_color: #3333a6;
+  --btn_BGcolor: #3f51b5;
+  --main_BGcolor: #f2f3f6;
+  --sign_BGcolor: white;
+  --error_message_color: #ff0000;
+}
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background-color: #f2f3f6;
-  height: 300vh;
+  background-color: var(--main_BGcolor);
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+  overflow-x: none;
 }
 
 html,
@@ -23,11 +29,9 @@ body {
   height: 100%;
 }
 
-
-
 a.btn {
   cursor: pointer;
-  border: 1px solid rgb(206, 204, 204);
+  border: 1px solid #cecccc;
   padding: 0.2rem 1rem;
   border-radius: 1rem;
 }
@@ -38,18 +42,16 @@ button {
   border: none;
   font-family: inherit;
   font-size: 1rem;
-  background: #3f51b5;
+  background: var(--btn_BGcolor);
   border-radius: 0.3rem;
-  color: white;
+  color: var(--sign_BGcolor);
   cursor: pointer;
-  border: 2px solid #3f51b5;
+  border: 2px solid var(--btn_BGcolor);
   transition: all 0.125s;
 }
 
-
 button:hover {
   filter: brightness(1.15);
-
 }
 
 button:disabled {

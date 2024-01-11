@@ -20,6 +20,8 @@ import { CarCardComponent } from './car-card/car-card.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
 import { CarsPageComponent } from './cars-page/cars-page.component';
+import { MatIconModule } from '@angular/material/icon';
+import { UserService } from './user-service/user.service';
 
 @NgModule({
   declarations: [
@@ -45,8 +47,9 @@ import { CarsPageComponent } from './cars-page/cars-page.component';
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
+    MatIconModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

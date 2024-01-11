@@ -3,14 +3,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
 }
 
 nav {
   background-color: var(--sign_BGcolor);
   width: 100%;
-  z-index: 100;
-  position: fixed;
 }
 
 .navbar {
@@ -43,24 +40,65 @@ nav {
   gap: 1.25rem;
 }
 
-.navbar ul li a.btn {
+.navbar ul li .nav-link .user {
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar ul li .nav-link .user .user-name {
+  position: relative;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.navbar ul li .nav-link .user .user-name::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 0;
+  height: 3px;
+  border-radius: 1rem;
+  background-color: var(--navbar_links__color_hovered);
+  transition: 0.25s linear;
+}
+
+.navbar ul li .nav-link .user .user-name:hover::before {
+  width: 100%;
+}
+
+.navbar ul li .nav-link .user .user-img {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  border-radius: 50%;
+}
+
+.navbar ul li .nav-link .user .user-img img {
+  width: 35px;
+}
+
+.navbar ul li.sign-btns a.btn {
+  position: relative;
   height: fit-content;
   font-size: 1rem;
   text-decoration: none;
   color: var(--navbar_links__color);
   border: 1px solid var(--sign_btn_color);
   color: var(--sign_btn_color);
-  position: relative;
   overflow: hidden;
   transition: all 0.2s;
   transition-delay: 0.1s;
+  z-index: 1;
 }
 
-.navbar ul li a.btn:hover {
+.navbar ul li.sign-btns a.btn:hover {
   color: var(--sign_BGcolor);
 }
 
-.navbar ul li a.btn::before {
+.navbar ul li.sign-btns a.btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -73,7 +111,7 @@ nav {
   transition-delay: 0.1s;
 }
 
-.navbar ul li a.btn:hover:before {
+.navbar ul li.sign-btns a.btn:hover::before {
   width: 100%;
 }
 
@@ -122,18 +160,65 @@ nav {
   transition: 0.25s linear;
 }
 
+.navbar ul li .add-btn {
+  all: unset;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.8rem;
+  background-color: var(--navbar_links__color_hovered);
+  color: var(--sign_BGcolor);
+  filter: hue-rotate(-5deg);
+  transition: 0.15s linear;
+}
+
+.navbar ul li .add-btn .mat-icon {
+  transform: scale(0.9);
+}
+
+.navbar ul li .add-btn:hover {
+  filter: brightness(1.02);
+}
+
+.navbar ul li .add-btn:active {
+  transform: scale(0.97);
+}
+
+.navbar ul li .nav-link.activeLink .user .user-name {
+  position: relative;
+}
+
+.navbar ul li .nav-link.activeLink .user .user-name::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 3px;
+  border-radius: 1rem;
+  background-color: var(--navbar_links__color_hovered);
+  transition: 0.25s linear;
+}
+
 .sign-btns {
-  margin-left: 1.125rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
 
+
+main {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+
+
 .footer_content {
-  margin-top: 2rem;
-  position: absolute;
-  bottom: 0;
   width: 100%;
   background-color: #252525;
   color: #aaa;
@@ -143,18 +228,21 @@ nav {
   align-items: center;
   font-weight: 500;
   gap: 1rem;
+  z-index: 1000;
 }
+
 .footer_content h3 {
   font-size: 1.25rem;
-  color: rgb(73, 76, 84);
+  color: #aaa;
 }
 
 .footer_content div {
   height: 60px;
 }
 
-.footer_content div img {
+.footer_content .footer-logo {
   object-fit: cover;
   width: 100px;
   height: 100%;
+  filter: brightness(0.8);
 }

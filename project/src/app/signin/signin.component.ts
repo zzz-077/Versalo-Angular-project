@@ -9,6 +9,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
+import { UserService } from '../user-service/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -19,7 +20,8 @@ export class SigninComponent {
   constructor(
     private router: Router,
     private services: DataService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private userService: UserService
   ) {}
   user: userInterface[] = [];
   checkIfExists = true;
@@ -35,7 +37,6 @@ export class SigninComponent {
     this.services.getuserData().subscribe((userList) => {
       if (Array.isArray(userList)) {
         this.user = userList;
-        console.log(this.user);
       }
     });
   }
@@ -48,6 +49,7 @@ export class SigninComponent {
           this.user[i].userPassword == this.signinForm.value.password
         ) {
           foundError = true;
+          this.userService.setLoggedInUser(this.user[i]);
           break;
         } else {
           foundError = false;
@@ -57,9 +59,17 @@ export class SigninComponent {
       setTimeout(() => {
         this.checkIfExists = true;
       }, 3000);
+
       if (this.checkIfExists == true) {
         this.localStorageService.setIsLogged(true);
-        this.router.navigate(['/']);
+        const intendedRoute = this.localStorageService.getIntendedRoute();
+        if (intendedRoute) {
+          this.localStorageService.clearIntendedRoute();
+          this.router.navigate([intendedRoute]);
+        } else {
+          // If no intended route, navigate to the default route
+          this.router.navigate(['/']);
+        }
       }
     }
   }

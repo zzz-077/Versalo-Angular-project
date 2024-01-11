@@ -1,70 +1,93 @@
-<nav>
-  <div class="navbar">
-    <div class="Homepage">
-      <img
-        routerLink="/"
-        class="logo"
-        src="/assets/full-logo.svg"
-        alt="Versalo"
-      />
+<div class="site-wrapper">
+  <nav>
+    <div class="navbar">
+      <div class="Homepage">
+        <img
+          routerLink="/"
+          class="logo"
+          src="/assets/full-logo.svg"
+          alt="Versalo"
+        />
+      </div>
+      <ul>
+        <li>
+          <a
+            class="nav-link"
+            (click)="uploadLink()"
+            routerLinkActive="activeLink"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <div class="add-btn"><mat-icon>add_circle</mat-icon>Upload</div>
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link"
+            routerLink=""
+            routerLinkActive="activeLink"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" routerLink="about" routerLinkActive="activeLink"
+            >About</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" routerLink="cars" routerLinkActive="activeLink"
+            >Cars</a
+          >
+        </li>
+        <li *ngIf="isLogged">
+          <a
+            class="nav-link"
+            routerLink="profile"
+            routerLinkActive="activeLink"
+          >
+            <div class="user">
+              <span class="user-name">
+                {{ user?.userName || "Unknown" }}
+              </span>
+              <span class="user-img">
+                <img src="/assets/user-icon.svg" alt="{{ user?.userName }}" />
+              </span>
+            </div>
+          </a>
+        </li>
+        <li class="sign-btns">
+          <a
+            *ngIf="
+              !isLogged &&
+              (activeRoute === '/signup' ||
+                (activeRoute !== '/signup' && activeRoute !== '/signin'))
+            "
+            class="btn"
+            (click)="signIn()"
+            >Sign In</a
+          >
+          <a
+            *ngIf="
+              !isLogged &&
+              (activeRoute === '/signin' ||
+                (activeRoute !== '/signup' && activeRoute !== '/signin'))
+            "
+            class="btn"
+            (click)="signUp()"
+            >Sign up</a
+          >
+          <a *ngIf="isLogged" class="btn" (click)="logOut()">Log out</a>
+        </li>
+      </ul>
     </div>
-    <ul>
-      <li>
-        <a
-          class="nav-link"
-          routerLink=""
-          routerLinkActive="activeLink"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >Home</a
-        >
-      </li>
-      <li>
-        <a class="nav-link" routerLink="about" routerLinkActive="activeLink"
-          >About</a
-        >
-      </li>
-      <li>
-        <a class="nav-link" routerLink="cars" routerLinkActive="activeLink"
-          >Cars</a
-        >
-      </li>
-      <li>
-        <a class="nav-link" routerLink="profile" routerLinkActive="activeLink"
-          >Profile</a
-        >
-      </li>
-      <li class="sign-btns">
-        <a
-          *ngIf="
-            !isLogged &&
-            (activeRoute === '/signup' ||
-              (activeRoute !== '/signup' && activeRoute !== '/signin'))
-          "
-          class="btn"
-          (click)="signIn()"
-          >Sign In</a
-        >
-        <a
-          *ngIf="
-            !isLogged &&
-            (activeRoute === '/signin' ||
-              (activeRoute !== '/signup' && activeRoute !== '/signin'))
-          "
-          class="btn"
-          (click)="signUp()"
-          >Sign up</a
-        >
-        <a *ngIf="isLogged" class="btn" (click)="logOut()">Log out</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<main>
-  <router-outlet></router-outlet>
-</main>
-<div class="footer_content">
-  <h3>© 2023</h3>
-  <div>
-    <img src="../assets/full-logo.svg" alt="#" />
-  </div>
+  </nav>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <footer class="footer_content">
+    <h3>© 2023</h3>
+    <div>
+      <img class="footer-logo" src="../assets/full-logo-white.svg" alt="#" />
+    </div>
+  </footer>
 </div>

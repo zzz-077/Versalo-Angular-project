@@ -2,6 +2,8 @@
 
 :root {
   --navbar_links__color: #1d1d1d;
+  --dark-bg: rgba(29, 29, 29, 0.8);
+  --text-color-main: #161616;
   --navbar_links__color_hovered: crimson;
   --sign_btn_color: #3333a6;
   --btn_BGcolor: #3f51b5;
@@ -24,10 +26,21 @@ body {
   overflow-x: none;
 }
 
-html,
+/* html,
 body {
   height: 100%;
-}
+} */
+
+/* .site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  background-color: #252525;
+} */
+
+
 
 a.btn {
   cursor: pointer;
@@ -35,6 +48,9 @@ a.btn {
   padding: 0.2rem 1rem;
   border-radius: 1rem;
 }
+
+
+
 
 button {
   padding: 0.5rem 1rem;

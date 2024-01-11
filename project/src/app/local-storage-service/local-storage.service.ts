@@ -17,4 +17,16 @@ export class LocalStorageService {
     localStorage.setItem('isLogged', JSON.stringify(value));
     this.isLoggedSubject.next(value);
   }
+
+  setIntendedRoute(route: string): void {
+    localStorage.setItem('intendedRoute', route);
+  }
+
+  getIntendedRoute(): string | null {
+    return localStorage.getItem('intendedRoute');
+  }
+
+  clearIntendedRoute(): void {
+    localStorage.removeItem('intendedRoute');
+  }
 }

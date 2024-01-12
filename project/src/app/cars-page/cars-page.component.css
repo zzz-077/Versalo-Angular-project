@@ -26,7 +26,6 @@
   gap: 0.5rem;
 }
 
-
 form select {
   padding: 0.65rem 0.8rem;
   font-size: 1rem;
@@ -51,7 +50,6 @@ form select option:first-child {
 form select option {
   height: 20px;
 }
-
 
 .Filter_button {
   display: flex;
@@ -100,7 +98,6 @@ form select option {
   width: 90%;
 }
 
-
 .no-cars-found {
   margin: 2rem auto;
   width: 100%;
@@ -114,7 +111,6 @@ form select option {
   justify-content: center;
   align-items: center;
   gap: 0.7rem;
-
 }
 
 .no-cars-found h3 {

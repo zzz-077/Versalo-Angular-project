@@ -25,9 +25,9 @@ export class SigninComponent {
   ) {}
   user: userInterface[] = [];
   checkIfExists = true;
-  /*==============================*/
+  /*===================*/
   /*====SIGNIN FORM====*/
-  /*==============================*/
+  /*===================*/
   signinForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),

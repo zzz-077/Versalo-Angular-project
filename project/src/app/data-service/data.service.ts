@@ -1,12 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { userInterface } from './registerInterface';
+import {
+  carCardInterface,
+  carInterface,
+  userInterface,
+} from './registerInterface';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  /*=================*/
+  /*====USER DATA====*/
+  /*=================*/
   private registerUrl = 'http://localhost:3000/users';
   private userDataSubject: BehaviorSubject<userInterface[]> =
     new BehaviorSubject<userInterface[]>([]);
@@ -33,15 +40,43 @@ export class DataService {
       }
     );
   }
+  /*===================*/
+  /*====CAR COMPONENTS FILTER====*/
+  /*===================*/
+  private carComponentsUrl = 'http://localhost:3000/cars';
+
+  getCarComponentsData(): Observable<carInterface[]> {
+    return this.http.get<carInterface[]>(this.carComponentsUrl);
+  }
+
+  /*===================*/
+  /*====CARS CARDS====*/
+  /*===================*/
+  private carCardsUrl = 'http://localhost:3000/carCards';
+
+  getCarCardsData(): Observable<carCardInterface[]> {
+    return this.http.get<carCardInterface[]>(this.carCardsUrl);
+  }
+
+  searchData(filters: any): Observable<carCardInterface[]> {
+    let params = new HttpParams();
+
+    for (const key in filters) {
+      if (
+        filters[key] !== null &&
+        filters[key] !== undefined &&
+        filters[key] !== ''
+      ) {
+        params = params.set(key, filters[key]);
+      }
+    }
+
+    console.log(
+      'Request URL with params:',
+      this.carCardsUrl,
+      params.toString()
+    );
+
+    return this.http.get<carCardInterface[]>(this.carCardsUrl, { params });
+  }
 }
-
-// constructor(private http: HttpClient) {}
-
-// registerUrl = 'http://localhost:3000/users';
-
-// RegisteredData(user: userInterface) {
-//   return this.http.post<userInterface>(this.registerUrl, user);
-// }
-// getuserData(): Observable<userInterface[]> {
-//   return this.http.get<userInterface[]>(this.registerUrl);
-// }

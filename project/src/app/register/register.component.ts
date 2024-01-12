@@ -8,8 +8,10 @@ import {
   Validators,
   ValidatorFn,
   AbstractControl,
+  AsyncValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, catchError, map, of } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,8 +19,13 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   RegUser: userInterface[] = [];
+  emailCheck = false;
+  constructor(private router: Router, private services: DataService) {
+    this.RegisterForm.get('email')?.valueChanges.subscribe((emailvalue) => {
+      return this.emailExists(emailvalue as string);
+    });
+  }
 
-  constructor(private router: Router, private services: DataService) {}
   /*==============================*/
   /*====CREATING REGISTER FORM====*/
   /*==============================*/
@@ -47,7 +54,23 @@ export class RegisterComponent {
     },
     { validators: this.Mustmatch('password', 'confirmPassword') }
   );
-
+  /*==================================*/
+  /*====IF EMAIL EXISTS LOGIC ====*/
+  /*====================================*/
+  emailExists(email: string) {
+    let emailC = false;
+    this.services.getuserData().subscribe((item) => {
+      if (Array.isArray(item)) {
+        for (let i = 0; i < item.length; i++) {
+          if (item[i].userEmail == email) {
+            emailC = true;
+            break;
+          }
+        }
+      }
+      this.emailCheck = emailC;
+    });
+  }
   /*==================================*/
   /*====PASSWORD CONFIRMATION LOGIC ====*/
   /*====================================*/
@@ -88,8 +111,7 @@ export class RegisterComponent {
         userEmail: this.RegisterForm.value.email as string,
         userPassword: this.RegisterForm.value.password as string,
       })
-      .subscribe();
-
+      .subscribe((item) => {});
     if (this.RegisterForm.valid) {
       localStorage.setItem('isLogged', JSON.stringify(true));
       this.router.navigate(['/signin']);

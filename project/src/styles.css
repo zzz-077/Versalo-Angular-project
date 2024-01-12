@@ -26,31 +26,12 @@ body {
   overflow-x: none;
 }
 
-/* html,
-body {
-  height: 100%;
-} */
-
-/* .site-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  background-color: #252525;
-} */
-
-
-
 a.btn {
   cursor: pointer;
   border: 1px solid #cecccc;
   padding: 0.2rem 1rem;
   border-radius: 1rem;
 }
-
-
-
 
 button {
   padding: 0.5rem 1rem;

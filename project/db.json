@@ -63,5 +63,200 @@
       "userEmail": "b@b.com",
       "userPassword": "123123123"
     }
+  ],
+  "cars": [
+    {
+      "carModel": [
+        "Volkswagen",
+        "Toyota",
+        "Mercedes-Benz",
+        "Ford",
+        "BMW",
+        "Honda",
+        "Hyundai",
+        "Nissan",
+        "Kia",
+        "Volvo",
+        "Tesla"
+      ],
+      "carPrice": [1000, 5000, 10000, 15000, 20000, 25000, 30000, 50000],
+      "carYear": [
+        2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013,
+        2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001,
+        2000
+      ],
+      "carCategory": [
+        "Convertable",
+        "Coupe",
+        "Pickup trucks",
+        "Hatchback",
+        "Sedan",
+        "Sports car",
+        "Compact sedan",
+        "SUV",
+        "Crossover",
+        "Wagons",
+        "microcar"
+      ],
+      "Gearbox": ["automatic", "manual"]
+    }
+  ],
+  "carCards": [
+    {
+      "id": 1,
+      "userId": 1,
+      "carModel": "Toyota",
+      "carCategory": "Sedan",
+      "carYear": 2022,
+      "carPrice": 25000,
+      "carImg": "https://example.com/toyota_camry_image.jpg",
+      "carColor": "Silver",
+      "Gearbox": "Automatic",
+      "cardetails": "Spacious interior, fuel-efficient",
+      "Wheel": "4-wheel drive"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "carModel": "Honda",
+      "carCategory": "Compact",
+      "carYear": 2023,
+      "carPrice": 22000,
+      "carImg": "https://example.com/honda_civic_image.jpg",
+      "carColor": "Blue",
+      "Gearbox": "Manual",
+      "cardetails": "Sporty design, great fuel economy",
+      "Wheel": "Front-wheel drive"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "carModel": "Ford",
+      "carCategory": "Sports Car",
+      "carYear": 2022,
+      "carPrice": 35000,
+      "carImg": "https://example.com/ford_mustang_image.jpg",
+      "carColor": "Red",
+      "Gearbox": "Automatic",
+      "cardetails": "Powerful engine, iconic design",
+      "Wheel": "Rear-wheel drive"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "carModel": "Chevrolet",
+      "carCategory": "Sedan",
+      "carYear": 2023,
+      "carPrice": 28000,
+      "carImg": "https://example.com/chevrolet_malibu_image.jpg",
+      "carColor": "White",
+      "Gearbox": "Automatic",
+      "cardetails": "Comfortable ride, advanced safety features",
+      "Wheel": "Front-wheel drive"
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "carModel": "BMW",
+      "carCategory": "SUV",
+      "carYear": 2022,
+      "carPrice": 60000,
+      "carImg": "https://example.com/bmw_x5_image.jpg",
+      "carColor": "Black",
+      "Gearbox": "Automatic",
+      "cardetails": "Luxurious interior, powerful performance",
+      "Wheel": "All-wheel drive"
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "carModel": "Mercedes-Benz",
+      "carCategory": "Luxury",
+      "carYear": 2023,
+      "carPrice": 55000,
+      "carImg": "https://example.com/mercedes_e_class_image.jpg",
+      "carColor": "Silver",
+      "Gearbox": "Automatic",
+      "cardetails": "Elegant design, cutting-edge technology",
+      "Wheel": "Rear-wheel drive"
+    },
+    {
+      "id": 7,
+      "userId": 1,
+      "carModel": "Audi",
+      "carCategory": "Sedan",
+      "carYear": 2022,
+      "carPrice": 42000,
+      "carImg": "https://example.com/audi_a4_image.jpg",
+      "carColor": "Gray",
+      "Gearbox": "Automatic",
+      "cardetails": "Premium features, smooth handling",
+      "Wheel": "All-wheel drive"
+    },
+    {
+      "id": 8,
+      "userId": 1,
+      "carModel": "Nissan",
+      "carCategory": "SUV",
+      "carYear": 2023,
+      "carPrice": 30000,
+      "carImg": "https://example.com/nissan_rogue_image.jpg",
+      "carColor": "Green",
+      "Gearbox": "Automatic",
+      "cardetails": "Versatile and spacious, fuel-efficient",
+      "Wheel": "Front-wheel drive"
+    },
+    {
+      "id": 9,
+      "userId": 1,
+      "carModel": "Hyundai",
+      "carCategory": "Compact",
+      "carYear": 2022,
+      "carPrice": 20000,
+      "carImg": "https://example.com/hyundai_elantra_image.jpg",
+      "carColor": "Orange",
+      "Gearbox": "Manual",
+      "cardetails": "Affordable and reliable",
+      "Wheel": "Front-wheel drive"
+    },
+    {
+      "id": 10,
+      "userId": 3,
+      "carModel": "Tesla",
+      "carCategory": "Electric",
+      "carYear": 2023,
+      "carPrice": 45000,
+      "carImg": "https://example.com/tesla_model_3_image.jpg",
+      "carColor": "Blue",
+      "Gearbox": "Automatic",
+      "cardetails": "Zero emissions, advanced autopilot",
+      "Wheel": "All-wheel drive"
+    },
+    {
+      "id": 11,
+      "userId": 2,
+      "carModel": "Kia",
+      "carCategory": "SUV",
+      "carYear": 2022,
+      "carPrice": 23000,
+      "carImg": "https://example.com/kia_seltos_image.jpg",
+      "carColor": "Yellow",
+      "Gearbox": "Automatic",
+      "cardetails": "Compact and stylish",
+      "Wheel": "Front-wheel drive"
+    },
+    {
+      "id": 12,
+      "userId": 2,
+      "carModel": "Subaru",
+      "carCategory": "Wagon",
+      "carYear": 2023,
+      "carPrice": 32000,
+      "carImg": "https://example.com/subaru_outback_image.jpg",
+      "carColor": "Brown",
+      "Gearbox": "Automatic",
+      "cardetails": "Rugged and versatile",
+      "Wheel": "All-wheel drive"
+    }
   ]
 }

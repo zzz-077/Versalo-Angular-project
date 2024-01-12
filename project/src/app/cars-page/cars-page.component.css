@@ -1,0 +1,63 @@
+.cars_container {
+  margin-top: 3rem;
+  padding: 0 2rem;
+}
+.filter_content {
+  background-color: var(--sign_BGcolor);
+  border-radius: 0.875rem;
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+.filter_content form {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 1rem 0;
+  gap: 1rem;
+  width: 80%;
+}
+.from_to {
+  display: flex;
+  gap: 0.5rem;
+}
+
+form select {
+  padding: 0.65rem 0.8rem;
+  font-size: 1rem;
+  border: none;
+  background: whitesmoke;
+  border-radius: 0.35rem;
+  width: 100%;
+  outline: none;
+}
+form select option {
+  height: 20px;
+}
+
+.Filter_button {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+.Filter_button .filter_btn {
+  width: 100%;
+}
+.Filter_button .clearFilter_btn {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fceaeaf7;
+  border: 2px solid #f06a6a;
+  color: #ff1818;
+  transition: all 0.2s;
+}
+.Filter_button .clearFilter_btn:hover {
+  background-color: #ff1818;
+  border: 2px solid #ff1818;
+  color: var(--main_BGcolor);
+
+  /* filter: brightness(0.7); */
+}

@@ -60,6 +60,18 @@
         class="form-field-input"
         placeholder="example@gmail.com"
       />
+
+      <div
+        *ngIf="
+          RegisterForm.get('email')?.valid &&
+          (RegisterForm.get('email')?.dirty ||
+            RegisterForm.get('email')?.touched)
+        "
+      >
+        <mat-error>
+          <span *ngIf="emailCheck">Email is already registered</span>
+        </mat-error>
+      </div>
       <div
         *ngIf="
           RegisterForm.get('email')?.invalid &&
@@ -143,7 +155,7 @@
     </div>
 
     <button
-      [disabled]="!this.RegisterForm.valid"
+      [disabled]="!this.RegisterForm.valid || emailCheck"
       class="signin-btn"
       (click)="onSignup()"
     >

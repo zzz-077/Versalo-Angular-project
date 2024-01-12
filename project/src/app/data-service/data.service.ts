@@ -57,26 +57,18 @@ export class DataService {
   getCarCardsData(): Observable<carCardInterface[]> {
     return this.http.get<carCardInterface[]>(this.carCardsUrl);
   }
-
   searchData(filters: any): Observable<carCardInterface[]> {
+    const modifyFilters: any = {
+      carModel: filters.Model?.toLowerCase() || null,
+      carCategory: filters.category?.toLowerCase() || null,
+      gearBox: filters.gearBox?.toLowerCase() || null,
+    };
     let params = new HttpParams();
-
-    for (const key in filters) {
-      if (
-        filters[key] !== null &&
-        filters[key] !== undefined &&
-        filters[key] !== ''
-      ) {
-        params = params.set(key, filters[key]);
+    for (const key in modifyFilters) {
+      if (modifyFilters[key]) {
+        params = params.set(key, modifyFilters[key]);
       }
     }
-
-    console.log(
-      'Request URL with params:',
-      this.carCardsUrl,
-      params.toString()
-    );
-
     return this.http.get<carCardInterface[]>(this.carCardsUrl, { params });
   }
 }

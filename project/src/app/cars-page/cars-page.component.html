@@ -2,13 +2,13 @@
   <div class="filter_content">
     <form [formGroup]="carForm">
       <select value="Carmodel" formControlName="Model">
-        <option value="Car model" selected>Car model</option>
+        <option value="carModel" selected>Car Model</option>
         <option *ngFor="let model of carList[0]?.carModel" [ngValue]="model">
           {{ model }}
         </option>
       </select>
       <select formControlName="category">
-        <option value="Car category" selected>Car category</option>
+        <option value="carCategory" selected>Car Category</option>
         <option
           *ngFor="let category of carList[0]?.carCategory"
           [ngValue]="category"
@@ -17,22 +17,22 @@
         </option>
       </select>
       <div class="from_to">
-        <select formControlName="yearFrom">
-          <option value="year from" selected>Year from</option>
+        <select (click)="chooseYear()" formControlName="yearFrom">
+          <option value="yearFrom" selected>Year From</option>
           <option *ngFor="let year of carList[0]?.carYear" [ngValue]="year">
             {{ year }}
           </option>
         </select>
         <select formControlName="yearTo">
-          <option value="to" selected>to</option>
-          <option *ngFor="let year of carList[0]?.carYear" [ngValue]="year">
+          <option value="yearTo" selected>Year To</option>
+          <option *ngFor="let year of yearToArr" [ngValue]="year">
             {{ year }}
           </option>
         </select>
       </div>
       <div class="from_to">
-        <select formControlName="priceFrom">
-          <option value="Price from" selected>Price from</option>
+        <select (click)="choosePrice()" formControlName="priceFrom">
+          <option value="priceFrom" selected>Price From</option>
           <option
             *ngFor="let price of carList[0]?.carPrice"
             value="price"
@@ -42,9 +42,9 @@
           </option>
         </select>
         <select formControlName="priceTo">
-          <option value="to" selected>to</option>
+          <option value="priceTo" selected>Price To</option>
           <option
-            *ngFor="let price of carList[0]?.carPrice"
+            *ngFor="let price of priceToArr"
             value="price"
             [ngValue]="price"
           >
@@ -52,10 +52,10 @@
           </option>
         </select>
       </div>
-      <select formControlName="gearbox">
-        <option value="gearbox" selected>Gear box</option>
+      <select formControlName="gearBox">
+        <option value="gearBox" selected>Gear Box</option>
         <option
-          *ngFor="let gearbox of carList[0]?.Gearbox"
+          *ngFor="let gearbox of carList[0]?.gearBox"
           value="gearbox"
           [ngValue]="gearbox"
         >
@@ -69,12 +69,12 @@
           [disabled]="!carForm.valid"
           (click)="filterClick()"
         >
-          Filter changes
+          Search
         </button>
         <button
           class="clearFilter_btn"
           [disabled]="!carForm.valid"
-          (click)="filterClick()"
+          (click)="clearFilter()"
         >
           <mat-icon>delete_sweep </mat-icon>
         </button>
@@ -82,7 +82,19 @@
     </form>
   </div>
   <div class="cards_content">
-    <div *ngFor="let card of carCArds">
+    <div class="no-cars-found" *ngIf="carCards.length === 0 || !carCards">
+      <h3>No cars were found.</h3>
+      <p>Please change the specified parameters.</p>
+      <button
+        class="clearFilter_btn"
+        [disabled]="!carForm.valid"
+        (click)="clearFilter()"
+      >
+        <mat-icon>delete_sweep </mat-icon>
+        Clear Filters
+      </button>
+    </div>
+    <div *ngFor="let card of carCards">
       {{ card.carModel }}, {{ card.carCategory }}, {{ card.carYear }},
       {{ card.carPrice }}
     </div>

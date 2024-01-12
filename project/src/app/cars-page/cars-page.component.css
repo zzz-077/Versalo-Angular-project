@@ -2,26 +2,30 @@
   margin-top: 3rem;
   padding: 0 2rem;
 }
+
 .filter_content {
   background-color: var(--sign_BGcolor);
   border-radius: 0.875rem;
   max-width: 1440px;
-  width: 100%;
+  width: 90%;
   display: flex;
   margin: 0 auto;
   justify-content: center;
 }
+
 .filter_content form {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 1rem 0;
   gap: 1rem;
-  width: 80%;
+  width: 90%;
 }
+
 .from_to {
   display: flex;
   gap: 0.5rem;
 }
+
 
 form select {
   padding: 0.65rem 0.8rem;
@@ -31,21 +35,50 @@ form select {
   border-radius: 0.35rem;
   width: 100%;
   outline: none;
+  cursor: pointer;
+  transition: 0.125s 0s ease-in-out;
 }
+
+form select:hover {
+  filter: brightness(0.9);
+}
+
+form select option:first-child {
+  color: black;
+  font-weight: 700;
+}
+
 form select option {
   height: 20px;
 }
+
 
 .Filter_button {
   display: flex;
   gap: 0.5rem;
   width: 100%;
 }
+
 .Filter_button .filter_btn {
+  background-color: crimson;
+  border: crimson;
   width: 100%;
+  font-size: 1.125rem;
+  font-weight: 600;
 }
+
+.Filter_button .filter_btn:hover {
+  filter: none;
+  background-color: rgb(190, 17, 52);
+}
+
+.Filter_button .filter_btn:active {
+  transform: scale(0.95);
+}
+
 .Filter_button .clearFilter_btn {
   width: 15%;
+  min-width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,10 +87,58 @@ form select option {
   color: #ff1818;
   transition: all 0.2s;
 }
+
 .Filter_button .clearFilter_btn:hover {
   background-color: #ff1818;
   border: 2px solid #ff1818;
   color: var(--main_BGcolor);
+}
 
-  /* filter: brightness(0.7); */
+.cards_content {
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 90%;
+}
+
+
+.no-cars-found {
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem 2rem;
+  color: var(--sign_BGcolor);
+  background-color: var(--navbar_links__color_hovered);
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+
+}
+
+.no-cars-found h3 {
+  font-size: 1.35rem;
+}
+
+.no-cars-found p {
+  font-size: 0.9rem;
+}
+
+.no-cars-found .clearFilter_btn {
+  background-color: var(--sign_BGcolor);
+  border: none;
+  color: #ff1818;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.no-cars-found .clearFilter_btn:hover {
+  filter: brightness(0.9);
+}
+
+.no-cars-found .clearFilter_btn:active {
+  transform: scale(0.95);
 }

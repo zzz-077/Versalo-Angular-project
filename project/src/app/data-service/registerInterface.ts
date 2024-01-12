@@ -7,11 +7,11 @@ export interface userInterface {
 }
 
 export interface carInterface {
-  carModel: string;
-  carYear: string;
-  carPrice: string;
-  carCategory: string;
-  Gearbox: string;
+  carModel: string[];
+  carYear: number[];
+  carPrice: number[];
+  carCategory: string[];
+  gearBox: string[];
 }
 export interface carCardInterface {
   id: string;

@@ -1,14 +1,16 @@
 <div *ngIf="carObj" class="car-card">
-  <div routerLink="" class="card-image">
+  <div routerLink="cardetails/:{{ carObj.id }}" class="card-image">
     <img ngSrc="{{ carObj.carImg }}" fill />
   </div>
   <div class="card-content">
     <div class="car-name">
-      <h3 class="car-name">
+      <h3 routerLink="cardetails/:{{ carObj.id }}" class="car-name">
         {{ carObj.carModel }} - {{ carObj.carSeries }}
         <span class="car-name-year">/ {{ carObj.carYear }} year</span>
       </h3>
-      <span class="car-price"> {{ carObj.carPrice | currency : "USD" }} </span>
+      <span routerLink="cardetails/:{{ carObj.id }}" class="car-price">
+        {{ carObj.carPrice | currency : "USD" }}
+      </span>
     </div>
     <div class="specifications">
       <div class="spec">

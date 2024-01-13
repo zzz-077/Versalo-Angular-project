@@ -23,6 +23,7 @@ import { CarsPageComponent } from './cars-page/cars-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UserService } from './user-service/user.service';
 import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
+import { CarDetailsComponent } from './car-details/car-details.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
     AboutPageComponent,
     MyProfilePageComponent,
     CarsPageComponent,
+    CarDetailsComponent,
   ],
   imports: [
     BrowserModule,

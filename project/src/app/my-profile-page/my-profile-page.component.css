@@ -69,12 +69,26 @@
   justify-content: space-between;
   width: 100%;
 }
+.profile_info_box_input mat-icon {
+  color: var(--navbar_links__color);
+  font-size: 1.125rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile_info_box_input mat-icon.active,
+.profile_info_box_input span.active {
+  display: none;
+}
+
+.profile_info_box_input input.active {
+  display: flex;
+}
 
 .profile_info_box_input span {
-  /* display: none; */
   font-size: 1.125rem;
   text-align: left;
-  /* border-bottom: 2px solid var(--navbar_links__color_hovered); */
 }
 
 .profile_info_box_input input {
@@ -95,7 +109,9 @@
 }
 
 .profile_info_btn_col1 {
-  width: 50%;
+  width: 100%;
+}
+.profile_info_btn_col1.active {
   display: none;
 }
 
@@ -104,10 +120,12 @@
 }
 
 .profile_info_btn_col2 {
-  display: flex;
-  /* display: none; */
+  display: none;
   width: 50%;
   gap: 0.5rem;
+}
+.profile_info_btn_col2.active {
+  display: flex;
 }
 
 .profile_info_btn_col2 button {
@@ -156,20 +174,53 @@
 
 .car_ctreate_box {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
 }
 
-.car_ctreate_box button {
+.prf_card_create_btn {
+  padding: 0.2rem 1.5rem;
+  border-radius: 0.3rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0.875rem;
+  border-top-right-radius: 1.75rem;
+  position: relative;
+}
+
+.prf_card_create_btn::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 18px;
+  transform: rotateZ(-20deg);
+  background-color: var(--btn_BGcolor);
+  bottom: -5px;
+  right: -3.5px;
+}
+.prf_card_btns_col2 {
+  display: flex;
+  align-items: center;
+}
+.prf_card_btns_col2 {
+  display: flex;
+}
+.prf_edit_col {
+  display: flex;
+  /* display: none; */
+  gap: 0.1rem;
+}
+.prf_cards_edit_btn,
+.prf_cards_save_btn {
   padding: 0.2rem 1.5rem;
   border-radius: 0.3rem;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-top-left-radius: 1.75rem;
-  border-top-right-radius: 0.875rem;
+  border-top-right-radius: 0;
   position: relative;
 }
-
-.car_ctreate_box button::before {
+.prf_cards_edit_btn::before,
+.prf_cards_save_btn::before {
   content: "";
   position: absolute;
   width: 10px;
@@ -177,12 +228,38 @@
   transform: rotateZ(20deg);
   background-color: var(--btn_BGcolor);
   bottom: -5px;
-  left: -4px;
+  left: -3.5px;
+}
+.prf_cards_delete_btn,
+.prf_cards_cancel_btn {
+  padding: 0.2rem 1.5rem;
+  border-radius: 0.3rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0.875rem;
+  position: relative;
+  background-color: #fceaeaf7;
+  border: 2px solid #f06a6a;
+  color: #ff1818;
+  transition: all 0.2s;
+}
+.prf_cards_delete_btn:hover,
+.prf_cards_cancel_btn:hover {
+  background-color: #ff1818;
+  border: 2px solid #ff1818;
+  color: var(--main_BGcolor);
+}
+.prf_save_col {
+  display: flex;
+  gap: 0.1rem;
+  display: none;
 }
 
 /*=========================*/
 /*====CREATE CARD POPUP====*/
 /*=========================*/
+
 .create_card_container {
   position: fixed;
   top: 0;
@@ -190,11 +267,13 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.703);
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
   display: none;
+}
+.create_card_container.active {
+  display: flex;
 }
 
 .create_card_container form {

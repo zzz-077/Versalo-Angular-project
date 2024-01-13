@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class DataService {
   /*=================*/
-  /*====USER DATA====*/
+  /*====USER DATA && CRUD====*/
   /*=================*/
   private registerUrl = 'http://localhost:3000/users';
   private userDataSubject: BehaviorSubject<userInterface[]> =

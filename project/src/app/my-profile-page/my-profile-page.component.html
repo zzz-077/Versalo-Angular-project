@@ -1,41 +1,89 @@
 <div class="profile_container">
   <div class="profile_top_content">
-    <form class="profile_edit_left_column">
+    <form class="profile_edit_left_column" (submit)="onFormSubmit($event)">
       <div class="cell">
         <h3>Name:</h3>
         <div class="profile_info_box_input">
-          <span>Vaska</span>
-          <input type="text" placeholder="User name" />
+          <span [ngClass]="infoEdit_btnCheck ? 'active' : null">Vaska</span>
+          <input
+            [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            type="text"
+            placeholder="User name"
+          />
         </div>
       </div>
       <div class="cell">
         <h3>Lastname:</h3>
         <div class="profile_info_box_input">
-          <span>zardiashvili</span>
-          <input type="text" placeholder="User lastname" />
+          <span [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            >zardiashvili</span
+          >
+          <input
+            [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            type="text"
+            placeholder="User lastname"
+          />
         </div>
       </div>
       <div class="cell">
         <h3>Email:</h3>
         <div class="profile_info_box_input">
-          <span>vaska2004.com</span>
-          <input type="email" placeholder="User email" />
+          <span [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            >vaska2004.com</span
+          >
+          <input
+            [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            type="email"
+            placeholder="User email"
+          />
         </div>
       </div>
       <div class="cell">
         <h3>Password:</h3>
         <div class="profile_info_box_input">
-          <span>******</span>
-          <input type="password" placeholder="User password" />
+          <span
+            [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            style="color: rgba(128, 128, 128, 0.912)"
+            *ngIf="!passwordCheck"
+            >********</span
+          >
+          <span
+            [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            style="color: var(--navbar_links__color)"
+            *ngIf="passwordCheck"
+            >12345678</span
+          >
+          <mat-icon
+            [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            (click)="passwordShow()"
+            >remove_red_eye</mat-icon
+          >
+          <input
+            [ngClass]="infoEdit_btnCheck ? 'active' : null"
+            type="password"
+            placeholder="User password"
+          />
         </div>
       </div>
       <div class="profile_btns_box">
-        <div class="profile_info_btn_col1">
-          <button class="prf_info_edit_btn">Edit</button>
+        <div
+          class="profile_info_btn_col1"
+          [ngClass]="infoEdit_btnCheck ? 'active' : null"
+        >
+          <button (click)="infoEditBtn()" class="prf_info_edit_btn">
+            Edit
+          </button>
         </div>
-        <div class="profile_info_btn_col2">
-          <button class="prf_info_save_btn">Save</button>
-          <button class="prf_info_cancel_btn">Cancel</button>
+        <div
+          class="profile_info_btn_col2"
+          [ngClass]="infoEdit_btnCheck ? 'active' : null"
+        >
+          <button (click)="infoSaveBtn()" class="prf_info_save_btn">
+            Save
+          </button>
+          <button (click)="infoCancelBtn()" class="prf_info_cancel_btn">
+            Cancel
+          </button>
         </div>
       </div>
     </form>
@@ -45,7 +93,21 @@
   </div>
   <div class="profile_bottom_content">
     <div class="car_ctreate_box">
-      <button class="prf_card_create_btn">Create</button>
+      <div class="prf_card_btns_col1">
+        <button (click)="cardAddBtn()" class="prf_card_create_btn">
+          Add card
+        </button>
+      </div>
+      <div class="prf_card_btns_col2">
+        <div class="prf_edit_col">
+          <button class="prf_cards_edit_btn">Edit</button>
+          <button class="prf_cards_delete_btn">Delete</button>
+        </div>
+        <div class="prf_save_col">
+          <button class="prf_cards_save_btn">Save</button>
+          <button class="prf_cards_cancel_btn">Cancel</button>
+        </div>
+      </div>
     </div>
     <div class="Person_card_content">
       <p>
@@ -62,8 +124,11 @@
   </div>
 </div>
 
-<div class="create_card_container">
-  <form>
+<div
+  [ngClass]="CardsAdd_btnCheck ? 'active' : null"
+  class="create_card_container"
+>
+  <form (submit)="onFormSubmit($event)">
     <div class="form_input_cont">
       <div class="input_box">
         <label>Model</label>
@@ -95,8 +160,12 @@
 
         <div class="profile_btns_box">
           <div class="profile_card_btn_col2">
-            <button class="prf_card_save_btn">Save</button>
-            <button class="prf_card_cancel_btn">Cancel</button>
+            <button (click)="cardSaveBtn()" class="prf_card_save_btn">
+              Save
+            </button>
+            <button (click)="cardCancelBtn()" class="prf_card_cancel_btn">
+              Cancel
+            </button>
           </div>
         </div>
       </div>

@@ -81,9 +81,6 @@
       </div>
     </form>
   </div>
-  <div *ngIf="isLoading">
-    <h1>Loading</h1>
-  </div>
   <div class="cards_content">
     <div class="no-cars-found" *ngIf="carCards.length === 0 && !isLoading">
       <h3>No cars were found.</h3>
@@ -98,6 +95,18 @@
       </button>
     </div>
 
+    <div *ngIf="isLoading">
+      <div *ngFor="let skeleton of skletonArray">
+        <div class="card is-loading">
+          <div class="image"></div>
+          <div class="content">
+            <h2 class="header-skeleton"></h2>
+            <p class="paragraph-skeleton"></p>
+            <p class="paragraph-skeleton"></p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div *ngFor="let carObj of carCards">
       <app-car-card [carObj]="carObj"></app-car-card>
     </div>

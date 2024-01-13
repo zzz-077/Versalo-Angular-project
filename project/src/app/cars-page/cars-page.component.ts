@@ -18,6 +18,7 @@ export class CarsPageComponent {
   priceToArr: number[] = [];
   yearToArr: number[] = [];
   isLoading: boolean = false;
+  skletonArray: number[] = new Array(10).fill(0);
 
   constructor(private services: DataService) {}
 
@@ -89,9 +90,13 @@ export class CarsPageComponent {
   /*====GETTING CAR DATA====*/
   /*========================*/
   ngOnInit() {
-    this.services.getCarComponentsData().subscribe((item) => {
-      if (Array.isArray(item)) {
-        this.carList = item;
+    this.services.getCarComponentsData().subscribe((items) => {
+      if (Array.isArray(items)) {
+        this.carList = items;
+
+        this.carList[0]?.carCategory.sort();
+        this.carList[0]?.carModel.sort();
+
         this.priceToArr = this.carList[0]?.carPrice;
         this.yearToArr = this.carList[0]?.carYear;
       }

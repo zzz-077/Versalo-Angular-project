@@ -26,6 +26,10 @@ export class DataService {
     return this.http.post<userInterface>(this.registerUrl, user);
   }
 
+  getUserById(userId?: number) {
+    return this.http.get<userInterface>(`${this.registerUrl}/${userId}`);
+  }
+
   getuserData(): Observable<userInterface[]> {
     return this.userDataSubject.asObservable();
   }
@@ -53,6 +57,10 @@ export class DataService {
   /*====CARS CARDS====*/
   /*===================*/
   private carCardsUrl = 'http://localhost:3000/carCards';
+
+  getCarDetailsById(id: number | null) {
+    return this.http.get<carCardInterface>(`${this.carCardsUrl}/${id}`);
+  }
 
   getCarCardsData(): Observable<carCardInterface[]> {
     return this.http.get<carCardInterface[]>(this.carCardsUrl);

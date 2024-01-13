@@ -4,6 +4,7 @@ import { UserService } from '../user-service/user.service';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data-service/data.service';
+import { __values } from 'tslib';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
@@ -62,6 +63,12 @@ export class MyProfilePageComponent {
     this.passwordCheck = !this.passwordCheck;
   }
   infoEditBtn() {
+    this.profileEditForm.setValue({
+      name: this.user?.userName || '',
+      lastname: this.user?.userLastName || '',
+      email: this.user?.userEmail || '',
+      password: this.user?.userPassword || '',
+    });
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   infoSaveBtn() {
@@ -69,10 +76,10 @@ export class MyProfilePageComponent {
     this.data
       .userUpdate({
         id: this.id,
-        userName: this.profileEditForm?.value.name as string,
-        userLastName: this.profileEditForm?.value.lastname as string,
-        userEmail: this.profileEditForm?.value.email as string,
-        userPassword: this.profileEditForm?.value.password as string,
+        userName: this.profileEditForm.value.name as string,
+        userLastName: this.profileEditForm.value.lastname as string,
+        userEmail: this.profileEditForm.value.email as string,
+        userPassword: this.profileEditForm.value.password as string,
       })
       .subscribe(() => {
         this.loadInfo();

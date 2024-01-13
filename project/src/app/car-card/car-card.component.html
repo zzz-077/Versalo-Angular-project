@@ -1,5 +1,5 @@
 <div *ngIf="carObj" class="car-card">
-  <div class="card-image">
+  <div routerLink="" class="card-image">
     <img ngSrc="{{ carObj.carImg }}" fill />
   </div>
   <div class="card-content">
@@ -12,16 +12,28 @@
     </div>
     <div class="specifications">
       <div class="spec">
-        <i class="fa-solid fa-car"></i>{{ carObj.carCategory }}
+        <img class="icon" src="/assets/icons/car.svg" alt="category" />
+        <span>
+          {{ carObj.carCategory }}
+        </span>
       </div>
       <div class="spec">
-        <i class="fa-solid fa-car"></i>{{ carObj.gearBox }}
+        <img class="icon" src="/assets/icons/gearbox.svg" alt="gearbox" />
+        <span>
+          {{ carObj.gearBox }}
+        </span>
       </div>
       <div class="spec">
-        <i class="fa-solid fa-car"></i>{{ carObj.carCategory }}
+        <img class="icon" src="/assets/icons/color.svg" alt="gearbox" />
+        <span>
+          {{ carObj.carColor }}
+        </span>
       </div>
       <div class="spec">
-        <i class="fa-solid fa-car"></i>{{ carObj.carCategory }}
+        <img class="icon" src="/assets/icons/wheel.svg" alt="wheel" />
+        <span>
+          {{ carObj.wheel }}
+        </span>
       </div>
     </div>
   </div>

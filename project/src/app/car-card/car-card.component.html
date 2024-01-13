@@ -1,13 +1,14 @@
-<div class="car-card">
+<div *ngIf="carObj" class="car-card">
   <div class="card-image">
-    <img src="/assets/full-logo.svg" alt="Versalo" />
+    <img ngSrc="{{ carObj.carImg }}" fill />
   </div>
-  <div>
-    <p>Nika Eliashvili</p>
+  <div class="card-content">
     <div class="car-name">
-      <span class="car-name-year">2023 - </span>
-      <p class="car-name-header">Ford Mustang</p>
+      <h3 class="car-name">
+        {{ carObj.carModel }} - {{ carObj.carSeries }}
+        <span class="car-name-year">/ {{ carObj.carYear }} year</span>
+      </h3>
+      <span class="car-price"> {{ carObj.carPrice | currency : "USD" }} </span>
     </div>
-    <p></p>
   </div>
 </div>

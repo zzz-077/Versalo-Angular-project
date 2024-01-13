@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<g id="BACKGROUND">
+	<rect style="fill:#FCF2E3;" width="500" height="500"/>
+</g>
+<g id="OBJECTS">
+	<g>
+		<g>
+			<path style="fill:#002947;" d="M378.988,338.226H121.012c-4.848,0-8.778-3.93-8.778-8.778V185.432
+				c0-4.848,3.93-8.778,8.778-8.778h257.975c4.848,0,8.778,3.93,8.778,8.778v144.016
+				C387.765,334.296,383.835,338.226,378.988,338.226z"/>
+			<path style="fill:#002947;" d="M167.697,176.654h-36.93v-5.746c0-3.588,2.909-6.497,6.497-6.497H161.2
+				c3.588,0,6.497,2.909,6.497,6.497V176.654z"/>
+			<path style="fill:#002947;" d="M309.367,185.291H204.885l8.119-20.994c1.986-5.136,6.927-8.523,12.434-8.523h65.8
+				c6.036,0,11.319,4.056,12.878,9.887L309.367,185.291z"/>
+			<path style="fill:#FCF2E3;" d="M366.635,207.716h-22.742c-2.864,0-5.187-2.322-5.187-5.187v-12.052
+				c0-2.864,2.322-5.187,5.187-5.187h22.742c2.865,0,5.187,2.322,5.187,5.187v12.052C371.822,205.394,369.5,207.716,366.635,207.716
+				z"/>
+			
+				<ellipse transform="matrix(0.1635 -0.9865 0.9865 0.1635 -44.8549 461.978)" style="fill:#FCF2E3;" cx="250" cy="257.44" rx="59.367" ry="59.367"/>
+			
+				<ellipse transform="matrix(0.9316 -0.3634 0.3634 0.9316 -76.4653 108.4576)" style="fill:#002947;" cx="250" cy="257.44" rx="39.203" ry="39.203"/>
+			<circle style="fill:#FCF2E3;" cx="270.293" cy="243.971" r="8.438"/>
+			<circle style="fill:#FCF2E3;" cx="133.911" cy="194.678" r="8.165"/>
+		</g>
+		
+			<line style="fill:none;stroke:#002947;stroke-width:27;stroke-miterlimit:10;" x1="112.235" y1="124.097" x2="387.765" y2="366.844"/>
+		
+			<line style="fill:none;stroke:#FCF2E3;stroke-width:3;stroke-miterlimit:10;" x1="102.888" y1="133.444" x2="378.418" y2="376.191"/>
+		<circle style="fill:none;stroke:#002947;stroke-width:27;stroke-miterlimit:10;" cx="250" cy="250" r="180.644"/>
+	</g>
+</g>
+</svg>

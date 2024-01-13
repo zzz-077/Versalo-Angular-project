@@ -22,6 +22,7 @@ import { MyProfilePageComponent } from './my-profile-page/my-profile-page.compon
 import { CarsPageComponent } from './cars-page/cars-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UserService } from './user-service/user.service';
+import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { UserService } from './user-service/user.service';
     BrowserAnimationsModule,
     MatSlideToggleModule,
     MatIconModule,
+    NgOptimizedImage,
   ],
   providers: [UserService],
   bootstrap: [AppComponent],

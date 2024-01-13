@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   carCardInterface,
   carInterface,
-  userInterface,
 } from '../data-service/registerInterface';
 import { DataService } from '../data-service/data.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -18,6 +17,7 @@ export class CarsPageComponent {
   saveCarCards: carCardInterface[] = [];
   priceToArr: number[] = [];
   yearToArr: number[] = [];
+  isLoading: boolean = false;
 
   constructor(private services: DataService) {}
 
@@ -38,6 +38,8 @@ export class CarsPageComponent {
   /*====FILTER FUNCTION====*/
   /*========================*/
   filterClick() {
+    this.isLoading = true;
+    this.carCards = [];
     const filters: any = this.carForm.value;
     this.modifyFilterValues(filters);
     Object.keys(filters).forEach(
@@ -63,12 +65,13 @@ export class CarsPageComponent {
           (car) => car.carPrice >= priceFrom && car.carPrice <= priceTo
         );
       }
-
       this.carCards = filteredData;
+      this.isLoading = false;
     });
   }
 
   clearFilter() {
+    this.isLoading = true;
     this.carForm = new FormGroup({
       Model: new FormControl('carModel'),
       category: new FormControl('carCategory'),
@@ -79,6 +82,7 @@ export class CarsPageComponent {
       gearBox: new FormControl('gearBox'),
     });
     this.carCards = this.saveCarCards;
+    this.isLoading = false;
   }
 
   /*========================*/
@@ -93,11 +97,14 @@ export class CarsPageComponent {
       }
     });
 
+    this.isLoading = true;
     this.services.getCarCardsData().subscribe((item) => {
       if (Array.isArray(item)) {
         this.saveCarCards = item;
         this.carCards = item; // Initialize carCards with all car cards initially
+        this.isLoading = false;
       }
+      this.isLoading = false;
     });
   }
 

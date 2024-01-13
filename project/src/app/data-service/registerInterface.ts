@@ -14,15 +14,16 @@ export interface carInterface {
   gearBox: string[];
 }
 export interface carCardInterface {
-  id: string;
-  userId: string;
+  id: number;
+  userId: number;
   carModel: string;
+  carSeries: string;
   carCategory: string;
-  carYear: string;
-  carPrice: string;
+  carYear: number;
+  carPrice: number;
   carImg: string;
   carColor: string;
-  Gearbox: string;
-  cardetails: string;
-  Wheel: string;
+  gearBox: string;
+  carDetails: string;
+  wheel: string;
 }

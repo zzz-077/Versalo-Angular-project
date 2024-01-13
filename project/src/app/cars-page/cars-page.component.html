@@ -81,8 +81,11 @@
       </div>
     </form>
   </div>
+  <div *ngIf="isLoading">
+    <h1>Loading</h1>
+  </div>
   <div class="cards_content">
-    <div class="no-cars-found" *ngIf="carCards.length === 0 || !carCards">
+    <div class="no-cars-found" *ngIf="carCards.length === 0 && !isLoading">
       <h3>No cars were found.</h3>
       <p>Please change the specified parameters.</p>
       <button
@@ -94,9 +97,9 @@
         Clear Filters
       </button>
     </div>
-    <div *ngFor="let card of carCards">
-      {{ card.carModel }}, {{ card.carCategory }}, {{ card.carYear }},
-      {{ card.carPrice }}
+
+    <div *ngFor="let carObj of carCards">
+      <app-car-card [carObj]="carObj"></app-car-card>
     </div>
   </div>
 </div>

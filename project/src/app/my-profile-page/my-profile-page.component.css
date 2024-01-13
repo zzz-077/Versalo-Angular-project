@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .profile_top_content {
   background-color: var(--sign_BGcolor);
   border-radius: 0.875rem;
@@ -16,6 +17,7 @@
   padding: 1rem;
   box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1);
 }
+
 .profile_bottom_content {
   display: flex;
   flex-direction: column;
@@ -24,24 +26,29 @@
   width: 90%;
   margin: 0 auto;
 }
+
 .profile_top_content {
   justify-content: center;
   align-items: center;
   justify-content: space-around;
 }
+
 .profile_edit_right_column {
   width: 250px;
 }
+
 .profile_edit_right_column img {
   width: 100%;
   object-fit: cover;
 }
+
 .profile_edit_left_column {
   display: flex;
   flex-direction: column;
   align-items: left;
   gap: 1rem;
 }
+
 .cell {
   /* background-color: rgba(33, 20, 20, 0.596); */
   display: flex;
@@ -50,22 +57,26 @@
   justify-content: space-between;
   height: 45px;
 }
+
 .cell h3 {
   color: var(--navbar_links__color_hovered);
   font-size: 1rem;
 }
+
 .profile_info_box_input {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
+
 .profile_info_box_input span {
   /* display: none; */
   font-size: 1.125rem;
   text-align: left;
   /* border-bottom: 2px solid var(--navbar_links__color_hovered); */
 }
+
 .profile_info_box_input input {
   color: var(--navbar_links__color);
   outline: none;
@@ -77,29 +88,36 @@
   width: 250px;
   display: none;
 }
+
 .profile_btns_box {
   display: flex;
   margin-top: 2rem;
 }
+
 .profile_info_btn_col1 {
   width: 50%;
   display: none;
 }
+
 .profile_info_btn_col1 button {
   width: 100%;
 }
+
 .profile_info_btn_col2 {
   display: flex;
   /* display: none; */
   width: 50%;
   gap: 0.5rem;
 }
+
 .profile_info_btn_col2 button {
   width: 100%;
 }
+
 .profile_info_btn_col2 button {
   width: 100%;
 }
+
 .prf_info_cancel_btn {
   background-color: #fceaeaf7;
   border: 2px solid #f06a6a;
@@ -129,11 +147,13 @@
   z-index: 10;
   box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1);
 }
+
 .Person_card_content p {
   padding: 1.25rem;
   background-color: var(--main_BGcolor);
   border-radius: 0.3rem;
 }
+
 .car_ctreate_box {
   display: flex;
   justify-content: end;
@@ -148,6 +168,7 @@
   border-top-right-radius: 0.875rem;
   position: relative;
 }
+
 .car_ctreate_box button::before {
   content: "";
   position: absolute;
@@ -158,11 +179,12 @@
   bottom: -5px;
   left: -4px;
 }
+
 /*=========================*/
 /*====CREATE CARD POPUP====*/
 /*=========================*/
 .create_card_container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -174,20 +196,24 @@
   z-index: 10;
   display: none;
 }
+
 .create_card_container form {
   background-color: var(--sign_BGcolor);
   padding: 2rem;
   border-radius: 0.3rem;
 }
+
 .form_input_cont {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 2rem;
 }
+
 .input_box {
   display: flex;
   flex-direction: column;
 }
+
 .input_box input {
   padding: 0.65rem 0.8rem;
   font-size: 1rem;
@@ -198,18 +224,22 @@
   box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.15);
   width: 300px;
 }
+
 .input_box label {
   font-size: 0.95rem;
   margin-left: 0.3rem;
   color: rgb(95, 85, 85);
 }
+
 .input_box input::placeholder,
 .input_box textarea::placeholder {
   color: rgb(139, 138, 138);
 }
+
 .input_textarea_box {
   width: 100%;
 }
+
 .input_box textarea {
   padding: 0.25rem 0.6rem;
   resize: none;
@@ -222,20 +252,24 @@
   box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.15);
   height: 200px;
 }
+
 .input_box .input_image_box {
   width: 1%;
   background-color: red;
   display: flex;
   flex-direction: column;
 }
+
 .image_display_box {
   background-color: rgb(234, 232, 232);
   width: 100%;
   height: 100%;
 }
+
 .input_box .input_image_box input {
   width: 1%;
 }
+
 .wheal_and_btnsbox {
   display: flex;
   flex-direction: column;
@@ -247,12 +281,15 @@
   width: 100%;
   gap: 0.5rem;
 }
+
 .profile_card_btn_col2 button {
   width: 100%;
 }
+
 .profile_card_btn_col2 button {
   width: 100%;
 }
+
 .prf_card_cancel_btn {
   background-color: #fceaeaf7;
   border: 2px solid #f06a6a;

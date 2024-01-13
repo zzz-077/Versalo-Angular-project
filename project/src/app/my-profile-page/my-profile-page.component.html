@@ -6,7 +6,9 @@
       (submit)="onFormSubmit($event)"
     >
       <div class="cell">
-        <h3>Name:</h3>
+        <div class="info_input_names">
+          <h3>Name:</h3>
+        </div>
         <div class="cell_child">
           <div class="profile_info_box_input">
             <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
@@ -38,7 +40,9 @@
         </div>
       </div>
       <div class="cell">
-        <h3>Lastname:</h3>
+        <div class="info_input_names">
+          <h3>Lastname:</h3>
+        </div>
         <div class="cell_child">
           <div class="profile_info_box_input">
             <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
@@ -71,7 +75,9 @@
         </div>
       </div>
       <div class="cell">
-        <h3>Email:</h3>
+        <div class="info_input_names">
+          <h3>Email:</h3>
+        </div>
         <div class="cell_child">
           <div class="profile_info_box_input">
             <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
@@ -103,32 +109,52 @@
         </div>
       </div>
       <div class="cell">
-        <h3>Password:</h3>
-
-        <div class="profile_info_box_input">
-          <span
-            [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            style="color: rgba(128, 128, 128, 0.912)"
-            *ngIf="!passwordCheck"
-            >********</span
+        <div class="info_input_names">
+          <h3>Password:</h3>
+        </div>
+        <div class="cell_child">
+          <div class="profile_info_box_input">
+            <span
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              style="color: rgba(128, 128, 128, 0.912)"
+              *ngIf="!passwordCheck"
+              >********</span
+            >
+            <span
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              style="color: var(--navbar_links__color)"
+              *ngIf="passwordCheck"
+              >{{ user?.userPassword }}</span
+            >
+            <mat-icon
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              (click)="passwordShow()"
+              >remove_red_eye</mat-icon
+            >
+            <input
+              formControlName="password"
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              type="password"
+              placeholder="{{ user?.userPassword }}"
+            />
+          </div>
+          <div
+            *ngIf="
+              profileEditForm.get('password')?.invalid &&
+              (profileEditForm.get('password')?.dirty ||
+                profileEditForm.get('password')?.touched)
+            "
           >
-          <span
-            [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            style="color: var(--navbar_links__color)"
-            *ngIf="passwordCheck"
-            >{{ user?.userPassword }}</span
-          >
-          <mat-icon
-            [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            (click)="passwordShow()"
-            >remove_red_eye</mat-icon
-          >
-          <input
-            formControlName="password"
-            [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            type="password"
-            placeholder="{{ user?.userPassword }}"
-          />
+            <mat-error>
+              <span
+                *ngIf="profileEditForm.get('password')?.hasError('required')"
+                >Password is required</span
+              >
+              <span *ngIf="profileEditForm.get('password')?.hasError('pattern')"
+                >Incorrect password format</span
+              >
+            </mat-error>
+          </div>
         </div>
       </div>
       <div class="profile_btns_box">

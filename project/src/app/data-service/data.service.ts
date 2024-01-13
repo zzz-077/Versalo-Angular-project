@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class DataService {
   /*=================*/
-  /*====USER DATA && CRUD====*/
+  /*====USER DATA====*/
   /*=================*/
   private registerUrl = 'http://localhost:3000/users';
   private userDataSubject: BehaviorSubject<userInterface[]> =
@@ -70,5 +70,19 @@ export class DataService {
       }
     }
     return this.http.get<carCardInterface[]>(this.carCardsUrl, { params });
+  }
+
+  /*======================*/
+  /*====USER DATA CRUD====*/
+  /*======================*/
+
+  userUpdate(user: userInterface) {
+    console.log('Update in service:' + user);
+    return this.http.put<userInterface>(`${this.registerUrl}/${user.id}`, user);
+  }
+
+  userGet(id: string): Observable<userInterface> {
+    console.log('Returning from service:');
+    return this.http.get<userInterface>(`${this.registerUrl}/${id}`);
   }
 }

@@ -1,45 +1,110 @@
 <div class="profile_container">
   <div class="profile_top_content">
-    <form class="profile_edit_left_column" (submit)="onFormSubmit($event)">
+    <form
+      [formGroup]="profileEditForm"
+      class="profile_edit_left_column"
+      (submit)="onFormSubmit($event)"
+    >
       <div class="cell">
         <h3>Name:</h3>
-        <div class="profile_info_box_input">
-          <span [ngClass]="infoEdit_btnCheck ? 'active' : null">Vaska</span>
-          <input
-            [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            type="text"
-            placeholder="User name"
-          />
+        <div class="cell_child">
+          <div class="profile_info_box_input">
+            <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
+              user?.userName
+            }}</span>
+            <input
+              formControlName="name"
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              type="text"
+              placeholder="{{ user?.userName }}"
+            />
+          </div>
+          <div
+            *ngIf="
+              profileEditForm.get('name')?.invalid &&
+              (profileEditForm.get('name')?.dirty ||
+                profileEditForm.get('name')?.touched)
+            "
+          >
+            <mat-error>
+              <span *ngIf="profileEditForm.get('name')?.hasError('required')"
+                >Name is required</span
+              >
+              <span *ngIf="profileEditForm.get('name')?.hasError('pattern')"
+                >Incorrect Name format</span
+              >
+            </mat-error>
+          </div>
         </div>
       </div>
       <div class="cell">
         <h3>Lastname:</h3>
-        <div class="profile_info_box_input">
-          <span [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            >zardiashvili</span
+        <div class="cell_child">
+          <div class="profile_info_box_input">
+            <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
+              user?.userLastName
+            }}</span>
+            <input
+              formControlName="lastname"
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              type="text"
+              placeholder="{{ user?.userLastName }}"
+            />
+          </div>
+          <div
+            *ngIf="
+              profileEditForm.get('lastname')?.invalid &&
+              (profileEditForm.get('lastname')?.dirty ||
+                profileEditForm.get('lastname')?.touched)
+            "
           >
-          <input
-            [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            type="text"
-            placeholder="User lastname"
-          />
+            <mat-error>
+              <span
+                *ngIf="profileEditForm.get('lastname')?.hasError('required')"
+                >Lastname is required</span
+              >
+              <span *ngIf="profileEditForm.get('lastname')?.hasError('pattern')"
+                >Incorrect lastname format</span
+              >
+            </mat-error>
+          </div>
         </div>
       </div>
       <div class="cell">
         <h3>Email:</h3>
-        <div class="profile_info_box_input">
-          <span [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            >vaska2004.com</span
+        <div class="cell_child">
+          <div class="profile_info_box_input">
+            <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
+              user?.userEmail
+            }}</span>
+            <input
+              formControlName="email"
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              type="email"
+              placeholder="{{ user?.userEmail }}"
+            />
+          </div>
+          <div
+            *ngIf="
+              profileEditForm.get('email')?.invalid &&
+              (profileEditForm.get('email')?.dirty ||
+                profileEditForm.get('email')?.touched)
+            "
           >
-          <input
-            [ngClass]="infoEdit_btnCheck ? 'active' : null"
-            type="email"
-            placeholder="User email"
-          />
+            <mat-error>
+              <span *ngIf="profileEditForm.get('email')?.hasError('required')"
+                >Email is required</span
+              >
+              <span *ngIf="profileEditForm.get('email')?.hasError('pattern')"
+                >Incorrect email format</span
+              >
+            </mat-error>
+          </div>
         </div>
       </div>
       <div class="cell">
         <h3>Password:</h3>
+
         <div class="profile_info_box_input">
           <span
             [ngClass]="infoEdit_btnCheck ? 'active' : null"
@@ -51,7 +116,7 @@
             [ngClass]="infoEdit_btnCheck ? 'active' : null"
             style="color: var(--navbar_links__color)"
             *ngIf="passwordCheck"
-            >12345678</span
+            >{{ user?.userPassword }}</span
           >
           <mat-icon
             [ngClass]="infoEdit_btnCheck ? 'active' : null"
@@ -59,9 +124,10 @@
             >remove_red_eye</mat-icon
           >
           <input
+            formControlName="password"
             [ngClass]="infoEdit_btnCheck ? 'active' : null"
             type="password"
-            placeholder="User password"
+            placeholder="{{ user?.userPassword }}"
           />
         </div>
       </div>

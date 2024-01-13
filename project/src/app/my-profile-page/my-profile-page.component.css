@@ -206,7 +206,6 @@
 }
 .prf_edit_col {
   display: flex;
-  /* display: none; */
   gap: 0.1rem;
 }
 .prf_cards_edit_btn,
@@ -380,4 +379,11 @@
   background-color: #ff1818;
   border: 2px solid #ff1818;
   color: var(--main_BGcolor);
+}
+
+mat-error {
+  font-size: 0.75rem;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  padding: 0;
 }

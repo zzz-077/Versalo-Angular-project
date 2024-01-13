@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { userInterface } from '../data-service/registerInterface';
 import { UserService } from '../user-service/user.service';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
@@ -18,6 +19,25 @@ export class MyProfilePageComponent {
   isLogged: boolean = false;
   user: userInterface | null = null;
   activeRoute: string = '';
+
+  profileEditForm = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z]+$'),
+    ]),
+    lastname: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z]+$'),
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^.{8,}$/),
+    ]),
+  });
   /*===============================*/
   /*====PROFILE CLICK FUNCTIONS====*/
   /*===============================*/
@@ -30,6 +50,9 @@ export class MyProfilePageComponent {
       this.user = user;
     });
     console.log(this.user);
+  }
+  getStarsArray(length: number): number[] {
+    return Array.from({ length }, (_, index) => index);
   }
 
   passwordShow() {

@@ -1,1 +1,24 @@
-<p>car-details works!</p>
+<div *ngIf="carDetails">
+  <div class="car-details">
+    <h2 class="car-header">
+      {{ carDetails.carModel }} {{ carDetails.carSeries }}
+      <span class="car-year">{{ carDetails.carYear }}</span>
+    </h2>
+
+    <figure class="car-image">
+      <img
+        [src]="carDetails.carImg"
+        [alt]="carDetails.carModel + ' ' + carDetails.carSeries"
+      />
+    </figure>
+    <div class="car-specifications">
+      <div class="user-details">
+        <div class="user-image">
+          <img src="/assets/user-icon.svg" alt="" />
+        </div>
+        {{ user?.userName }}
+      </div>
+      <div class="car-description"></div>
+    </div>
+  </div>
+</div>

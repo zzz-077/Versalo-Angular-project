@@ -12,7 +12,7 @@
 }
 
 .card-image {
-  background-color: rgb(182, 179, 179);
+  background-color: var(--sign_BGcolor);
   width: 220px;
   flex-shrink: 0;
   display: flex;
@@ -49,16 +49,30 @@
   gap: 1em;
 }
 
-
-
 .car-name {
-  font-size: 1.05em;
-  color: var(--navbar_links__color);
-  text-transform: capitalize;
-  font-weight: 500;
+  all: unset;
+}
+
+.car-name-price,
+.car-name {
   display: flex;
   align-items: center;
+  font-size: 1.05em;
+  font-weight: 500;
   gap: 0.3em;
+  color: var(--navbar_links__color);
+  text-transform: capitalize;
+}
+
+.car-name,
+.car-price {
+  cursor: pointer;
+  transition: 0.125s linear;
+}
+
+.car-name:hover,
+.car-price:hover {
+  color: var(--navbar_links__color_hovered);
 }
 
 .car-name-year {
@@ -72,7 +86,7 @@
   align-items: center;
   gap: 0.5em;
   margin-left: auto;
-  font-size: 1.25em;
+  font-size: 1.125em;
   opacity: 0.85;
   letter-spacing: 0.2px;
 }

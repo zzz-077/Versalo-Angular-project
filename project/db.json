@@ -341,7 +341,7 @@
       "carPrice": 15000,
       "carImg": "https://atcimages.kbb.com/scaler/408/306/hn/c/d6dcc3ff70374dd9af26fcd446e84727.jpg",
       "carColor": "Silver",
-      "gearBox": "Manual",
+      "gearBox": "manual",
       "carDetails": "European styling, comfortable ride",
       "wheel": "Front-wheel drive"
     },
@@ -355,7 +355,7 @@
       "carPrice": 19000,
       "carImg": "https://cdn05.carsforsale.com/008ad932a58314f6845dbb60ed626d9855/1280x960/2013-mazda-cx-5-touring-4dr-suv.jpg",
       "carColor": "Black",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Sporty design, efficient fuel economy",
       "wheel": "All-wheel drive"
     },
@@ -369,7 +369,7 @@
       "carPrice": 17000,
       "carImg": "https://ap.ge/system/car/photos/007/379/873/medium.jpg?1698413904",
       "carColor": "Black",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Reliable and economical",
       "wheel": "Front-wheel drive"
     },
@@ -383,7 +383,7 @@
       "carPrice": 26000,
       "carImg": "https://cdn05.carsforsale.com/7828a17f491a5532e8ad1dfe072e735e/1280x960/2010-bmw-x3-xdrive30i-awd-4dr-suv.jpg",
       "carColor": "Blue",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Luxury SUV with advanced features",
       "wheel": "All-wheel drive"
     },
@@ -397,7 +397,7 @@
       "carPrice": 28000,
       "carImg": "https://f7432d8eadcf865aa9d9-9c672a3a4ecaaacdf2fee3b3e6fd2716.ssl.cf3.rackcdn.com/C513/U18970662/IMG_14617-large.jpg",
       "carColor": "Black",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Premium sedan with cutting-edge technology",
       "wheel": "All-wheel drive"
     },
@@ -411,7 +411,7 @@
       "carPrice": 32000,
       "carImg": "https://junkmailimages.blob.core.windows.net/large/1988b5f039524a93bb4bd520400bac48.jpg",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Elegant design, luxury features",
       "wheel": "Rear-wheel drive"
     },
@@ -425,7 +425,7 @@
       "carPrice": 12000,
       "carImg": "https://cs.copart.com/v1/AUTH_svc.pdoc00001/lpp/1123/e0264b5ae53946d18770ee4f1a592ba9_hrs.jpg",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Affordable SUV with comfortable seating",
       "wheel": "Front-wheel drive"
     },
@@ -439,7 +439,7 @@
       "carPrice": 22000,
       "carImg": "https://carsales.pxcrush.net/cars/private/epxgfssqwukyee2bthbf3oqu7.jpg?pxc_method=gravityfill&pxc_bgtype=self&pxc_size=720,480",
       "carColor": "Black",
-      "gearBox": "CVT",
+      "gearBox": "manual",
       "carDetails": "Rugged and versatile crossover",
       "wheel": "All-wheel drive"
     },
@@ -453,7 +453,7 @@
       "carPrice": 34000,
       "carImg": "https://cs.copart.com/v1/AUTH_svc.pdoc00001/lpp/1223/b70968aec265493d9e9663b9d851ae17_hrs.jpg",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Best car ever",
       "wheel": "Front-wheel drive"
     },
@@ -467,7 +467,7 @@
       "carPrice": 10000,
       "carImg": "https://cs.copart.com/v1/AUTH_svc.pdoc00001/lpp/1123/cf6e4dcddd004ecba563dd5a2599b45a_hrs.jpg",
       "carColor": "Blue",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Bold design, comfortable interior",
       "wheel": "Rear-wheel drive"
     },
@@ -481,7 +481,7 @@
       "carPrice": 26000,
       "carImg": "https://static.overfuel.com/photos/64/34480/202310-c7a059d1461742889a4197422290dd3a.webp",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Off-road capability, premium features",
       "wheel": "4-wheel drive"
     },
@@ -495,7 +495,7 @@
       "carPrice": 18000,
       "carImg": "https://static.wikia.nocookie.net/acura/images/c/c4/2nd_Acura_MDX..jpg",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Luxurious SUV with advanced safety",
       "wheel": "All-wheel drive"
     },
@@ -509,7 +509,7 @@
       "carPrice": 22000,
       "carImg": "https://www.cnet.com/a/img/resize/a7305a4b8f75af40d660c49360484073b0cf69c4/hub/2009/05/04/e2d5169f-f8df-11e2-8c7c-d4ae52e62bcc/33642211_OVR_small.jpg?auto=webp&fit=crop&height=675&width=1200",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Sporty sedan with powerful performance",
       "wheel": "Rear-wheel drive"
     },
@@ -523,7 +523,7 @@
       "carPrice": 30000,
       "carImg": "https://upload.wikimedia.org/wikipedia/commons/9/95/2018_Volvo_XC90_2.0.jpg",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Safety-focused SUV with a luxurious touch",
       "wheel": "All-wheel drive"
     },
@@ -537,7 +537,7 @@
       "carPrice": 16000,
       "carImg": "https://trademe.tmcdn.co.nz/photoserver/480x360c/2083081434.jpg",
       "carColor": "Black",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Elegant design, high-end features",
       "wheel": "Rear-wheel drive"
     },
@@ -551,7 +551,7 @@
       "carPrice": 18000,
       "carImg": "https://image.usedcarsni.com/photos/000/296/804/655/296804657.1920.jpg",
       "carColor": "Black",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Compact and efficient",
       "wheel": "Front-wheel drive"
     },
@@ -565,7 +565,7 @@
       "carPrice": 25000,
       "carImg": "https://upload.wikimedia.org/wikipedia/commons/d/d3/2011_Ford_Mustang_GT-CS_Black_Side_View.jpg",
       "carColor": "Black",
-      "gearBox": "Manual",
+      "gearBox": "manual",
       "carDetails": "Iconic muscle car with powerful performance",
       "wheel": "Rear-wheel drive"
     },
@@ -579,7 +579,7 @@
       "carPrice": 28000,
       "carImg": "https://cf-img.autorevo.com/2015-jeep-wrangler-unlimited-albuquerque-nm-7241618/980x980/2870182-1-revo.jpg?_=1704343538",
       "carColor": "Green",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Off-road adventure and open-air driving",
       "wheel": "4-wheel drive"
     },
@@ -593,7 +593,7 @@
       "carPrice": 12000,
       "carImg": "https://imagescdn.dealercarsearch.com/Media/8276/19422028/638041073488185084.jpg",
       "carColor": "Silver",
-      "gearBox": "Automatic",
+      "gearBox": "automatic",
       "carDetails": "Economical and reliable",
       "wheel": "Front-wheel drive"
     },
@@ -607,7 +607,7 @@
       "carPrice": 35000,
       "carImg": "https://cdn.ebizautos.media/used-1985-porsche-911-carreratarga5speedmanual-6383-21854789-1-1024.jpg",
       "carColor": "White",
-      "gearBox": "Manual",
+      "gearBox": "manual",
       "carDetails": "Timeless design with precision engineering",
       "wheel": "Rear-wheel drive"
     },
@@ -621,7 +621,7 @@
       "carPrice": 12000,
       "carImg": "https://kars4kidsgarage.com/wp-content/uploads/2021/08/790825_01X.jpg",
       "carColor": "Blue",
-      "gearBox": "Manual",
+      "gearBox": "manual",
       "carDetails": "Quirky and iconic compact car",
       "wheel": "Rear-wheel drive"
     },
@@ -635,7 +635,7 @@
       "carPrice": 8000,
       "carImg": "https://images.squarespace-cdn.com/content/v1/5b7da0b355b02c1acc11376e/1646945477569-JQLXK7XLHV5F01NGO68R/IMG_1891.JPG?format=1000w",
       "carColor": "Red",
-      "gearBox": "Manual",
+      "gearBox": "manual",
       "carDetails": "Reliable and fuel-efficient",
       "wheel": "Front-wheel drive"
     },
@@ -649,7 +649,7 @@
       "carPrice": 22000,
       "carImg": "https://journal.classiccars.com/media/2023/05/36855070-1974-bmw-2002-std.jpg",
       "carColor": "White",
-      "gearBox": "Manual",
+      "gearBox": "manual",
       "carDetails": "Compact luxury with a sporty flair",
       "wheel": "Rear-wheel drive"
     }

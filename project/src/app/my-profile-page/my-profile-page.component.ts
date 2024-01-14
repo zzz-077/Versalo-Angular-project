@@ -42,9 +42,9 @@ export class MyProfilePageComponent {
       Validators.pattern(/^.{8,}$/),
     ]),
   });
-  /*===============================*/
-  /*====PROFILE CLICK FUNCTIONS====*/
-  /*===============================*/
+  /*======================*/
+  /*====INFO FUNCTIONS====*/
+  /*======================*/
   ngOnInit(): void {
     this.localStorageService.isLogged$.subscribe((value) => {
       this.isLogged = value;
@@ -102,7 +102,7 @@ export class MyProfilePageComponent {
   }
 
   /*===============================*/
-  /*====CARDS CLICK FUNCTIONS====*/
+  /*====CARDS  FUNCTIONS====*/
   /*===============================*/
   cardAddBtn() {
     this.CardsAdd_btnCheck = true;

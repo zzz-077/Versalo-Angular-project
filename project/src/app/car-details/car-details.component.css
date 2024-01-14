@@ -107,7 +107,7 @@
 .car-specifications .car-description {
     display: flex;
     flex-direction: column;
-    padding: 0.5em 0 1em;
+    padding: 0.5em 1.25em 1em;
     border-bottom: 4px solid var(--main_BGcolor);
     height: fit-content;
     max-height: 110px;
@@ -117,12 +117,11 @@
 .car-specifications .car-description .car-description-header {
     font-size: 1.125em;
     font-weight: 600;
-    padding: 0 1em;
-    /* border-bottom: 2px solid var(--main_BGcolor); */
+
 }
 
 .car-specifications .car-description .car-description-text {
-    padding: 0 1em;
+
     font-size: 0.9em;
     max-width: 100%;
     height: 100%;
@@ -140,7 +139,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 0.5em 1em;
+    padding: 0.5em 1.25em;
     transition: 0.2s ease-in-out;
 }
 

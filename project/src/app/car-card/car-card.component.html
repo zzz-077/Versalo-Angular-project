@@ -12,7 +12,11 @@
         {{ carObj.carModel }} - {{ carObj.carSeries }}
         <span class="car-name-year">/ {{ carObj.carYear }} year</span>
       </a>
-      <span routerLink="cardetails/:{{ carObj.id }}" class="car-price">
+      <span
+        routerLink="cardetails/{{ carObj.id }}"
+        target="_blank"
+        class="car-price"
+      >
         {{ carObj.carPrice | currency : "USD" }}
       </span>
     </div>

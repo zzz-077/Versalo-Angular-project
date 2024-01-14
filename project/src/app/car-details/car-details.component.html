@@ -1,24 +1,68 @@
-<div *ngIf="carDetails">
-  <div class="car-details">
+<div *ngIf="carDetails" class="car-details">
+  <div class="car-header-image">
     <h2 class="car-header">
       {{ carDetails.carModel }} {{ carDetails.carSeries }}
       <span class="car-year">{{ carDetails.carYear }}</span>
+      <span class="car-price">
+        {{ carDetails.carPrice | currency : "USD" }}
+      </span>
     </h2>
-
-    <figure class="car-image">
+    <div class="car-image">
       <img
         [src]="carDetails.carImg"
         [alt]="carDetails.carModel + ' ' + carDetails.carSeries"
       />
-    </figure>
-    <div class="car-specifications">
-      <div class="user-details">
-        <div class="user-image">
-          <img src="/assets/user-icon.svg" alt="" />
-        </div>
-        {{ user?.userName }}
+    </div>
+  </div>
+  <div class="car-specifications">
+    <div class="user">
+      <div class="user-image">
+        <img src="/assets/user-icon.svg" alt="" />
       </div>
-      <div class="car-description"></div>
+      <div class="user-details">
+        <span class="user-fullname"
+          >{{ user?.userName }} {{ user?.userLastName }}</span
+        >
+        <span class="user-email">{{ user?.userEmail }}</span>
+      </div>
+    </div>
+    <div class="car-description">
+      <p class="car-description-header">Description:</p>
+      <p class="car-description-text">
+        {{ carDetails.carDetails }}
+      </p>
+    </div>
+    <div class="car-parameters">
+      <div class="car-parameter">
+        <div class="car-parameter-name">Manufacturer</div>
+        <div class="car-parameter-value">{{ carDetails.carModel || "-" }}</div>
+      </div>
+      <div class="car-parameter">
+        <div class="car-parameter-name">Model</div>
+        <div class="car-parameter-value">{{ carDetails.carSeries || "-" }}</div>
+      </div>
+      <div class="car-parameter">
+        <div class="car-parameter-name">Year</div>
+        <div class="car-parameter-value">{{ carDetails.carYear || "-" }}</div>
+      </div>
+      <div class="car-parameter">
+        <div class="car-parameter-name">Category</div>
+        <div class="car-parameter-value">
+          {{ carDetails.carCategory || "-" }}
+        </div>
+      </div>
+      <div class="car-parameter">
+        <div class="car-parameter-name">Gear box type</div>
+        <div class="car-parameter-value">{{ carDetails.gearBox || "-" }}</div>
+      </div>
+      <div class="car-parameter">
+        <div class="car-parameter-name">Drive wheels</div>
+        <div class="car-parameter-value">{{ carDetails.wheel || "-" }}</div>
+      </div>
+      <div class="car-parameter">
+        <div class="car-parameter-name">Color</div>
+        <div class="car-parameter-value">{{ carDetails.carColor || "-" }}</div>
+      </div>
     </div>
   </div>
 </div>

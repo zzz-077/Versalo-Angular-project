@@ -4,6 +4,7 @@ export interface userInterface {
   userLastName: string;
   userEmail: string;
   userPassword: string;
+  userImageUrl: string;
 }
 
 export interface carInterface {

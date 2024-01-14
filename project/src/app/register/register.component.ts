@@ -51,6 +51,7 @@ export class RegisterComponent {
         Validators.required,
         Validators.pattern(/^.{8,}$/),
       ]),
+      userImageUrl: new FormControl(''),
     },
     { validators: this.Mustmatch('password', 'confirmPassword') }
   );
@@ -110,6 +111,7 @@ export class RegisterComponent {
         userLastName: this.RegisterForm.value.lastname as string,
         userEmail: this.RegisterForm.value.email as string,
         userPassword: this.RegisterForm.value.password as string,
+        userImageUrl: this.RegisterForm.value.userImageUrl as string,
       })
       .subscribe((item) => {});
     if (this.RegisterForm.valid) {

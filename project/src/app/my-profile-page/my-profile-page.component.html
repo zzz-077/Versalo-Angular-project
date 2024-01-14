@@ -184,7 +184,7 @@
       </div>
     </form>
     <div class="profile_edit_right_column">
-      <img src="../../assets/user-icon.svg" alt="#" />
+      <img [src]="user?.userImageUrl" alt="#" />
     </div>
   </div>
   <div class="profile_bottom_content">
@@ -268,9 +268,11 @@
           <textarea placeholder="Powerful engine, iconic design..."></textarea>
         </div>
         <div class="input_box input_image_box">
-          <label>Photo</label>
-          <div class="image_display_box"></div>
-          <input type="file" />
+          <label for="fileUpload">Photo</label>
+          <div class="image_display_box">
+            <img [src]="saveCarImageUrl || '/assets/no-image.svg'" alt="" />
+          </div>
+          <input id="fileUpload" type="file" (change)="onFileChange($event)" />
         </div>
       </div>
     </div>

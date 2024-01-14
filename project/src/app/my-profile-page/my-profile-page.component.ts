@@ -5,6 +5,7 @@ import { LocalStorageService } from '../local-storage-service/local-storage.serv
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data-service/data.service';
 import { __values } from 'tslib';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
@@ -14,7 +15,8 @@ export class MyProfilePageComponent {
   constructor(
     private localStorageService: LocalStorageService,
     private userService: UserService,
-    private data: DataService
+    private data: DataService,
+    private fireStorage: AngularFireStorage
   ) {}
   passwordCheck = false;
   infoEdit_btnCheck = false;
@@ -23,6 +25,8 @@ export class MyProfilePageComponent {
   user: userInterface | null = null;
   id: any = '';
   activeRoute: string = '';
+  saveCarImageUrl: string = '';
+  oldSavedCarImageName: string | null = null;
 
   profileEditForm = new FormGroup({
     name: new FormControl('', [
@@ -41,6 +45,7 @@ export class MyProfilePageComponent {
       Validators.required,
       Validators.pattern(/^.{8,}$/),
     ]),
+    userImageUrl: new FormControl(''),
   });
   /*======================*/
   /*====INFO FUNCTIONS====*/
@@ -68,6 +73,7 @@ export class MyProfilePageComponent {
       lastname: this.user?.userLastName || '',
       email: this.user?.userEmail || '',
       password: this.user?.userPassword || '',
+      userImageUrl: this.user?.userImageUrl || '',
     });
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
@@ -80,6 +86,7 @@ export class MyProfilePageComponent {
         userLastName: this.profileEditForm.value.lastname as string,
         userEmail: this.profileEditForm.value.email as string,
         userPassword: this.profileEditForm.value.password as string,
+        userImageUrl: this.profileEditForm.value.userImageUrl as string,
       })
       .subscribe(() => {
         this.loadInfo();
@@ -112,5 +119,27 @@ export class MyProfilePageComponent {
   }
   cardSaveBtn() {
     this.CardsAdd_btnCheck = false;
+  }
+
+  async onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      if (
+        this.oldSavedCarImageName &&
+        this.oldSavedCarImageName !== file.name
+      ) {
+        await this.fireStorage.storage
+          .refFromURL(this.saveCarImageUrl)
+          .delete();
+      }
+      if (this.oldSavedCarImageName !== file.name) {
+        const path = `carImages/${file.name}`;
+        const uploadTask = await this.fireStorage.upload(path, file);
+        const url = await uploadTask.ref.getDownloadURL();
+        this.saveCarImageUrl = url;
+        this.oldSavedCarImageName = file.name;
+        console.log(this.saveCarImageUrl);
+      }
+    }
   }
 }

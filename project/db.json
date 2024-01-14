@@ -5,63 +5,72 @@
       "userName": "vaska",
       "userLastName": "zardiashvili",
       "userEmail": "vaska2004@gmail.com",
-      "userPassword": "12345678"
+      "userPassword": "12345678",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 2,
       "userName": "guja",
       "userLastName": "gujejiani",
       "userEmail": "gujeqsdzlieri@gmail.ru",
-      "userPassword": "magarkacagujeja"
+      "userPassword": "magarkacagujeja",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 3,
       "userName": "sasha",
       "userLastName": "shumaxeri",
       "userEmail": "sasha@gmail.ru",
-      "userPassword": "12345678"
+      "userPassword": "12345678",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 4,
       "userName": "guram",
       "userLastName": "sherozia",
       "userEmail": "sheroooz@gandil.ru",
-      "userPassword": "sherozshenifanivar"
+      "userPassword": "sherozshenifanivar",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 5,
       "userName": "luka",
       "userLastName": "adeshidze",
       "userEmail": "lukson@gmail.com",
-      "userPassword": "123lukadzlieri123"
+      "userPassword": "123lukadzlieri123",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 6,
       "userName": "guga",
       "userLastName": "berdzenishvili",
       "userEmail": "laxalovka@gmail.com",
-      "userPassword": "laxalovkovich"
+      "userPassword": "laxalovkovich",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 7,
       "userName": "Nikvardi",
       "userLastName": "eliashvili",
       "userEmail": "gori+vashli@gmail.com",
-      "userPassword": "stalinithegod"
+      "userPassword": "stalinithegod",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 8,
       "userName": "Nika",
       "userLastName": "Eliashvili",
       "userEmail": "nika@gmail.com",
-      "userPassword": "123123123"
+      "userPassword": "123123123",
+      "userImageUrl": "/assets/user-icon.svg"
     },
     {
       "id": 9,
       "userName": "nika",
       "userLastName": "nika",
       "userEmail": "b@b.com",
-      "userPassword": "123123123"
+      "userPassword": "123123123",
+      "userImageUrl": "/assets/user-icon.svg"
     }
   ],
   "cars": [

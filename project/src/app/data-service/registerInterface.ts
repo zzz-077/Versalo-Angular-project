@@ -15,7 +15,7 @@ export interface carInterface {
   gearBox: string[];
 }
 export interface carCardInterface {
-  id: number;
+  id: string;
   userId: number;
   carModel: string;
   carSeries: string;

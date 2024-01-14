@@ -2,7 +2,7 @@
   <div class="filter_content">
     <form [formGroup]="carForm">
       <select value="Carmodel" formControlName="Model">
-        <option value="carModel" selected>Car Model</option>
+        <option value="carModel" selected>Car Manufacturer</option>
         <option *ngFor="let model of carList[0]?.carModel" [ngValue]="model">
           {{ model }}
         </option>

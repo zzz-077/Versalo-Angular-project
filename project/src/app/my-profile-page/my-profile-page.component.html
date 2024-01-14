@@ -206,75 +206,20 @@
       </div>
     </div>
     <div class="Person_card_content">
-      <div>
-        <app-car-card></app-car-card>
+      <div *ngFor="let card of usersCardsList">
+        <app-car-card [carObj]="card"></app-car-card>
       </div>
     </div>
   </div>
 </div>
-
 <div
-  [ngClass]="CardsAdd_btnCheck ? 'active' : null"
-  class="create_card_container"
+  *ngIf="CardsAdd_btnCheck"
+  [ngClass]="!CardsAdd_btnCheck ? 'hide' : null"
+  class="overlay-container"
 >
-  <form (submit)="onFormSubmit($event)">
-    <div class="form_input_cont">
-      <div class="addCard_input_top_row">
-        <div class="input_box">
-          <label>Model</label>
-          <input placeholder="model" type="text" />
-        </div>
-        <div class="input_box">
-          <label>Category</label>
-          <input placeholder="sedan" type="text" />
-        </div>
-        <div class="input_box">
-          <label>Year</label>
-          <input placeholder="2023" type="text" />
-        </div>
-        <div class="input_box">
-          <label>Price</label>
-          <input placeholder="28000" type="text" />
-        </div>
-        <div class="input_box">
-          <label>Color</label>
-          <input placeholder="red" type="text" />
-        </div>
-        <div class="input_box">
-          <label>Gearbox</label>
-          <input placeholder="automatic" type="text" />
-        </div>
-      </div>
-      <div class="addCard_input_bottom_row">
-        <div class="input_box wheal_and_btnsbox">
-          <div>
-            <label>Wheel</label>
-            <input placeholder="front-wheel drive" type="text" />
-          </div>
-
-          <div class="profile_btns_box">
-            <div class="profile_card_btn_col2">
-              <button (click)="cardSaveBtn()" class="prf_card_save_btn">
-                Save
-              </button>
-              <button (click)="cardCancelBtn()" class="prf_card_cancel_btn">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="input_box input_textarea_box">
-          <label>Details</label>
-          <textarea placeholder="Powerful engine, iconic design..."></textarea>
-        </div>
-        <div class="input_box input_image_box">
-          <label for="fileUpload">Photo</label>
-          <div class="image_display_box">
-            <img [src]="saveCarImageUrl || '/assets/no-image.svg'" alt="" />
-          </div>
-          <input id="fileUpload" type="file" (change)="onFileChange($event)" />
-        </div>
-      </div>
-    </div>
-  </form>
+  <app-add-card
+    [fromChild]="CardsAdd_btnCheck"
+    [id]="id"
+    (cancel)="closeAddCardOverlay()"
+  ></app-add-card>
 </div>

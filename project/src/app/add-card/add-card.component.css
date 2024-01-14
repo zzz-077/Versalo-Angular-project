@@ -1,0 +1,150 @@
+.create_card_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.703);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  display: flex;
+}
+
+.create_card_container form {
+  background-color: var(--sign_BGcolor);
+  padding: 2rem;
+  border-radius: 0.3rem;
+}
+.input_title_box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.input_title_box div {
+  display: flex;
+  align-items: center;
+}
+.form_input_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.addCard_input_top_row {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+}
+
+.addCard_input_bottom_row {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1rem;
+}
+
+.input_box {
+  display: flex;
+  flex-direction: column;
+}
+
+.input_box input,
+.input_box select {
+  padding: 0.65rem 0.8rem;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  background: whitesmoke;
+  border-radius: 0.35rem;
+  box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.15);
+  width: 300px;
+}
+
+.input_box label {
+  font-size: 0.95rem;
+  color: rgb(95, 85, 85);
+}
+
+.input_box input::placeholder,
+.input_box textarea::placeholder {
+  color: rgb(139, 138, 138);
+}
+
+.input_textarea_box {
+  width: 100%;
+}
+
+.input_box textarea {
+  padding: 0.25rem 0.6rem;
+  resize: none;
+  outline: none;
+  font-size: 0.875rem;
+  outline: none;
+  border: none;
+  background: whitesmoke;
+  border-radius: 0.35rem;
+  box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.15);
+  height: 150px;
+}
+
+.input_box .input_image_box {
+  width: 1%;
+  background-color: red;
+  display: flex;
+}
+
+.image_display_box {
+  width: 100%;
+  height: 100%;
+  max-height: 150px;
+}
+
+.image_display_box img {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+}
+
+.input_box .input_image_box input {
+  width: 1%;
+}
+
+.wheel_and_btnsbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile_card_btn_col2 {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.profile_card_btn_col2 button {
+  width: 100%;
+}
+
+.profile_card_btn_col2 button {
+  width: 100%;
+}
+
+.prf_card_cancel_btn {
+  background-color: #fceaeaf7;
+  border: 2px solid #f06a6a;
+  color: #ff1818;
+  transition: all 0.2s;
+}
+
+.prf_card_cancel_btn:hover {
+  background-color: #ff1818;
+  border: 2px solid #ff1818;
+  color: var(--main_BGcolor);
+}
+
+mat-error {
+  font-size: 0.75rem;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  padding: 0;
+}

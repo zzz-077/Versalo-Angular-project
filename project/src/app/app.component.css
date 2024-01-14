@@ -71,7 +71,6 @@ nav {
   text-transform: capitalize;
 }
 
-
 .navbar ul li .nav-link .user .user-img {
   display: flex;
   align-items: center;
@@ -212,14 +211,11 @@ nav {
   gap: 1rem;
 }
 
-
 main {
   flex: 1;
   position: relative;
   height: 100%;
 }
-
-
 
 .footer_content {
   width: 100%;
@@ -232,6 +228,7 @@ main {
   font-weight: 500;
   gap: 1rem;
   z-index: 1000;
+  margin-top: 2rem;
 }
 
 .footer_content h3 {

@@ -1,0 +1,226 @@
+<div class="create_card_container" *ngIf="fromChild">
+  <form [formGroup]="CardAddForm">
+    <div class="form_input_cont">
+      <div class="addCard_input_top_row">
+        <div class="input_box">
+          <div class="input_title_box">
+            <label>Manufacturer</label>
+            <div
+              *ngIf="
+                CardAddForm.get('model')?.invalid &&
+                (CardAddForm.get('model')?.dirty ||
+                  CardAddForm.get('model')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('model')?.hasError('required')"
+                  >Manufacturer is required</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <input formControlName="model" placeholder="e.g bmw" type="text" />
+        </div>
+        <div class="input_box">
+          <div class="input_title_box">
+            <label>Model</label>
+            <div
+              *ngIf="
+                CardAddForm.get('serie')?.invalid &&
+                (CardAddForm.get('serie')?.dirty ||
+                  CardAddForm.get('serie')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('serie')?.hasError('required')"
+                  >Model is required</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <input formControlName="serie" placeholder="e.g X6" type="text" />
+        </div>
+        <div class="input_box">
+          <div class="input_title_box">
+            <label>Category</label>
+            <div
+              *ngIf="
+                CardAddForm.get('category')?.invalid &&
+                (CardAddForm.get('category')?.dirty ||
+                  CardAddForm.get('category')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('category')?.hasError('required')"
+                  >Category is required</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <input formControlName="category" placeholder="e.g suv" type="text" />
+        </div>
+        <div class="input_box">
+          <div class="input_title_box">
+            <label>Year</label>
+            <div
+              *ngIf="
+                CardAddForm.get('year')?.invalid &&
+                (CardAddForm.get('year')?.dirty ||
+                  CardAddForm.get('year')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('year')?.hasError('required')"
+                  >Year is required</span
+                ><span *ngIf="CardAddForm.get('year')?.hasError('pattern')"
+                  >Year form is incorrect</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <select formControlName="year">
+            <option *ngFor="let year of carList[0]?.carYear" [ngValue]="year">
+              {{ year }}
+            </option>
+          </select>
+        </div>
+        <div class="input_box">
+          <div class="input_title_box">
+            <label>Price</label>
+            <div
+              *ngIf="
+                CardAddForm.get('price')?.invalid &&
+                (CardAddForm.get('price')?.dirty ||
+                  CardAddForm.get('price')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('price')?.hasError('required')"
+                  >Price is required</span
+                >
+                <span *ngIf="CardAddForm.get('price')?.hasError('pattern')"
+                  >Price form is incorrect</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <input formControlName="price" placeholder="e.g $12000" type="text" />
+        </div>
+        <div class="input_box">
+          <div class="input_title_box">
+            <label>Color</label>
+            <div
+              *ngIf="
+                CardAddForm.get('color')?.invalid &&
+                (CardAddForm.get('color')?.dirty ||
+                  CardAddForm.get('color')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('color')?.hasError('required')"
+                  >Color is required</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <input formControlName="color" placeholder="e.g blue" type="text" />
+        </div>
+        <div class="input_box">
+          <div class="input_title_box">
+            <label>GearBox</label>
+            <div
+              *ngIf="
+                CardAddForm.get('gearBox')?.invalid &&
+                (CardAddForm.get('gearBox')?.dirty ||
+                  CardAddForm.get('gearBox')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('gearBox')?.hasError('required')"
+                  >GearBox is required</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <select formControlName="gearBox">
+            <option value="GearBox" selected>GearBox</option>
+            <option value="automatic">automatic</option>
+            <option value="manual">manual</option>
+          </select>
+        </div>
+        <div class="input_box wheel_and_btnsbox">
+          <div>
+            <div class="input_title_box">
+              <label>Wheel</label>
+              <div
+                *ngIf="
+                  CardAddForm.get('wheel')?.invalid &&
+                  (CardAddForm.get('wheel')?.dirty ||
+                    CardAddForm.get('wheel')?.touched)
+                "
+              >
+                <mat-error>
+                  <span *ngIf="CardAddForm.get('wheel')?.hasError('required')"
+                    >Wheel is required</span
+                  >
+                </mat-error>
+              </div>
+            </div>
+            <select formControlName="wheel">
+              <option value="Wheel" selected>Wheel</option>
+              <option value="4-Wheel Drive">4-Wheel Drive</option>
+              <option value="Front-Wheel Drive">Front-Wheel Drive</option>
+              <option value="Rear-Wheel Drive">Rear-Wheel Drive</option>
+              <option value="All-Wheel Drive">All-Wheel Drive</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="addCard_input_bottom_row">
+        <div class="input_box input_image_box">
+          <label>Photo</label>
+          <div class="image_display_box">
+            <img [src]="saveCarImageUrl || '/assets/no-image.svg'" alt="" />
+          </div>
+          <input id="fileUpload" type="file" (change)="onFileChange($event)" />
+        </div>
+        <div class="input_box input_textarea_box">
+          <div class="input_title_box">
+            <label>Details</label>
+            <div
+              *ngIf="
+                CardAddForm.get('details')?.invalid &&
+                (CardAddForm.get('details')?.dirty ||
+                  CardAddForm.get('details')?.touched)
+              "
+            >
+              <mat-error>
+                <span *ngIf="CardAddForm.get('details')?.hasError('required')"
+                  >Details is required</span
+                >
+              </mat-error>
+            </div>
+          </div>
+          <textarea
+            formArrayName="details"
+            placeholder="e.g Powerful engine, iconic design..."
+          ></textarea>
+        </div>
+      </div>
+      <div class="profile_btns_box">
+        <div class="profile_card_btn_col2">
+          <button
+            [disabled]="!CardAddForm.valid || isSubmitting"
+            (click)="cardSaveBtn()"
+            class="prf_card_save_btn"
+          >
+            Submit
+          </button>
+          <button (click)="cardCancelBtn()" class="prf_card_cancel_btn">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

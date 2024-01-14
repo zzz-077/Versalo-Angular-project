@@ -24,11 +24,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserService } from './user-service/user.service';
 import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
 import { CarDetailsComponent } from './car-details/car-details.component';
-
 /* AngularFire imports */
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
+import { AddCardComponent } from './add-card/add-card.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { environment } from 'src/environments/environment';
     MyProfilePageComponent,
     CarsPageComponent,
     CarDetailsComponent,
+    AddCardComponent,
   ],
   imports: [
     BrowserModule,

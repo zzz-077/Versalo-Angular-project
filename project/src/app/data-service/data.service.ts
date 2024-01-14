@@ -84,12 +84,20 @@ export class DataService {
   /*======================*/
 
   userUpdate(user: userInterface) {
-    console.log('Update in service:' + user);
     return this.http.put<userInterface>(`${this.registerUrl}/${user.id}`, user);
   }
 
   userGet(id: string): Observable<userInterface> {
-    console.log('Returning from service:');
     return this.http.get<userInterface>(`${this.registerUrl}/${id}`);
+  }
+
+  userCardsGet(userId: number): Observable<carCardInterface[]> {
+    return this.http.get<carCardInterface[]>(
+      `${this.carCardsUrl}?userId=${userId}`
+    );
+  }
+
+  userCardCreate(card: carCardInterface): Observable<carCardInterface> {
+    return this.http.post<carCardInterface>(this.carCardsUrl, card);
   }
 }

@@ -1,11 +1,15 @@
 <div *ngIf="carObj" class="car-card">
-  <a routerLink="cardetails/{{ carObj.id }}" target="_blank" class="card-image">
+  <a
+    routerLink="/cars/cardetails/{{ carObj.id }}"
+    target="_blank"
+    class="card-image"
+  >
     <img ngSrc="{{ carObj.carImg }}" fill [loading]="'lazy'" />
   </a>
   <div class="card-content">
     <div class="car-name-price">
       <a
-        routerLink="cardetails/{{ carObj.id }}"
+        routerLink="/cars/cardetails/{{ carObj.id }}"
         target="_blank"
         class="car-name"
       >
@@ -13,7 +17,7 @@
         <span class="car-name-year">/ {{ carObj.carYear }} year</span>
       </a>
       <span
-        routerLink="cardetails/{{ carObj.id }}"
+        routerLink="/cars/cardetails/{{ carObj.id }}"
         target="_blank"
         class="car-price"
       >

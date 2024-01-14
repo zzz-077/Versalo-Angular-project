@@ -52,7 +52,6 @@ export class DataService {
   getCarComponentsData(): Observable<carInterface[]> {
     return this.http.get<carInterface[]>(this.carComponentsUrl);
   }
-
   /*===================*/
   /*====CARS CARDS====*/
   /*===================*/

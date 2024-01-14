@@ -1,10 +1,6 @@
 <div class="profile_container">
   <div class="profile_top_content">
-    <form
-      [formGroup]="profileEditForm"
-      class="profile_edit_left_column"
-      (submit)="onFormSubmit($event)"
-    >
+    <form [formGroup]="profileEditForm" class="profile_edit_left_column">
       <div class="cell">
         <div class="info_input_names">
           <h3>Name:</h3>
@@ -18,7 +14,6 @@
               formControlName="name"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
               type="text"
-              placeholder="{{ user?.userName }}"
             />
           </div>
           <div
@@ -28,7 +23,7 @@
                 profileEditForm.get('name')?.touched)
             "
           >
-            <mat-error>
+            <mat-error *ngIf="infoEdit_btnCheck">
               <span *ngIf="profileEditForm.get('name')?.hasError('required')"
                 >Name is required</span
               >
@@ -52,7 +47,6 @@
               formControlName="lastname"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
               type="text"
-              placeholder="{{ user?.userLastName }}"
             />
           </div>
           <div
@@ -62,7 +56,7 @@
                 profileEditForm.get('lastname')?.touched)
             "
           >
-            <mat-error>
+            <mat-error *ngIf="infoEdit_btnCheck">
               <span
                 *ngIf="profileEditForm.get('lastname')?.hasError('required')"
                 >Lastname is required</span
@@ -87,7 +81,6 @@
               formControlName="email"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
               type="email"
-              placeholder="{{ user?.userEmail }}"
             />
           </div>
           <div
@@ -97,7 +90,7 @@
                 profileEditForm.get('email')?.touched)
             "
           >
-            <mat-error>
+            <mat-error *ngIf="infoEdit_btnCheck">
               <span *ngIf="profileEditForm.get('email')?.hasError('required')"
                 >Email is required</span
               >
@@ -134,8 +127,7 @@
             <input
               formControlName="password"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
-              type="password"
-              placeholder="{{ user?.userPassword }}"
+              type="text"
             />
           </div>
           <div
@@ -145,7 +137,7 @@
                 profileEditForm.get('password')?.touched)
             "
           >
-            <mat-error>
+            <mat-error *ngIf="infoEdit_btnCheck">
               <span
                 *ngIf="profileEditForm.get('password')?.hasError('required')"
                 >Password is required</span
@@ -224,7 +216,7 @@
     <div class="form_input_cont">
       <div class="input_box">
         <label>Model</label>
-        <input placeholder="BMW" type="text" />
+        placeholder="model"
       </div>
       <div class="input_box">
         <label>Category</label>

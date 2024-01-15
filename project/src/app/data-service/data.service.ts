@@ -5,7 +5,7 @@ import {
   carInterface,
   userInterface,
 } from './registerInterface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -91,13 +91,41 @@ export class DataService {
     return this.http.get<userInterface>(`${this.registerUrl}/${id}`);
   }
 
+  // userCardsGet(userId: number): Observable<carCardInterface[]> {
+  //   return this.http.get<carCardInterface[]>(
+  //     `${this.carCardsUrl}?userId=${userId}`
+  //   );
+  // }
+  private carCardsSubject = new BehaviorSubject<carCardInterface[]>([]);
+  carCards$ = this.carCardsSubject.asObservable();
+
   userCardsGet(userId: number): Observable<carCardInterface[]> {
     return this.http.get<carCardInterface[]>(
       `${this.carCardsUrl}?userId=${userId}`
     );
   }
+  updateUserCarCards(carCards: carCardInterface[]) {
+    this.carCardsSubject.next(carCards);
+  }
+
+  /*======================*/
+  /*====USER CARS CRUD====*/
+  /*======================*/
 
   userCardCreate(card: carCardInterface): Observable<carCardInterface> {
     return this.http.post<carCardInterface>(this.carCardsUrl, card);
+  }
+
+  userCardDelete(cards: [] | any) {
+    for (let i = 0; i < cards.length; i++) {
+      this.http.delete(`${this.carCardsUrl}/${cards[i]}`).subscribe(
+        (response) => {
+          console.log('DELETED SUCCESSFULY! ');
+        },
+        (error) => {
+          console.log('ERROR FOUND WHILE DELETING CARD: ', error);
+        }
+      );
+    }
   }
 }

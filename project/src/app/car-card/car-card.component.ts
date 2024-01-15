@@ -7,4 +7,6 @@ import { carCardInterface } from '../data-service/registerInterface';
 })
 export class CarCardComponent {
   @Input() carObj: carCardInterface | null = null;
+  @Input() selected = false;
+  @Input() isProfilePage = false;
 }

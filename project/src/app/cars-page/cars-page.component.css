@@ -1,5 +1,5 @@
 .cars_container {
-  margin-top: 3rem;
+  margin: 2rem 0;
   padding: 0 2rem;
 }
 
@@ -81,7 +81,7 @@ form select option {
 }
 
 .Filter_button .filter_btn:disabled:active {
-  transform: none
+  transform: none;
 }
 
 .Filter_button .clearFilter_btn {
@@ -149,14 +149,10 @@ form select option {
   transform: scale(0.95);
 }
 
-
-
-
 /*---------------------------
       Car Card Skeleton  
  ---------------------------*/
 .card.is-loading {
-
   display: flex;
   margin: 2rem auto;
   width: 100%;
@@ -169,7 +165,6 @@ form select option {
   color: rgb(16, 25, 62);
 }
 
-
 .card.is-loading .image {
   width: 220px;
   height: 170px;
@@ -181,7 +176,7 @@ form select option {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.3rem
+  gap: 1.3rem;
 }
 
 .card.is-loading .image,

@@ -30,6 +30,9 @@ export class MyProfilePageComponent {
   id: any = '';
   activeRoute: string = '';
   usersCardsList: carCardInterface[] = [];
+  CardClickCheck = false;
+  popUpCheck = false;
+  CardSelectedArray: any[] = [];
   /*======================*/
   /*====USER EDIT FORM====*/
   /*======================*/
@@ -48,7 +51,7 @@ export class MyProfilePageComponent {
     ]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^.{8,}$/),
+      Validators.pattern(/^\S{8,}$/),
     ]),
     userImageUrl: new FormControl(''),
   });
@@ -64,8 +67,11 @@ export class MyProfilePageComponent {
       this.id = user?.id;
       // console.log(this.id);
     });
+    this.data.carCards$.subscribe((carcards) => {
+      this.usersCardsList = carcards;
+    });
     this.loadInfo();
-    this.UsesCards();
+    this.UserCards();
   }
   passwordShow() {
     this.passwordCheck = !this.passwordCheck;
@@ -116,10 +122,40 @@ export class MyProfilePageComponent {
   closeAddCardOverlay() {
     this.CardsAdd_btnCheck = false;
   }
-  UsesCards() {
+  UserCards() {
     this.data.userCardsGet(this.id).subscribe((cards) => {
       this.usersCardsList = cards;
+      this.data.updateUserCarCards(cards);
       console.log(this.usersCardsList);
     });
+  }
+
+  deleteCard() {
+    this.popUpCheck = true;
+  }
+  popUpCancel() {
+    this.popUpCheck = false;
+  }
+  popUpDelete() {
+    console.log('Card deleted!');
+    this.popUpCheck = false;
+    this.data.userCardDelete(this.CardSelectedArray);
+  }
+  cardSelect(card: carCardInterface) {
+    card.selected = !card.selected;
+    this.CardClickCheck = true;
+    if (card.selected) {
+      this.CardSelectedArray.push(card.id);
+    } else {
+      this.CardSelectedArray = this.CardSelectedArray.filter(
+        (item) => item !== card.id
+      );
+    }
+
+    if (this.CardSelectedArray.length == 0) {
+      this.CardClickCheck = false;
+    }
+
+    console.log(this.CardSelectedArray);
   }
 }

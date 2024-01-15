@@ -1,4 +1,8 @@
-<div *ngIf="carObj" class="car-card">
+<div
+  *ngIf="carObj"
+  [ngClass]="selected ? 'hover selected' : isProfilePage ? 'hover' : ''"
+  class="car-card"
+>
   <a
     routerLink="/cars/cardetails/{{ carObj.id }}"
     target="_blank"

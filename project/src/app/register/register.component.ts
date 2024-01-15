@@ -45,11 +45,11 @@ export class RegisterComponent {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^.{8,}$/),
+        Validators.pattern(/^\S{8,}$/),
       ]),
       confirmPassword: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^.{8,}$/),
+        Validators.pattern(/^\S{8,}$/),
       ]),
       userImageUrl: new FormControl(''),
     },

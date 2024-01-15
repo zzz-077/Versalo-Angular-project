@@ -190,8 +190,7 @@
             <div
               *ngIf="
                 CardAddForm.get('details')?.invalid &&
-                (CardAddForm.get('details')?.dirty ||
-                  CardAddForm.get('details')?.touched)
+                CardAddForm.get('details')?.dirty
               "
             >
               <mat-error>

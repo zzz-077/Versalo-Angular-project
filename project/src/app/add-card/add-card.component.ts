@@ -75,6 +75,7 @@ export class AddCardComponent {
           gearBox: this.CardAddForm.value.gearBox?.toLowerCase() as string,
           carDetails: this.CardAddForm.value.details?.toLowerCase() as string,
           wheel: this.CardAddForm.value.wheel?.toLowerCase() as string,
+          selected: false,
         })
         .subscribe(
           () => {

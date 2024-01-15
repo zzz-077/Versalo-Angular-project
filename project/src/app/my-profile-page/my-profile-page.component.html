@@ -196,8 +196,16 @@
       </div>
       <div class="prf_card_btns_col2">
         <div class="prf_edit_col">
-          <button class="prf_cards_edit_btn">Edit</button>
-          <button class="prf_cards_delete_btn">Delete</button>
+          <button [disabled]="!CardClickCheck" class="prf_cards_edit_btn">
+            Edit
+          </button>
+          <button
+            [disabled]="!CardClickCheck"
+            (click)="deleteCard()"
+            class="prf_cards_delete_btn"
+          >
+            Delete
+          </button>
         </div>
         <div class="prf_save_col">
           <button class="prf_cards_save_btn">Save</button>
@@ -207,11 +215,20 @@
     </div>
     <div class="Person_card_content">
       <div *ngFor="let card of usersCardsList">
-        <app-car-card [carObj]="card"></app-car-card>
+        <div class="user_card_box">
+          <app-car-card
+            (click)="cardSelect(card)"
+            [selected]="card.selected"
+            [isProfilePage]="true"
+            #card
+            [carObj]="card"
+          ></app-car-card>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <div
   *ngIf="CardsAdd_btnCheck"
   [ngClass]="!CardsAdd_btnCheck ? 'hide' : null"
@@ -222,4 +239,20 @@
     [id]="id"
     (cancel)="closeAddCardOverlay()"
   ></app-add-card>
+</div>
+
+<div *ngIf="popUpCheck" class="delete_popup">
+  <div class="delete_popup_content">
+    <div class="popup_top_row">
+      <mat-icon>report_problem</mat-icon>
+      <h2>Delete Card</h2>
+    </div>
+    <div class="popup_bottom_row">
+      <p>Are you sure you want to delete this card?</p>
+      <div class="delete_popUp_btns">
+        <button (click)="popUpDelete()" class="popUp_deleteBtn">Delete</button>
+        <button (click)="popUpCancel()" class="popUp_cancelBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>

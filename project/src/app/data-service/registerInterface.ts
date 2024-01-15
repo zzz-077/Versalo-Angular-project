@@ -27,4 +27,5 @@ export interface carCardInterface {
   gearBox: string;
   carDetails: string;
   wheel: string;
+  selected: boolean;
 }

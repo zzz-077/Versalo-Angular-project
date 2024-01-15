@@ -9,6 +9,16 @@
   background-color: var(--sign_BGcolor);
   color: rgb(16, 25, 62);
   font-size: 1rem;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.car-card.hover:hover {
+  background-color: #e8f0ec;
+}
+
+.selected {
+  background-color: #e4eee9;
+  border: 2px solid #9de0bf;
 }
 
 .card-image {

@@ -513,20 +513,6 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 20,
-      "userId": 7,
-      "carModel": "subaru",
-      "carSeries": "outback",
-      "carCategory": "SUV",
-      "carYear": 2014,
-      "carPrice": 22000,
-      "carImg": "https://carsales.pxcrush.net/cars/private/epxgfssqwukyee2bthbf3oqu7.jpg?pxc_method=gravityfill&pxc_bgtype=self&pxc_size=720,480",
-      "carColor": "Black",
-      "gearBox": "manual",
-      "carDetails": "Rugged and versatile crossover",
-      "wheel": "All-wheel drive"
-    },
-    {
       "id": 21,
       "userId": 5,
       "carModel": "lexus",
@@ -583,20 +569,6 @@
       "wheel": "All-wheel drive"
     },
     {
-      "id": 25,
-      "userId": 7,
-      "carModel": "infiniti",
-      "carSeries": "g37",
-      "carCategory": "Sedan",
-      "carYear": 2010,
-      "carPrice": 22000,
-      "carImg": "https://www.cnet.com/a/img/resize/a7305a4b8f75af40d660c49360484073b0cf69c4/hub/2009/05/04/e2d5169f-f8df-11e2-8c7c-d4ae52e62bcc/33642211_OVR_small.jpg?auto=webp&fit=crop&height=675&width=1200",
-      "carColor": "Silver",
-      "gearBox": "automatic",
-      "carDetails": "Sporty sedan with powerful performance",
-      "wheel": "Rear-wheel drive"
-    },
-    {
       "id": 26,
       "userId": 3,
       "carModel": "volvo",
@@ -623,20 +595,6 @@
       "gearBox": "automatic",
       "carDetails": "Elegant design, high-end features",
       "wheel": "Rear-wheel drive"
-    },
-    {
-      "id": 28,
-      "userId": 7,
-      "carModel": "volkswagen",
-      "carSeries": "golf",
-      "carCategory": "Hatchback",
-      "carYear": 2014,
-      "carPrice": 18000,
-      "carImg": "https://image.usedcarsni.com/photos/000/296/804/655/296804657.1920.jpg",
-      "carColor": "Black",
-      "gearBox": "automatic",
-      "carDetails": "Compact and efficient",
-      "wheel": "Front-wheel drive"
     },
     {
       "id": 29,
@@ -735,34 +693,6 @@
       "gearBox": "manual",
       "carDetails": "Compact luxury with a sporty flair",
       "wheel": "Rear-wheel drive"
-    },
-    {
-      "id": 36,
-      "userId": 7,
-      "carModel": "bmw",
-      "carSeries": "x6",
-      "carCategory": "suv",
-      "carYear": "2013",
-      "carPrice": 0,
-      "carImg": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/carImages%2FScreenshot_20230227_103226.png?alt=media&token=9bcb2615-184f-458e-bd16-de3611ee77f8",
-      "carColor": "blue",
-      "gearBox": "automatic",
-      "carDetails": "",
-      "wheel": "front-wheel drive"
-    },
-    {
-      "id": 37,
-      "userId": 7,
-      "carModel": "opel",
-      "carSeries": "combo",
-      "carCategory": "van",
-      "carYear": 2007,
-      "carPrice": "1600",
-      "carImg": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/carImages%2Fdownload.jpeg?alt=media&token=e9ff584f-bae7-404e-bae3-a589ab7ab1c4",
-      "carColor": "white",
-      "gearBox": "manual",
-      "carDetails": "",
-      "wheel": "rear-wheel drive"
     }
   ]
 }

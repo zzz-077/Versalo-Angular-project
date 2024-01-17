@@ -7,9 +7,11 @@
             <h3>Name:</h3>
           </div>
           <div class="profile_info_box_input">
-            <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
-              user?.userName
-            }}</span>
+            <span
+              class="userName"
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              >{{ user?.userName }}</span
+            >
             <input
               formControlName="name"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
@@ -42,9 +44,11 @@
             <h3>Lastname:</h3>
           </div>
           <div class="profile_info_box_input">
-            <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
-              user?.userLastName
-            }}</span>
+            <span
+              class="lastName"
+              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              >{{ user?.userLastName }}</span
+            >
             <input
               formControlName="lastname"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
@@ -174,6 +178,7 @@
             [disabled]="!profileEditForm.valid"
             (click)="infoSaveBtn()"
             class="prf_info_save_btn"
+            type="submit"
           >
             Save
           </button>
@@ -184,7 +189,7 @@
       </div>
     </form>
     <div class="profile_edit_right_column">
-      <img [src]="user?.userImageUrl" alt="#" />
+      <img [src]="user?.userImageUrl || '/assets/user-icon.svg'" alt="" />
     </div>
   </div>
   <div class="profile_bottom_content">
@@ -214,6 +219,18 @@
       </div>
     </div>
     <div class="Person_card_content">
+      <div *ngIf="isLoading">
+        <div *ngFor="let skeleton of skletonArray">
+          <div class="card is-loading">
+            <div class="image"></div>
+            <div class="content">
+              <h2 class="header-skeleton"></h2>
+              <p class="paragraph-skeleton"></p>
+              <p class="paragraph-skeleton"></p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div *ngFor="let card of usersCardsList">
         <div class="user_card_box">
           <app-car-card

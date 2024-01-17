@@ -33,6 +33,10 @@ export class MyProfilePageComponent {
   CardClickCheck = false;
   popUpCheck = false;
   CardSelectedArray: any[] = [];
+
+  isLoading: boolean = false;
+  skletonArray: number[] = new Array(10).fill(0);
+
   /*======================*/
   /*====USER EDIT FORM====*/
   /*======================*/
@@ -65,18 +69,23 @@ export class MyProfilePageComponent {
     this.userService.loadUser();
     this.userService.loggedInUser$.subscribe((user) => {
       this.id = user?.id;
-      // console.log(this.id);
     });
-    this.data.carCards$.subscribe((carcards) => {
-      this.usersCardsList = carcards;
-    });
+
     this.loadInfo();
     this.UserCards();
+    // this.isLoading = true;
+    this.data.carCards$.subscribe((cards) => {
+      console.log('carCards$: ', cards);
+      this.usersCardsList = cards;
+      // this.isLoading = cards && false;
+    });
   }
+
   passwordShow() {
     this.passwordCheck = !this.passwordCheck;
   }
   infoEditBtn() {
+    console.log('Edit button Worked!');
     this.profileEditForm.setValue({
       name: this.user?.userName || '',
       lastname: this.user?.userLastName || '',
@@ -87,21 +96,25 @@ export class MyProfilePageComponent {
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   infoSaveBtn() {
+    console.log('Save button Worked!');
+    if (this.infoEdit_btnCheck) {
+      this.data
+        .userUpdate({
+          id: this.id,
+          userName: this.profileEditForm.value.name as string,
+          userLastName: this.profileEditForm.value.lastname as string,
+          userEmail: this.profileEditForm.value.email as string,
+          userPassword: this.profileEditForm.value.password as string,
+          userImageUrl: this.profileEditForm.value.userImageUrl as string,
+        })
+        .subscribe(() => {
+          this.loadInfo();
+        });
+    }
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
-    this.data
-      .userUpdate({
-        id: this.id,
-        userName: this.profileEditForm.value.name as string,
-        userLastName: this.profileEditForm.value.lastname as string,
-        userEmail: this.profileEditForm.value.email as string,
-        userPassword: this.profileEditForm.value.password as string,
-        userImageUrl: this.profileEditForm.value.userImageUrl as string,
-      })
-      .subscribe(() => {
-        this.loadInfo();
-      });
   }
   infoCancelBtn() {
+    console.log('Cancel button Worked!');
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   loadInfo() {
@@ -109,10 +122,12 @@ export class MyProfilePageComponent {
       if (user) {
         this.user = user;
         this.userService.setLoggedInUser(this.user);
+        console.log('This Worked!!!');
       }
       // console.log(this.user);
     });
   }
+
   /*=======================*/
   /*====CARDS FUNCTIONS====*/
   /*=======================*/
@@ -123,10 +138,9 @@ export class MyProfilePageComponent {
     this.CardsAdd_btnCheck = false;
   }
   UserCards() {
+    // this.isLoading = true;
     this.data.userCardsGet(this.id).subscribe((cards) => {
       this.usersCardsList = cards;
-      this.data.updateUserCarCards(cards);
-      console.log(this.usersCardsList);
     });
   }
 
@@ -137,10 +151,22 @@ export class MyProfilePageComponent {
     this.popUpCheck = false;
   }
   popUpDelete() {
-    console.log('Card deleted!');
+    // console.log('Card deleted!');
     this.popUpCheck = false;
-    this.data.userCardDelete(this.CardSelectedArray);
+    this.data.userCardDelete(this.CardSelectedArray, this.id).subscribe(
+      () => {
+        console.log('Succsfully Deleted');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    // Clear Selected Array after deleting
+    this.CardSelectedArray = [];
+
+    this.UserCards();
   }
+
   cardSelect(card: carCardInterface) {
     card.selected = !card.selected;
     this.CardClickCheck = true;
@@ -156,6 +182,6 @@ export class MyProfilePageComponent {
       this.CardClickCheck = false;
     }
 
-    console.log(this.CardSelectedArray);
+    // console.log(this.CardSelectedArray);
   }
 }

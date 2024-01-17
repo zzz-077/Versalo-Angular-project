@@ -8,7 +8,16 @@ import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CarCardComponent } from './car-card/car-card.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
+import { CarsPageComponent } from './cars-page/cars-page.component';
+import { UserService } from './user-service/user.service';
+import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
+import { CarDetailsComponent } from './car-details/car-details.component';
+import { AddCardComponent } from './add-card/add-card.component';
 //matt imports
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -16,19 +25,11 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { CarCardComponent } from './car-card/car-card.component';
-import { AboutPageComponent } from './about-page/about-page.component';
-import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
-import { CarsPageComponent } from './cars-page/cars-page.component';
 import { MatIconModule } from '@angular/material/icon';
-import { UserService } from './user-service/user.service';
-import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
-import { CarDetailsComponent } from './car-details/car-details.component';
 /* AngularFire imports */
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
-import { AddCardComponent } from './add-card/add-card.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { AddCardComponent } from './add-card/add-card.component';
     BrowserAnimationsModule,
     MatSlideToggleModule,
     MatIconModule,
+    MatProgressBarModule,
     NgOptimizedImage,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,

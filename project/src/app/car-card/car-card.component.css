@@ -12,8 +12,10 @@
   transition: all 0.2s;
   border: 2px solid transparent;
 }
+
 .car-card.hover:hover {
   background-color: #e8f0ec;
+  cursor: pointer;
 }
 
 .selected {

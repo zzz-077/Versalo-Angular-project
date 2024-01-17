@@ -24,6 +24,7 @@
     "angular-resize-event": "^0.4.2",
     "angular-uuid": "^0.0.4",
     "json-server": "^1.0.0-alpha.16",
+    "ngx-image-compress": "^15.1.6",
     "ngx-image-zoom": "^3.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

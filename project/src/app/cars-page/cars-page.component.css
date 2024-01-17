@@ -49,6 +49,7 @@ form select option:first-child {
 
 form select option {
   height: 20px;
+  text-transform: capitalize;
 }
 
 .Filter_button {

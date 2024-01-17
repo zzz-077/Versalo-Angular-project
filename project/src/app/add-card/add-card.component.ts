@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data-service/data.service';
-import { uuid } from 'uuidv4';
 import { carInterface } from '../data-service/registerInterface';
+
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { NgxImageCompressService } from 'ngx-image-compress';
+
 @Component({
   selector: 'app-add-card',
   templateUrl: './add-card.component.html',
@@ -17,7 +19,8 @@ export class AddCardComponent {
 
   constructor(
     private fireStorage: AngularFireStorage,
-    private data: DataService
+    private data: DataService,
+    private imageCompress: NgxImageCompressService
   ) {
     this.data.getCarComponentsData().subscribe((items) => {
       if (Array.isArray(items)) {
@@ -32,6 +35,8 @@ export class AddCardComponent {
   saveCarImageUrl: string = '';
   oldSavedCarImageName: string | null = null;
   isSubmitting = false;
+  isImageCompressing: boolean = false;
+  imageUploadProgressBar: number = 0;
   /*=====================*/
   /*====CARD ADD FORM====*/
   /*=====================*/
@@ -81,6 +86,7 @@ export class AddCardComponent {
           () => {
             this.isSubmitting = false;
             this.cancel.emit();
+            this.data.userCardsGet(this.id).subscribe();
           },
           (error) => {
             this.isSubmitting = false;
@@ -95,8 +101,9 @@ export class AddCardComponent {
   /*=========================*/
   /*====IMAGE TO FIREBASE====*/
   /*=========================*/
+
   async onFileChange(event: any) {
-    const file = event.target.files[0];
+    const file = <File>event.target.files[0];
     if (file) {
       if (
         this.oldSavedCarImageName &&
@@ -107,13 +114,82 @@ export class AddCardComponent {
           .delete();
       }
       if (this.oldSavedCarImageName !== file.name) {
-        const path = `carImages/${file.name}`;
-        const uploadTask = await this.fireStorage.upload(path, file);
-        const url = await uploadTask.ref.getDownloadURL();
-        this.saveCarImageUrl = url;
-        this.oldSavedCarImageName = file.name;
-        console.log(this.saveCarImageUrl);
+        const width = await this.getImageWidth(file);
+        if (width > 2000) {
+          // Resize and Upload the image
+          await this.compressAndUpload(file);
+        } else {
+          // Upload the original image
+          await this.uploadImage(file, file.name);
+        }
       }
     }
+  }
+
+  async getImageWidth(file: File): Promise<number> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(img.width);
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  async compressAndUpload(file: File) {
+    const reader = new FileReader();
+
+    reader.onload = async (event: any) => {
+      this.isImageCompressing = true;
+      const compressedImage = await this.imageCompress.compressFile(
+        event.target.result,
+        1, // Orientation
+        50, // Ratio
+        90, // Quality
+        2000, //maxWidth
+        2000 //maxHeight
+      );
+
+      // Convert base64 compressed image to Blob
+      const blob = this.dataURItoBlob(compressedImage);
+      this.isImageCompressing = false;
+      // Uploading Compressed Image
+      await this.uploadImage(blob, file.name);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  dataURItoBlob(dataURI: string): Blob {
+    // Convert base64 to Blob
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ab], { type: mimeString });
+  }
+
+  async uploadImage(file: Blob, fileName: string) {
+    // Upload the file to Firebase or perform other actions
+
+    const path = `carImages/${fileName}`;
+    const uploadTask = this.fireStorage.upload(path, file);
+    uploadTask.then(async (res) => {
+      const url = await res.ref.getDownloadURL();
+      this.saveCarImageUrl = url;
+      this.oldSavedCarImageName = fileName;
+    });
+    uploadTask.percentageChanges().subscribe((percentage) => {
+      this.imageUploadProgressBar = percentage || 0;
+      if (this.imageUploadProgressBar === 100) {
+        setTimeout(() => {
+          this.imageUploadProgressBar = 0;
+        }, 1500);
+      }
+    });
   }
 }

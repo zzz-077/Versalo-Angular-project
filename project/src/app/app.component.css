@@ -227,7 +227,7 @@ main {
   align-items: center;
   font-weight: 500;
   gap: 1rem;
-  z-index: 1000;
+  z-index: +1;
 }
 
 .footer_content h3 {

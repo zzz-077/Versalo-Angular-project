@@ -5,16 +5,27 @@ import {
   carInterface,
   userInterface,
 } from './registerInterface';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  concatMap,
+  delay,
+  forkJoin,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  port = 3000;
+
   /*=================*/
   /*====USER DATA====*/
   /*=================*/
-  private registerUrl = 'http://localhost:3000/users';
+  private registerUrl = `http://localhost:${this.port}/users`;
   private userDataSubject: BehaviorSubject<userInterface[]> =
     new BehaviorSubject<userInterface[]>([]);
 
@@ -47,7 +58,7 @@ export class DataService {
   /*===================*/
   /*====CAR COMPONENTS FILTER====*/
   /*===================*/
-  private carComponentsUrl = 'http://localhost:3000/cars';
+  private carComponentsUrl = `http://localhost:${this.port}/cars`;
 
   getCarComponentsData(): Observable<carInterface[]> {
     return this.http.get<carInterface[]>(this.carComponentsUrl);
@@ -55,7 +66,7 @@ export class DataService {
   /*===================*/
   /*====CARS CARDS====*/
   /*===================*/
-  private carCardsUrl = 'http://localhost:3000/carCards';
+  private carCardsUrl = `http://localhost:${this.port}/carCards`;
 
   getCarDetailsById(id: number | null) {
     return this.http.get<carCardInterface>(`${this.carCardsUrl}/${id}`);
@@ -91,41 +102,71 @@ export class DataService {
     return this.http.get<userInterface>(`${this.registerUrl}/${id}`);
   }
 
-  // userCardsGet(userId: number): Observable<carCardInterface[]> {
-  //   return this.http.get<carCardInterface[]>(
-  //     `${this.carCardsUrl}?userId=${userId}`
-  //   );
-  // }
-  private carCardsSubject = new BehaviorSubject<carCardInterface[]>([]);
-  carCards$ = this.carCardsSubject.asObservable();
+  /*======================*/
+  /*====USER CARS CRUD====*/
+  /*======================*/
+
+  // private carCardsSubject = new BehaviorSubject<carCardInterface[]>([]);
+  // carCards$ = this.carCardsSubject.asObservable();
+
+  private carCardsSubject: BehaviorSubject<carCardInterface[]> =
+    new BehaviorSubject<carCardInterface[]>([]);
+  carCards$: Observable<carCardInterface[]> =
+    this.carCardsSubject.asObservable();
 
   userCardsGet(userId: number): Observable<carCardInterface[]> {
     return this.http.get<carCardInterface[]>(
       `${this.carCardsUrl}?userId=${userId}`
     );
   }
-  updateUserCarCards(carCards: carCardInterface[]) {
-    this.carCardsSubject.next(carCards);
-  }
 
-  /*======================*/
-  /*====USER CARS CRUD====*/
-  /*======================*/
+  // userCardCreate(card: carCardInterface): Observable<carCardInterface> {
+  //   return this.http.post<carCardInterface>(this.carCardsUrl, card);
+  // }
 
+  // Create a new card and notify subscribers about the change
   userCardCreate(card: carCardInterface): Observable<carCardInterface> {
-    return this.http.post<carCardInterface>(this.carCardsUrl, card);
+    return this.http.post<carCardInterface>(this.carCardsUrl, card).pipe(
+      // After successfully creating a card, update the BehaviorSubject
+      tap(() => {
+        this.http
+          .get<carCardInterface[]>(`${this.carCardsUrl}?userId=${card.userId}`)
+          .subscribe((cards) => {
+            this.updateCarCards(cards);
+          });
+      })
+    );
   }
 
-  userCardDelete(cards: [] | any) {
-    for (let i = 0; i < cards.length; i++) {
-      this.http.delete(`${this.carCardsUrl}/${cards[i]}`).subscribe(
-        (response) => {
-          console.log('DELETED SUCCESSFULY! ');
-        },
-        (error) => {
-          console.log('ERROR FOUND WHILE DELETING CARD: ', error);
-        }
-      );
-    }
+  userCardDelete(
+    cardIds: number[],
+    userId: string
+  ): Observable<carCardInterface[]> {
+    // Create an array of observables for each delete request
+    const deleteRequests = cardIds.map((cardId) =>
+      this.http.delete<void>(`${this.carCardsUrl}/${cardId}`).pipe(
+        delay(1000) // Add a delay of 100 milliseconds between requests
+      )
+    );
+
+    // Use forkJoin to wait for all delete requests to complete
+    return forkJoin(deleteRequests).pipe(
+      // Map to void[] since forkJoin returns an array of results
+      concatMap(() => {
+        // Fetch the updated cards after all delete requests are successful
+        return this.http.get<carCardInterface[]>(
+          `${this.carCardsUrl}?userId=${userId}`
+        );
+      }),
+      tap((cards) => {
+        // Update the BehaviorSubject with the updated cards
+        this.updateCarCards(cards);
+      })
+    );
+  }
+
+  private updateCarCards(updatedCards: carCardInterface[]) {
+    // Update the BehaviorSubject with the new list of cards
+    this.carCardsSubject.next(updatedCards);
   }
 }

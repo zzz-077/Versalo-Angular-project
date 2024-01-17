@@ -26,10 +26,10 @@
     },
     {
       "id": 4,
-      "userName": "guram",
-      "userLastName": "sherozia",
-      "userEmail": "sheroooz@gandil.ru",
-      "userPassword": "sherozshenifanivar",
+      "userName": "merab",
+      "userLastName": "xomlelishvili",
+      "userEmail": "xomlela2004@gmail.ru",
+      "userPassword": "merabxomleli123",
       "userImageUrl": "/assets/user-icon.svg"
     },
     {
@@ -237,7 +237,9 @@
         "Crossover",
         "Wagons",
         "microcar",
-        "van"
+        "van",
+        "luxury",
+        "electric"
       ],
       "gearBox": [
         "automatic",

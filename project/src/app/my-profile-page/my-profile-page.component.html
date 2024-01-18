@@ -201,7 +201,11 @@
       </div>
       <div class="prf_card_btns_col2">
         <div class="prf_edit_col">
-          <button [disabled]="!CardClickCheck" class="prf_cards_edit_btn">
+          <button
+            [disabled]="CardSelectedArray.length !== 1"
+            class="prf_cards_edit_btn"
+            (click)="editCard()"
+          >
             Edit
           </button>
           <button
@@ -252,7 +256,20 @@
   class="overlay-container"
 >
   <app-add-card
-    [fromChild]="CardsAdd_btnCheck"
+    [IsCardsAdd]="CardsAdd_btnCheck"
+    [id]="id"
+    (cancel)="closeAddCardOverlay()"
+  ></app-add-card>
+</div>
+
+<div
+  *ngIf="CardsEdit_btnCheck"
+  [ngClass]="!CardsEdit_btnCheck ? 'hide' : null"
+  class="overlay-container"
+>
+  <app-add-card
+    [IsCardsEdit]="CardsEdit_btnCheck"
+    [SelectedCarIdForEdit]="CardSelectedArray"
     [id]="id"
     (cancel)="closeAddCardOverlay()"
   ></app-add-card>

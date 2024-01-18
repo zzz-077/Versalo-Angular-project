@@ -27,16 +27,15 @@ export class MyProfilePageComponent {
   isLogged: boolean = false;
   user: userInterface | null = null;
   CardsAdd_btnCheck = false;
+  CardsEdit_btnCheck = false;
   id: any = '';
   activeRoute: string = '';
   usersCardsList: carCardInterface[] = [];
   CardClickCheck = false;
   popUpCheck = false;
   CardSelectedArray: any[] = [];
-
   isLoading: boolean = false;
   skletonArray: number[] = new Array(10).fill(0);
-
   /*======================*/
   /*====USER EDIT FORM====*/
   /*======================*/
@@ -80,12 +79,10 @@ export class MyProfilePageComponent {
       // this.isLoading = cards && false;
     });
   }
-
   passwordShow() {
     this.passwordCheck = !this.passwordCheck;
   }
   infoEditBtn() {
-    console.log('Edit button Worked!');
     this.profileEditForm.setValue({
       name: this.user?.userName || '',
       lastname: this.user?.userLastName || '',
@@ -114,7 +111,6 @@ export class MyProfilePageComponent {
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   infoCancelBtn() {
-    console.log('Cancel button Worked!');
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   loadInfo() {
@@ -122,12 +118,10 @@ export class MyProfilePageComponent {
       if (user) {
         this.user = user;
         this.userService.setLoggedInUser(this.user);
-        console.log('This Worked!!!');
       }
       // console.log(this.user);
     });
   }
-
   /*=======================*/
   /*====CARDS FUNCTIONS====*/
   /*=======================*/
@@ -143,9 +137,11 @@ export class MyProfilePageComponent {
       this.usersCardsList = cards;
     });
   }
-
   deleteCard() {
     this.popUpCheck = true;
+  }
+  editCard() {
+    this.CardsEdit_btnCheck = true;
   }
   popUpCancel() {
     this.popUpCheck = false;
@@ -166,7 +162,6 @@ export class MyProfilePageComponent {
 
     this.UserCards();
   }
-
   cardSelect(card: carCardInterface) {
     card.selected = !card.selected;
     this.CardClickCheck = true;
@@ -177,11 +172,8 @@ export class MyProfilePageComponent {
         (item) => item !== card.id
       );
     }
-
     if (this.CardSelectedArray.length == 0) {
       this.CardClickCheck = false;
     }
-
-    // console.log(this.CardSelectedArray);
   }
 }

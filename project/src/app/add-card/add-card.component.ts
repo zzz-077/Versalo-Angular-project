@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data-service/data.service';
-import { carInterface } from '../data-service/registerInterface';
-
+import {
+  carCardInterface,
+  carInterface,
+} from '../data-service/registerInterface';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
@@ -12,19 +14,24 @@ import { NgxImageCompressService } from 'ngx-image-compress';
   styleUrls: ['./add-card.component.css'],
 })
 export class AddCardComponent {
-  @Input() fromChild = false;
+  @Input() IsCardsAdd = false;
+  @Input() IsCardsEdit = false;
   @Input() id = 0;
+  @Input() SelectedCarIdForEdit: any[] = [];
   @Output() cancel = new EventEmitter<void>();
   carList: carInterface[] = [];
-
+  isLoading = false;
+  isLoadingOnEdit = false;
   constructor(
     private fireStorage: AngularFireStorage,
     private data: DataService,
     private imageCompress: NgxImageCompressService
   ) {
+    this.isLoading = true;
     this.data.getCarComponentsData().subscribe((items) => {
       if (Array.isArray(items)) {
         this.carList = items;
+        this.isLoading = false;
       }
     });
   }
@@ -37,6 +44,7 @@ export class AddCardComponent {
   isSubmitting = false;
   isImageCompressing: boolean = false;
   imageUploadProgressBar: number = 0;
+  carcardForedit: carCardInterface | null = null;
   /*=====================*/
   /*====CARD ADD FORM====*/
   /*=====================*/
@@ -46,7 +54,7 @@ export class AddCardComponent {
     year: new FormControl(2024, [Validators.required]),
     price: new FormControl(0, [
       Validators.required,
-      Validators.pattern('^[0-9]*$'),
+      Validators.pattern(/^[1-9]\d*$/),
     ]),
     serie: new FormControl('', [Validators.required]),
     color: new FormControl('', [Validators.required]),
@@ -59,12 +67,16 @@ export class AddCardComponent {
   /*====FUNCTIONS====*/
   /*=================*/
   cardCancelBtn() {
-    this.fromChild = false;
+    this.IsCardsAdd = false;
     this.cancel.emit();
   }
   cardSaveBtn() {
-    if (this.id && this.CardAddForm.valid) {
-      this.fromChild = false;
+    if (
+      (this.id && this.CardAddForm.valid) ||
+      this.imageUploadProgressBar !== 0 ||
+      this.isImageCompressing
+    ) {
+      this.IsCardsAdd = false;
       this.isSubmitting = true;
       this.data
         .userCardCreate({
@@ -97,7 +109,31 @@ export class AddCardComponent {
       console.log('not requested to server');
     }
   }
-
+  ngOnInit() {
+    if (this.SelectedCarIdForEdit.length === 1) {
+      this.isLoadingOnEdit = true;
+      let selectedCarCardForEdit = this.SelectedCarIdForEdit[0];
+      this.data.getCarDetailsById(selectedCarCardForEdit).subscribe((card) => {
+        console.log(card);
+        if (card) {
+          this.carcardForedit = card;
+        }
+        this.CardAddForm.setValue({
+          model: this.carcardForedit?.carModel || '',
+          category: this.carcardForedit?.carCategory || '',
+          year: this.carcardForedit?.carYear || 2024,
+          price: this.carcardForedit?.carPrice || 0,
+          serie: this.carcardForedit?.carSeries || '',
+          color: this.carcardForedit?.carColor || '',
+          gearBox: this.carcardForedit?.gearBox.toLowerCase() || 'GearBox',
+          details: this.carcardForedit?.carDetails.toLowerCase() || '',
+          wheel: this.carcardForedit?.wheel.toLowerCase() || 'Wheel',
+        });
+        this.saveCarImageUrl = card.carImg;
+        this.isLoadingOnEdit = false;
+      });
+    }
+  }
   /*=========================*/
   /*====IMAGE TO FIREBASE====*/
   /*=========================*/

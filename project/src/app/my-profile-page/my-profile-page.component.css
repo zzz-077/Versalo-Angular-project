@@ -82,14 +82,12 @@
   align-items: center;
   color: var(--navbar_links__color);
   font-size: 1rem;
-
 }
 
 .profile_info_box_input .userName,
 .profile_info_box_input .lastName {
   text-transform: capitalize;
 }
-
 
 .profile_info_box_input mat-icon {
   color: var(--navbar_links__color);
@@ -380,17 +378,14 @@
   justify-content: center;
   z-index: 999;
 }
-
+/* 
 .overlay-container app-add-card {
   max-width: 80%;
   max-height: 80%;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-
-
+} */
 
 /*---------------------------
       Car Card Skeleton  

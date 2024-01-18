@@ -793,6 +793,21 @@
       "gearBox": "manual",
       "carDetails": "Compact luxury with a sporty flair",
       "wheel": "Rear-wheel drive"
+    },
+    {
+      "id": 45,
+      "userId": 4,
+      "carModel": "opel",
+      "carSeries": "combo",
+      "carCategory": "van",
+      "carYear": 2005,
+      "carPrice": "1700",
+      "carImg": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/carImages%2Fdownload.jpeg?alt=media&token=3e373dc0-2be3-45a3-9906-2b9777f996d4",
+      "carColor": "white",
+      "gearBox": "manual",
+      "carDetails": "",
+      "wheel": "rear-wheel drive",
+      "selected": false
     }
   ]
 }

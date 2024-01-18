@@ -14,11 +14,14 @@
   align-items: center;
   z-index: +1;
 }
-
-.create_card_container form {
+.card_content {
+  min-height: 660px;
+  min-width: 624px;
   background-color: var(--sign_BGcolor);
   padding: 2rem;
   border-radius: 0.3rem;
+}
+.create_card_container form {
   max-height: 95%;
   overflow-y: auto;
 }
@@ -58,7 +61,6 @@
   flex-direction: column;
 }
 
-
 .input_box input,
 .input_box select {
   padding: 0.65rem 0.8rem;
@@ -88,9 +90,8 @@
   padding: 0.25rem 0.6rem;
   resize: none;
   outline: none;
-  font-size: 0.875rem;
-  outline: none;
   border: none;
+  font-size: 0.875rem;
   background: whitesmoke;
   border-radius: 0.35rem;
   height: 100%;
@@ -136,8 +137,6 @@
   height: 6px;
 }
 
-
-
 .wheel_and_btnsbox {
   display: flex;
   flex-direction: column;
@@ -169,6 +168,13 @@
   background-color: #ff1818;
   border: 2px solid #ff1818;
   color: var(--main_BGcolor);
+}
+.load_spinner_cont {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 mat-error {

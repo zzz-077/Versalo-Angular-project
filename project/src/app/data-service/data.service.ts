@@ -101,6 +101,12 @@ export class DataService {
   userGet(id: string): Observable<userInterface> {
     return this.http.get<userInterface>(`${this.registerUrl}/${id}`);
   }
+  userImageEdit(img: string, id: string) {
+    return this.http.put<userInterface>(
+      `${this.registerUrl}/${id}?userImageUrl`,
+      img
+    );
+  }
 
   /*======================*/
   /*====USER CARS CRUD====*/
@@ -162,6 +168,12 @@ export class DataService {
         // Update the BehaviorSubject with the updated cards
         this.updateCarCards(cards);
       })
+    );
+  }
+  userCardUpdate(form: carCardInterface) {
+    return this.http.put<carCardInterface>(
+      `${this.carCardsUrl}/${form?.id}`,
+      form
     );
   }
 

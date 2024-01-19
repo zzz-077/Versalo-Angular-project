@@ -10,6 +10,7 @@
   background-color: var(--sign_BGcolor);
   border-radius: 0.875rem;
   max-width: 1440px;
+  height: 356px;
   width: 90%;
   display: flex;
   margin: 0 auto;
@@ -35,11 +36,41 @@
 
 .profile_edit_right_column {
   width: 250px;
+  position: relative;
 }
 
 .profile_edit_right_column img {
   width: 100%;
   object-fit: cover;
+}
+
+.editImg_btn {
+  position: absolute;
+  bottom: 22px;
+  left: 26px;
+}
+.editImg_btn input {
+  display: none;
+}
+.editImg_btn label {
+  padding: 0.05rem 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3rem;
+  background-color: var(--btn_BGcolor);
+  cursor: pointer;
+  transition: all 0.125s;
+  gap: 0.25rem;
+  color: var(--main_BGcolor);
+}
+.editImg_btn label mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+.editImg_btn label:hover {
+  filter: brightness(1.15);
 }
 
 .profile_edit_left_column {

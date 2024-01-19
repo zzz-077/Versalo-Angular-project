@@ -1,6 +1,20 @@
 <div class="profile_container">
   <div class="profile_top_content">
-    <form [formGroup]="profileEditForm" class="profile_edit_left_column">
+    <div *ngIf="!user" class="profileCard is-loading">
+      <div class="content">
+        <p class="paragraph-skeleton"></p>
+        <p class="paragraph-skeleton"></p>
+        <p class="paragraph-skeleton"></p>
+        <p class="paragraph-skeleton"></p>
+      </div>
+      <div class="image"></div>
+    </div>
+
+    <form
+      *ngIf="user"
+      [formGroup]="profileEditForm"
+      class="profile_edit_left_column"
+    >
       <div class="cell">
         <div class="info_input_names">
           <div class="info_inpt_name_box">
@@ -10,7 +24,7 @@
             <span
               class="userName"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
-              >{{ user?.userName }}</span
+              >{{ user.userName }}</span
             >
             <input
               formControlName="name"
@@ -47,7 +61,7 @@
             <span
               class="lastName"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
-              >{{ user?.userLastName }}</span
+              >{{ user.userLastName }}</span
             >
             <input
               formControlName="lastname"
@@ -83,7 +97,7 @@
           </div>
           <div class="profile_info_box_input">
             <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
-              user?.userEmail
+              user.userEmail
             }}</span>
             <input
               formControlName="email"
@@ -127,7 +141,7 @@
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
               style="color: var(--navbar_links__color)"
               *ngIf="passwordCheck"
-              >{{ user?.userPassword }}</span
+              >{{ user.userPassword }}</span
             >
             <mat-icon
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
@@ -188,8 +202,15 @@
         </div>
       </div>
     </form>
-    <div class="profile_edit_right_column">
-      <img [src]="user?.userImageUrl || '/assets/user-icon.svg'" alt="" />
+    <div *ngIf="user" class="profile_edit_right_column">
+      <img [src]="saveUserImageUrl || '/assets/user-icon.svg'" alt="" />
+      <div class="editImg_btn">
+        <label for="UserimageEdit"
+          ><p>Edit</p>
+          <mat-icon>create</mat-icon></label
+        >
+        <input id="UserimageEdit" type="file" />
+      </div>
     </div>
   </div>
   <div class="profile_bottom_content">

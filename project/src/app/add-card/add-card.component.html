@@ -17,13 +17,25 @@
                 "
               >
                 <mat-error>
-                  <span *ngIf="CardAddForm.get('model')?.hasError('required')"
+                  <span
+                    *ngIf="
+                      CardAddForm.get('model')?.hasError('required') ||
+                      CardAddForm.get('model')?.hasError('invalidModel')
+                    "
                     >Manufacturer is required</span
                   >
                 </mat-error>
               </div>
             </div>
-            <input formControlName="model" placeholder="e.g bmw" type="text" />
+            <select formControlName="model">
+              <option value="carModel" selected>Car Model</option>
+              <option
+                *ngFor="let model of carList[0]?.carModel"
+                [ngValue]="model"
+              >
+                {{ model }}
+              </option>
+            </select>
           </div>
           <div class="input_box">
             <div class="input_title_box">
@@ -56,17 +68,24 @@
               >
                 <mat-error>
                   <span
-                    *ngIf="CardAddForm.get('category')?.hasError('required')"
+                    *ngIf="
+                      CardAddForm.get('category')?.hasError('required') ||
+                      CardAddForm.get('category')?.hasError('invalidCategory')
+                    "
                     >Category is required</span
                   >
                 </mat-error>
               </div>
             </div>
-            <input
-              formControlName="category"
-              placeholder="e.g suv"
-              type="text"
-            />
+            <select formControlName="category">
+              <option value="carCategory" selected>Car Category</option>
+              <option
+                *ngFor="let category of carList[0]?.carCategory"
+                [ngValue]="category"
+              >
+                {{ category }}
+              </option>
+            </select>
           </div>
           <div class="input_box">
             <div class="input_title_box">

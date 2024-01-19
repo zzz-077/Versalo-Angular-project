@@ -8,16 +8,19 @@ import { LocalStorageService } from '../local-storage-service/local-storage.serv
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data-service/data.service';
 import { __values } from 'tslib';
+import { NgxImageCompressService } from 'ngx-image-compress';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
   styleUrls: ['./my-profile-page.component.css'],
 })
 export class MyProfilePageComponent {
+  fireStorage: any;
   constructor(
     private localStorageService: LocalStorageService,
     private userService: UserService,
-    private data: DataService
+    private data: DataService,
+    private imageCompress: NgxImageCompressService
   ) {}
   /*=================*/
   /*====VARIABLES====*/
@@ -36,6 +39,10 @@ export class MyProfilePageComponent {
   CardSelectedArray: any[] = [];
   isLoading: boolean = false;
   skletonArray: number[] = new Array(10).fill(0);
+  saveUserImageUrl: string = '';
+  oldSaveduserImageName: string | null = null;
+  isImageCompressing: boolean = false;
+  imageUploadProgressBar: number = 0;
   /*======================*/
   /*====USER EDIT FORM====*/
   /*======================*/
@@ -74,7 +81,6 @@ export class MyProfilePageComponent {
     this.UserCards();
     // this.isLoading = true;
     this.data.carCards$.subscribe((cards) => {
-      console.log('carCards$: ', cards);
       this.usersCardsList = cards;
       // this.isLoading = cards && false;
     });
@@ -122,6 +128,119 @@ export class MyProfilePageComponent {
       // console.log(this.user);
     });
   }
+
+  /*
+  async onFileChange(event: any) {
+    const file = <File>event.target.files[0];
+    if (file) {
+      if (
+        this.oldSaveduserImageName &&
+        this.oldSaveduserImageName !== file.name
+      ) {
+        await this.fireStorage.storage
+          .refFromURL(this.saveUserImageUrl)
+          .delete();
+      }
+      if (this.oldSaveduserImageName !== file.name) {
+        const width = await this.getImageWidth(file);
+        if (width > 2000) {
+          // Resize and Upload the image
+          await this.compressAndUpload(file);
+        } else {
+          // Upload the original image
+          await this.uploadImage(file, file.name);
+        }
+      }
+    }
+  }
+
+  async getImageWidth(file: File): Promise<number> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(img.width);
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  async compressAndUpload(file: File) {
+    const reader = new FileReader();
+
+    reader.onload = async (event: any) => {
+      this.isImageCompressing = true;
+      const compressedImage = await this.imageCompress.compressFile(
+        event.target.result,
+        1, // Orientation
+        50, // Ratio
+        90, // Quality
+        2000, //maxWidth
+        2000 //maxHeight
+      );
+
+      // Convert base64 compressed image to Blob
+      const blob = this.dataURItoBlob(compressedImage);
+      this.isImageCompressing = false;
+      // Uploading Compressed Image
+      await this.uploadImage(blob, file.name);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  dataURItoBlob(dataURI: string): Blob {
+    // Convert base64 to Blob
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ab], { type: mimeString });
+  }
+
+  async uploadImage(file: Blob, fileName: string) {
+    // Upload the file to Firebase or perform other actions
+
+    const path = `userImages/${fileName}`;
+    const uploadTask = this.fireStorage.upload(path, file);
+    uploadTask.then(async (res) => {
+      const url = await res.ref.getDownloadURL();
+      this.saveUserImageUrl = url;
+      this.oldSaveduserImageName = fileName;
+    });
+    uploadTask.percentageChanges().subscribe((percentage) => {
+      this.imageUploadProgressBar = percentage || 0;
+      if (this.imageUploadProgressBar === 100) {
+        setTimeout(() => {
+          this.imageUploadProgressBar = 0;
+        }, 1500);
+      }
+    });
+  }
+    async uploadImage(file: Blob, fileName: string) {
+    // Upload the file to Firebase or perform other actions
+
+    const path = `carImages/${fileName}`;
+    const uploadTask = this.fireStorage.upload(path, file);
+    uploadTask.then(async (res) => {
+      const url = await res.ref.getDownloadURL();
+      this.saveCarImageUrl = url;
+      this.oldSavedCarImageName = fileName;
+    });
+    uploadTask.percentageChanges().subscribe((percentage) => {
+      this.imageUploadProgressBar = percentage || 0;
+      if (this.imageUploadProgressBar === 100) {
+        setTimeout(() => {
+          this.imageUploadProgressBar = 0;
+        }, 1500);
+      }
+    });
+  }
+*/
+
   /*=======================*/
   /*====CARDS FUNCTIONS====*/
   /*=======================*/
@@ -130,6 +249,7 @@ export class MyProfilePageComponent {
   }
   closeAddCardOverlay() {
     this.CardsAdd_btnCheck = false;
+    this.CardsEdit_btnCheck = false;
   }
   UserCards() {
     // this.isLoading = true;

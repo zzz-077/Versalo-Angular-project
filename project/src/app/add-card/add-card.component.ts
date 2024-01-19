@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DataService } from '../data-service/data.service';
 import {
   carCardInterface,
@@ -14,14 +19,24 @@ import { NgxImageCompressService } from 'ngx-image-compress';
   styleUrls: ['./add-card.component.css'],
 })
 export class AddCardComponent {
+  /*=================*/
+  /*====VARIABLES====*/
+  /*=================*/
   @Input() IsCardsAdd = false;
   @Input() IsCardsEdit = false;
   @Input() id = 0;
   @Input() SelectedCarIdForEdit: any[] = [];
   @Output() cancel = new EventEmitter<void>();
+  saveCarImageUrl: string = '';
+  oldSavedCarImageName: string | null = null;
+  isSubmitting = false;
+  isImageCompressing: boolean = false;
+  imageUploadProgressBar: number = 0;
+  carcardForedit: carCardInterface | null = null;
   carList: carInterface[] = [];
   isLoading = false;
   isLoadingOnEdit = false;
+  userSelectedCard: number = this.SelectedCarIdForEdit[0];
   constructor(
     private fireStorage: AngularFireStorage,
     private data: DataService,
@@ -35,22 +50,18 @@ export class AddCardComponent {
       }
     });
   }
-
-  /*=================*/
-  /*====VARIABLES====*/
-  /*=================*/
-  saveCarImageUrl: string = '';
-  oldSavedCarImageName: string | null = null;
-  isSubmitting = false;
-  isImageCompressing: boolean = false;
-  imageUploadProgressBar: number = 0;
-  carcardForedit: carCardInterface | null = null;
   /*=====================*/
   /*====CARD ADD FORM====*/
   /*=====================*/
   CardAddForm = new FormGroup({
-    model: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required]),
+    model: new FormControl('carModel', [
+      Validators.required,
+      this.validateModel.bind(this),
+    ]),
+    category: new FormControl('carCategory', [
+      Validators.required,
+      this.validateCategory.bind(this),
+    ]),
     year: new FormControl(2024, [Validators.required]),
     price: new FormControl(0, [
       Validators.required,
@@ -63,39 +74,51 @@ export class AddCardComponent {
     wheel: new FormControl('Wheel', [Validators.required]),
     // carImageUrl: new FormControl(this.saveCarImageUrl),
   });
+  validateCategory(control: AbstractControl): { [key: string]: any } | null {
+    const selectedCategory = control.value;
+    if (selectedCategory === 'carCategory') {
+      return { invalidCategory: true };
+    }
+    return null;
+  }
+
+  validateModel(control: AbstractControl): { [key: string]: any } | null {
+    const selectedModel = control.value;
+    if (selectedModel === 'carModel') {
+      return { invalidModel: true };
+    }
+    return null;
+  }
   /*=================*/
   /*====FUNCTIONS====*/
   /*=================*/
   cardCancelBtn() {
     this.IsCardsAdd = false;
+    this.IsCardsEdit = false;
     this.cancel.emit();
   }
   cardSaveBtn() {
-    if (
-      (this.id && this.CardAddForm.valid) ||
-      this.imageUploadProgressBar !== 0 ||
-      this.isImageCompressing
-    ) {
-      this.IsCardsAdd = false;
-      this.isSubmitting = true;
+    if (this.IsCardsEdit && !this.IsCardsAdd) {
+      console.log('Updated');
+
       this.data
-        .userCardCreate({
-          id: '',
+        .userCardUpdate({
+          id: this.SelectedCarIdForEdit[0] as any,
           userId: this.id,
-          carModel: this.CardAddForm.value.model?.toLowerCase() as string,
-          carSeries: this.CardAddForm.value.serie?.toLowerCase() as string,
-          carCategory: this.CardAddForm.value.category?.toLowerCase() as string,
-          carYear: this.CardAddForm.value.year as number,
-          carPrice: this.CardAddForm.value.price as number,
+          carModel: this.CardAddForm?.value.model as string,
+          carSeries: this.CardAddForm?.value.serie as string,
+          carCategory: this.CardAddForm?.value.category as string,
+          carYear: this.CardAddForm?.value.year as number,
+          carPrice: this.CardAddForm?.value.price as number,
           carImg: this.saveCarImageUrl,
-          carColor: this.CardAddForm.value.color?.toLowerCase() as string,
-          gearBox: this.CardAddForm.value.gearBox?.toLowerCase() as string,
-          carDetails: this.CardAddForm.value.details?.toLowerCase() as string,
-          wheel: this.CardAddForm.value.wheel?.toLowerCase() as string,
+          carColor: this.CardAddForm?.value.color as string,
+          gearBox: this.CardAddForm?.value.gearBox as string,
+          carDetails: this.CardAddForm?.value.details as string,
+          wheel: this.CardAddForm?.value.wheel as string,
           selected: false,
         })
         .subscribe(
-          () => {
+          (item) => {
             this.isSubmitting = false;
             this.cancel.emit();
             this.data.userCardsGet(this.id).subscribe();
@@ -105,33 +128,75 @@ export class AddCardComponent {
             console.error('Error loading user data:', error);
           }
         );
-    } else {
-      console.log('not requested to server');
+    } else if (this.IsCardsAdd && !this.IsCardsEdit) {
+      console.log('Added');
+      if (
+        (this.id && this.CardAddForm.valid) ||
+        this.imageUploadProgressBar !== 0 ||
+        this.isImageCompressing
+      ) {
+        this.IsCardsAdd = false;
+        this.isSubmitting = true;
+        this.data
+          .userCardCreate({
+            id: '',
+            userId: this.id,
+            carModel: this.CardAddForm.value.model?.toLowerCase() as string,
+            carSeries: this.CardAddForm.value.serie?.toLowerCase() as string,
+            carCategory:
+              this.CardAddForm.value.category?.toLowerCase() as string,
+            carYear: this.CardAddForm.value.year as number,
+            carPrice: this.CardAddForm.value.price as number,
+            carImg: this.saveCarImageUrl,
+            carColor: this.CardAddForm.value.color?.toLowerCase() as string,
+            gearBox: this.CardAddForm.value.gearBox?.toLowerCase() as string,
+            carDetails: this.CardAddForm.value.details?.toLowerCase() as string,
+            wheel: this.CardAddForm.value.wheel?.toLowerCase() as string,
+            selected: false,
+          })
+          .subscribe(
+            () => {
+              this.isSubmitting = false;
+              this.cancel.emit();
+              this.data.userCardsGet(this.id).subscribe();
+            },
+            (error) => {
+              this.isSubmitting = false;
+              console.error('Error loading user data:', error);
+            }
+          );
+      } else {
+        console.log('not requested to server');
+      }
     }
   }
+
   ngOnInit() {
+    console.log(this.SelectedCarIdForEdit[0] as unknown as number);
+
+    // let cardId: number = this.userSelectedCard;
     if (this.SelectedCarIdForEdit.length === 1) {
       this.isLoadingOnEdit = true;
-      let selectedCarCardForEdit = this.SelectedCarIdForEdit[0];
-      this.data.getCarDetailsById(selectedCarCardForEdit).subscribe((card) => {
-        console.log(card);
-        if (card) {
-          this.carcardForedit = card;
-        }
-        this.CardAddForm.setValue({
-          model: this.carcardForedit?.carModel || '',
-          category: this.carcardForedit?.carCategory || '',
-          year: this.carcardForedit?.carYear || 2024,
-          price: this.carcardForedit?.carPrice || 0,
-          serie: this.carcardForedit?.carSeries || '',
-          color: this.carcardForedit?.carColor || '',
-          gearBox: this.carcardForedit?.gearBox.toLowerCase() || 'GearBox',
-          details: this.carcardForedit?.carDetails.toLowerCase() || '',
-          wheel: this.carcardForedit?.wheel.toLowerCase() || 'Wheel',
+      this.data
+        .getCarDetailsById(this.SelectedCarIdForEdit[0] as unknown as number)
+        .subscribe((card) => {
+          if (card) {
+            this.carcardForedit = card;
+          }
+          this.CardAddForm.setValue({
+            model: this.carcardForedit?.carModel || '',
+            category: this.carcardForedit?.carCategory || '',
+            year: this.carcardForedit?.carYear || 2024,
+            price: this.carcardForedit?.carPrice || 0,
+            serie: this.carcardForedit?.carSeries || '',
+            color: this.carcardForedit?.carColor || '',
+            gearBox: this.carcardForedit?.gearBox.toLowerCase() || 'GearBox',
+            details: this.carcardForedit?.carDetails.toLowerCase() || '',
+            wheel: this.carcardForedit?.wheel.toLowerCase() || 'Wheel',
+          });
+          this.saveCarImageUrl = card.carImg;
+          this.isLoadingOnEdit = false;
         });
-        this.saveCarImageUrl = card.carImg;
-        this.isLoadingOnEdit = false;
-      });
     }
   }
   /*=========================*/

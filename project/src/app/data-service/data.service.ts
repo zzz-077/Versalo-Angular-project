@@ -95,25 +95,19 @@ export class DataService {
   /*======================*/
 
   userUpdate(user: userInterface) {
-    return this.http.put<userInterface>(`${this.registerUrl}/${user.id}`, user);
+    return this.http.put<userInterface>(
+      `${this.registerUrl}/${user?.id}`,
+      user
+    );
   }
 
   userGet(id: string): Observable<userInterface> {
     return this.http.get<userInterface>(`${this.registerUrl}/${id}`);
   }
-  userImageEdit(img: string, id: string) {
-    return this.http.put<userInterface>(
-      `${this.registerUrl}/${id}?userImageUrl`,
-      img
-    );
-  }
 
   /*======================*/
   /*====USER CARS CRUD====*/
   /*======================*/
-
-  // private carCardsSubject = new BehaviorSubject<carCardInterface[]>([]);
-  // carCards$ = this.carCardsSubject.asObservable();
 
   private carCardsSubject: BehaviorSubject<carCardInterface[]> =
     new BehaviorSubject<carCardInterface[]>([]);
@@ -125,10 +119,6 @@ export class DataService {
       `${this.carCardsUrl}?userId=${userId}`
     );
   }
-
-  // userCardCreate(card: carCardInterface): Observable<carCardInterface> {
-  //   return this.http.post<carCardInterface>(this.carCardsUrl, card);
-  // }
 
   // Create a new card and notify subscribers about the change
   userCardCreate(card: carCardInterface): Observable<carCardInterface> {
@@ -144,32 +134,44 @@ export class DataService {
     );
   }
 
-  userCardDelete(
-    cardIds: number[],
-    userId: string
-  ): Observable<carCardInterface[]> {
+  // userCardDelete(
+  //   cardIds: number[],
+  //   userId: string
+  // ): Observable<carCardInterface[]> {
+  //   // Create an array of observables for each delete request
+  //   const deleteRequests = cardIds.map((cardId) =>
+  //     this.http.delete<void>(`${this.carCardsUrl}/${cardId}`).pipe(
+  //       delay(2000) // Add a delay of 2000 milliseconds between requests
+  //     )
+  //   );
+
+  //   // Use forkJoin to wait for all delete requests to complete
+  //   return forkJoin(deleteRequests).pipe(
+  //     // Map to void[] since forkJoin returns an array of results
+  //     concatMap(() => {
+  //       // Fetch the updated cards after all delete requests are successful
+  //       return this.http.get<carCardInterface[]>(
+  //         `${this.carCardsUrl}?userId=${userId}`
+  //       );
+  //     }),
+  //     tap((cards) => {
+  //       // Update the BehaviorSubject with the updated cards
+  //       this.updateCarCards(cards);
+  //     })
+  //   );
+  // }
+
+  userCardDelete(cardIds: number[], userId: string) {
     // Create an array of observables for each delete request
     const deleteRequests = cardIds.map((cardId) =>
       this.http.delete<void>(`${this.carCardsUrl}/${cardId}`).pipe(
-        delay(1000) // Add a delay of 100 milliseconds between requests
+        delay(2000) // Add a delay of 2000 milliseconds between requests
       )
     );
 
-    // Use forkJoin to wait for all delete requests to complete
-    return forkJoin(deleteRequests).pipe(
-      // Map to void[] since forkJoin returns an array of results
-      concatMap(() => {
-        // Fetch the updated cards after all delete requests are successful
-        return this.http.get<carCardInterface[]>(
-          `${this.carCardsUrl}?userId=${userId}`
-        );
-      }),
-      tap((cards) => {
-        // Update the BehaviorSubject with the updated cards
-        this.updateCarCards(cards);
-      })
-    );
+    return forkJoin(deleteRequests);
   }
+
   userCardUpdate(form: carCardInterface) {
     return this.http.put<carCardInterface>(
       `${this.carCardsUrl}/${form?.id}`,

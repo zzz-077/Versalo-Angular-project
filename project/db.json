@@ -6,7 +6,7 @@
       "userLastName": "zardiashvili",
       "userEmail": "vaska2004@gmail.com",
       "userPassword": "12345678",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": ""
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "userLastName": "gujejiani",
       "userEmail": "gujeqsdzlieri@gmail.ru",
       "userPassword": "magarkacagujeja",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": ""
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "userLastName": "shumaxeri",
       "userEmail": "sasha@gmail.ru",
       "userPassword": "12345678",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": ""
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "userLastName": "xomlelishvili",
       "userEmail": "xomlela2004@gmail.ru",
       "userPassword": "merabxomleli123",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": ""
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "userLastName": "adeshidze",
       "userEmail": "lukson@gmail.com",
       "userPassword": "123lukadzlieri123",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": ""
     },
     {
       "id": 6,
@@ -46,7 +46,7 @@
       "userLastName": "berdzenishvili",
       "userEmail": "laxalovka@gmail.com",
       "userPassword": "laxalovkovich",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": ""
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "userLastName": "eliashvili",
       "userEmail": "gori+vashli@gmail.com",
       "userPassword": "stalinithegod",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": ""
     },
     {
       "id": 8,
@@ -62,7 +62,7 @@
       "userLastName": "Eliashvili",
       "userEmail": "nika@gmail.com",
       "userPassword": "123123123",
-      "userImageUrl": "/assets/user-icon.svg"
+      "userImageUrl": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/userProfileImages%2FGRG03953.jpg?alt=media&token=57581370-0a97-4e2e-970b-5b20ed30b460"
     },
     {
       "id": 9,
@@ -446,20 +446,6 @@
       "wheel": "All-wheel drive"
     },
     {
-      "id": 15,
-      "userId": 8,
-      "carModel": "hyundai",
-      "carSeries": "sonata",
-      "carCategory": "sedan",
-      "carYear": 2011,
-      "carPrice": 17000,
-      "carImg": "https://ap.ge/system/car/photos/007/379/873/medium.jpg?1698413904",
-      "carColor": "Black",
-      "gearBox": "automatic",
-      "carDetails": "Reliable and economical",
-      "wheel": "Front-wheel drive"
-    },
-    {
       "id": 16,
       "userId": 3,
       "carModel": "bmw",
@@ -684,20 +670,6 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 35,
-      "userId": 8,
-      "carModel": "bmw",
-      "carSeries": "2002",
-      "carCategory": "sedan",
-      "carYear": 1974,
-      "carPrice": 22000,
-      "carImg": "https://journal.classiccars.com/media/2023/05/36855070-1974-bmw-2002-std.jpg",
-      "carColor": "White",
-      "gearBox": "manual",
-      "carDetails": "Compact luxury with a sporty flair",
-      "wheel": "Rear-wheel drive"
-    },
-    {
       "id": 38,
       "userId": 9,
       "carModel": "ford",
@@ -811,19 +783,18 @@
       "selected": false
     },
     {
-      "id": 46,
-      "userId": 4,
-      "carModel": "bmw",
-      "carSeries": "x6",
-      "carCategory": "suv",
-      "carYear": 2015,
-      "carPrice": "13000",
-      "carImg": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/carImages%2FUntitled.png?alt=media&token=04ee9091-2d24-4ace-bd3f-211964460d97",
-      "carColor": "blue cameleon",
-      "gearBox": "automatic",
-      "carDetails": "magar mdgomareobashia manqana marto trakshia dartymuli dzma",
-      "wheel": "all-wheel drive",
-      "selected": false
+      "id": 50,
+      "userId": 8,
+      "carModel": "porsche",
+      "carSeries": "911",
+      "carCategory": "sports car",
+      "carYear": 1985,
+      "carPrice": 35000,
+      "carImg": "https://cdn.ebizautos.media/used-1985-porsche-911-carreratarga5speedmanual-6383-21854789-1-1024.jpg",
+      "carColor": "White",
+      "gearBox": "manual",
+      "carDetails": "Timeless design with precision engineering",
+      "wheel": "Rear-wheel drive"
     }
   ]
 }

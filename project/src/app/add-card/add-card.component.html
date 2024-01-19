@@ -33,7 +33,7 @@
                 *ngFor="let model of carList[0]?.carModel"
                 [ngValue]="model"
               >
-                {{ model }}
+                {{ model | titlecase }}
               </option>
             </select>
           </div>
@@ -83,7 +83,7 @@
                 *ngFor="let category of carList[0]?.carCategory"
                 [ngValue]="category"
               >
-                {{ category }}
+                {{ category | titlecase }}
               </option>
             </select>
           </div>
@@ -176,8 +176,8 @@
             </div>
             <select formControlName="gearBox">
               <option value="GearBox" selected>GearBox</option>
-              <option value="automatic">automatic</option>
-              <option value="manual">manual</option>
+              <option value="automatic">Automatic</option>
+              <option value="manual">Manual</option>
             </select>
           </div>
           <div class="input_box wheel_and_btnsbox">
@@ -200,9 +200,9 @@
               </div>
               <select formControlName="wheel">
                 <option value="Wheel" selected>Wheel</option>
-                <option value="front-wheel drive">front-wheel drive</option>
-                <option value="rear-wheel drive">rear-wheel drive</option>
-                <option value="all-wheel drive">all-wheel drive</option>
+                <option value="front-wheel drive">Front-wheel drive</option>
+                <option value="rear-wheel drive">Rear-wheel drive</option>
+                <option value="all-wheel drive">All-wheel drive</option>
               </select>
             </div>
           </div>

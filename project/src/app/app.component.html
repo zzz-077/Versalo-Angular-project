@@ -50,7 +50,10 @@
                 {{ user?.userName || "Unknown" }}
               </span>
               <span class="user-img">
-                <img src="/assets/user-icon.svg" alt="{{ user?.userName }}" />
+                <img
+                  [src]="user?.userImageUrl || '/assets/user-icon.svg'"
+                  alt="{{ user?.userName }}"
+                />
               </span>
             </div>
           </a>
@@ -77,6 +80,12 @@
             >Sign up</a
           >
           <a *ngIf="isLogged" class="btn" (click)="logOut()">Log out</a>
+        </li>
+        <li>
+          <select name="language">
+            <option value="EN">EN</option>
+            <option value="GEO">GEO</option>
+          </select>
         </li>
       </ul>
     </div>

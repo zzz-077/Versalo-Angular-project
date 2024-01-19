@@ -76,10 +76,13 @@ nav {
   align-items: center;
   justify-self: center;
   border-radius: 50%;
+  overflow: hidden;
 }
 
 .navbar ul li .nav-link .user .user-img img {
   width: 30px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .navbar ul li.sign-btns a.btn {

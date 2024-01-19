@@ -14,7 +14,8 @@
   width: 90%;
   display: flex;
   margin: 0 auto;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
   padding: 1rem;
   box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1);
 }
@@ -28,48 +29,126 @@
   margin: 0 auto;
 }
 
-.profile_top_content {
-  justify-content: center;
-  align-items: center;
-  justify-content: space-around;
-}
+
 
 .profile_edit_right_column {
   width: 250px;
   position: relative;
 }
 
+.userImage.disabled {
+  transition: 0.3s;
+  opacity: 0.4;
+  filter: saturate(60%);
+}
+
+
+
+.editImg_btn .editImageBtn.disabled,
+.editImg_btn .editImageBtn.disabled:hover {
+  transition: 0.3s;
+  opacity: 0.95;
+  filter: saturate(40%);
+  cursor: default;
+}
+
+.mat-spinner-container,
+.mat-spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.mat-spinner-container .percentage {
+  color: var(--btn_BGcolor);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.userImage {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--main_BGcolor);
+}
+
 .profile_edit_right_column img {
   width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
   object-fit: cover;
 }
 
 .editImg_btn {
   position: absolute;
-  bottom: 22px;
-  left: 26px;
+  bottom: 1.35rem;
+  left: 1.35rem;
+  display: flex;
+
 }
+
 .editImg_btn input {
   display: none;
 }
-.editImg_btn label {
+
+
+
+.editImg_btn .editImageBtn {
+  border-radius: 0.3rem 0 0 0.3rem;
+}
+
+.editImg_btn .delete-btn {
+  border-radius: 0 0.3rem 0.3rem 0;
+  cursor: pointer;
+}
+
+.editImg_btn .delete-btn:disabled:hover {
+  cursor: default;
+}
+
+.editImg_btn .editImageBtn,
+.editImg_btn .delete-btn {
+  font-weight: 500;
+  font-size: 1.1rem;
   padding: 0.05rem 0.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0.3rem;
   background-color: var(--btn_BGcolor);
   cursor: pointer;
   transition: all 0.125s;
   gap: 0.25rem;
   color: var(--main_BGcolor);
 }
-.editImg_btn label mat-icon {
-  width: 18px;
-  height: 18px;
-  font-size: 18px;
+
+.editImg_btn .delete-btn {
+  padding: 0;
+  background-color: var(--navbar_links__color_hovered);
+  border: none;
 }
-.editImg_btn label:hover {
+
+
+.editImg_btn .delete-btn mat-icon {
+  width: 30px;
+}
+
+.editImg_btn .editImageBtn mat-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 1.25rem;
+}
+
+.editImg_btn .editImageBtn:hover {
   filter: brightness(1.15);
 }
 
@@ -77,7 +156,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 540px;
+  width: 100%;
+  max-width: 540px;
+
 }
 
 .cell {
@@ -105,7 +186,7 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .profile_info_box_input {
@@ -210,6 +291,7 @@
   border-top-left-radius: 0;
   max-width: 1440px;
   width: 100%;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -371,7 +453,7 @@
 
 .delete_popUp_btns {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 0.5rem;
   align-items: center;
 }
@@ -393,6 +475,19 @@
   color: var(--navbar_links__color);
 }
 
+
+.no-cars {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--navbar_links__color_hovered);
+  text-align: center;
+  font-style: italic;
+  margin-bottom: auto;
+}
+
+
+
+
 /*=========================*/
 /*====CREATE CARD POPUP====*/
 /*=========================*/
@@ -409,6 +504,7 @@
   justify-content: center;
   z-index: 999;
 }
+
 /* 
 .overlay-container app-add-card {
   max-width: 80%;
@@ -417,61 +513,3 @@
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 } */
-
-/*---------------------------
-      Car Card Skeleton  
- ---------------------------*/
-.card.is-loading {
-  display: flex;
-  margin: 2rem auto;
-  width: 100%;
-  min-height: 200px;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1);
-  background-color: var(--sign_BGcolor);
-  color: rgb(16, 25, 62);
-}
-
-.card.is-loading .image {
-  width: 220px;
-  height: 170px;
-  flex-shrink: 0;
-}
-
-.card.is-loading .content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.3rem;
-}
-
-.card.is-loading .image,
-.card.is-loading .content .header-skeleton,
-.card.is-loading .content .paragraph-skeleton {
-  background: #eee;
-  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-  border-radius: 0.5rem;
-  background-size: 200% 100%;
-  animation: shine 1.5s linear infinite;
-}
-
-.card.is-loading .header-skeleton {
-  display: inline;
-  width: 100%;
-  height: 40px;
-}
-
-.card.is-loading .content .paragraph-skeleton {
-  display: inline;
-  width: 70%;
-  height: 20px;
-}
-
-@keyframes shine {
-  to {
-    background-position-x: -200%;
-  }
-}

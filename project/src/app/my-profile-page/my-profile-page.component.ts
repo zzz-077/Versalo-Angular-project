@@ -9,18 +9,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data-service/data.service';
 import { __values } from 'tslib';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
   styleUrls: ['./my-profile-page.component.css'],
 })
 export class MyProfilePageComponent {
-  fireStorage: any;
   constructor(
     private localStorageService: LocalStorageService,
     private userService: UserService,
     private data: DataService,
-    private imageCompress: NgxImageCompressService
+    private imageCompress: NgxImageCompressService,
+    private fireStorage: AngularFireStorage
   ) {}
   /*=================*/
   /*====VARIABLES====*/
@@ -37,12 +38,19 @@ export class MyProfilePageComponent {
   CardClickCheck = false;
   popUpCheck = false;
   CardSelectedArray: any[] = [];
-  isLoading: boolean = false;
-  skletonArray: number[] = new Array(10).fill(0);
+  isLoadingCars: boolean = false;
+  skletonArray: number[] = new Array(2).fill(0);
+  isDeleteOpen: boolean = false;
+  /*==================================== */
+  /*======FOR USER IMAGE UPLOADING====== */
+  /*==================================== */
   saveUserImageUrl: string = '';
   oldSaveduserImageName: string | null = null;
   isImageCompressing: boolean = false;
+  isImageUploading: boolean = false;
   imageUploadProgressBar: number = 0;
+  /*----------------------------------*/
+
   /*======================*/
   /*====USER EDIT FORM====*/
   /*======================*/
@@ -78,11 +86,16 @@ export class MyProfilePageComponent {
     });
 
     this.loadInfo();
-    this.UserCards();
-    // this.isLoading = true;
+
+    this.isLoadingCars = true;
+    this.data.userCardsGet(this.id).subscribe((cards) => {
+      this.usersCardsList = cards;
+      this.isLoadingCars = false;
+    });
+
+    // To Update userCarsData immediately after editi db.
     this.data.carCards$.subscribe((cards) => {
       this.usersCardsList = cards;
-      // this.isLoading = cards && false;
     });
   }
   passwordShow() {
@@ -129,7 +142,72 @@ export class MyProfilePageComponent {
     });
   }
 
-  /*
+  /*=======================*/
+  /*====CARDS FUNCTIONS====*/
+  /*=======================*/
+  cardAddBtn() {
+    this.CardsAdd_btnCheck = true;
+  }
+  closeAddCardOverlay() {
+    this.CardsAdd_btnCheck = false;
+    this.CardsEdit_btnCheck = false;
+  }
+  UserCards() {
+    this.data.userCardsGet(this.id).subscribe((cards) => {
+      this.usersCardsList = cards;
+      this.isLoadingCars = false;
+    });
+  }
+  deleteCard() {
+    this.popUpCheck = true;
+  }
+  editCard() {
+    this.CardsEdit_btnCheck = true;
+  }
+  popUpCancel() {
+    this.popUpCheck = false;
+  }
+  popUpDelete() {
+    // console.log('Card deleted!');
+    this.isLoadingCars = true;
+    this.popUpCheck = false;
+    this.data.userCardDelete(this.CardSelectedArray, this.id).subscribe(
+      () => {
+        console.log('Succsfully Deleted');
+        this.data.userCardsGet(this.id).subscribe((cards) => {
+          console.log({ cards });
+
+          this.usersCardsList = cards;
+          this.isLoadingCars = false;
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    // Clear Selected Array after deleting
+    this.CardSelectedArray = [];
+  }
+  cardSelect(card: carCardInterface) {
+    card.selected = !card.selected;
+    this.CardClickCheck = true;
+    if (card.selected) {
+      this.CardSelectedArray.push(card.id);
+    } else {
+      this.CardSelectedArray = this.CardSelectedArray.filter(
+        (item) => item !== card.id
+      );
+    }
+    if (this.CardSelectedArray.length == 0) {
+      this.CardClickCheck = false;
+    }
+  }
+
+  /*=========================*/
+  /*====IMAGE TO FIREBASE====*/
+  /*========AND TO DB========*/
+  /*=========================*/
+
   async onFileChange(event: any) {
     const file = <File>event.target.files[0];
     if (file) {
@@ -143,7 +221,7 @@ export class MyProfilePageComponent {
       }
       if (this.oldSaveduserImageName !== file.name) {
         const width = await this.getImageWidth(file);
-        if (width > 2000) {
+        if (width > 1500) {
           // Resize and Upload the image
           await this.compressAndUpload(file);
         } else {
@@ -163,24 +241,26 @@ export class MyProfilePageComponent {
   }
 
   async compressAndUpload(file: File) {
-    const reader = new FileReader();
+    this.isImageCompressing = true;
 
+    const reader = new FileReader();
     reader.onload = async (event: any) => {
-      this.isImageCompressing = true;
       const compressedImage = await this.imageCompress.compressFile(
         event.target.result,
         1, // Orientation
         50, // Ratio
         90, // Quality
-        2000, //maxWidth
-        2000 //maxHeight
+        1500, //maxWidth
+        1500 //maxHeight
       );
 
       // Convert base64 compressed image to Blob
       const blob = this.dataURItoBlob(compressedImage);
-      this.isImageCompressing = false;
+
       // Uploading Compressed Image
       await this.uploadImage(blob, file.name);
+
+      this.isImageCompressing = false;
     };
 
     reader.readAsDataURL(file);
@@ -204,96 +284,63 @@ export class MyProfilePageComponent {
   async uploadImage(file: Blob, fileName: string) {
     // Upload the file to Firebase or perform other actions
 
-    const path = `userImages/${fileName}`;
+    this.isImageUploading = true;
+    const path = `userProfileImages/${fileName}`;
     const uploadTask = this.fireStorage.upload(path, file);
     uploadTask.then(async (res) => {
       const url = await res.ref.getDownloadURL();
       this.saveUserImageUrl = url;
       this.oldSaveduserImageName = fileName;
+      if (this.saveUserImageUrl) {
+        this.submitNewUserImageInDB(this.saveUserImageUrl);
+      }
     });
     uploadTask.percentageChanges().subscribe((percentage) => {
-      this.imageUploadProgressBar = percentage || 0;
+      this.imageUploadProgressBar = percentage ? Math.round(percentage) : 0;
       if (this.imageUploadProgressBar === 100) {
         setTimeout(() => {
           this.imageUploadProgressBar = 0;
-        }, 1500);
+        }, 3000);
       }
     });
   }
-    async uploadImage(file: Blob, fileName: string) {
-    // Upload the file to Firebase or perform other actions
 
-    const path = `carImages/${fileName}`;
-    const uploadTask = this.fireStorage.upload(path, file);
-    uploadTask.then(async (res) => {
-      const url = await res.ref.getDownloadURL();
-      this.saveCarImageUrl = url;
-      this.oldSavedCarImageName = fileName;
-    });
-    uploadTask.percentageChanges().subscribe((percentage) => {
-      this.imageUploadProgressBar = percentage || 0;
-      if (this.imageUploadProgressBar === 100) {
-        setTimeout(() => {
-          this.imageUploadProgressBar = 0;
-        }, 1500);
-      }
-    });
+  openDeleting() {
+    this.isDeleteOpen = true;
   }
-*/
+  cancelDeleting() {
+    this.isDeleteOpen = false;
+  }
 
-  /*=======================*/
-  /*====CARDS FUNCTIONS====*/
-  /*=======================*/
-  cardAddBtn() {
-    this.CardsAdd_btnCheck = true;
-  }
-  closeAddCardOverlay() {
-    this.CardsAdd_btnCheck = false;
-    this.CardsEdit_btnCheck = false;
-  }
-  UserCards() {
-    // this.isLoading = true;
-    this.data.userCardsGet(this.id).subscribe((cards) => {
-      this.usersCardsList = cards;
-    });
-  }
-  deleteCard() {
-    this.popUpCheck = true;
-  }
-  editCard() {
-    this.CardsEdit_btnCheck = true;
-  }
-  popUpCancel() {
-    this.popUpCheck = false;
-  }
-  popUpDelete() {
-    // console.log('Card deleted!');
-    this.popUpCheck = false;
-    this.data.userCardDelete(this.CardSelectedArray, this.id).subscribe(
-      () => {
-        console.log('Succsfully Deleted');
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    // Clear Selected Array after deleting
-    this.CardSelectedArray = [];
-
-    this.UserCards();
-  }
-  cardSelect(card: carCardInterface) {
-    card.selected = !card.selected;
-    this.CardClickCheck = true;
-    if (card.selected) {
-      this.CardSelectedArray.push(card.id);
-    } else {
-      this.CardSelectedArray = this.CardSelectedArray.filter(
-        (item) => item !== card.id
-      );
+  submitNewUserImageInDB(newImageUrl: string) {
+    if (newImageUrl && this.user) {
+      this.data
+        .userUpdate({
+          ...this.user,
+          userImageUrl: newImageUrl as string,
+        })
+        .subscribe(() => {
+          this.loadInfo();
+          this.isImageUploading = false;
+        });
     }
-    if (this.CardSelectedArray.length == 0) {
-      this.CardClickCheck = false;
+  }
+
+  deleteProfileImage() {
+    if (this.user) {
+      this.data
+        .userUpdate({
+          ...this.user,
+          userImageUrl: '',
+        })
+        .subscribe(async () => {
+          await this.fireStorage.storage
+            .refFromURL(this.saveUserImageUrl)
+            .delete();
+          this.saveUserImageUrl = '';
+          this.cancelDeleting();
+          this.loadInfo();
+        });
     }
   }
 }

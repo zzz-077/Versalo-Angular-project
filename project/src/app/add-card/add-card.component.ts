@@ -155,10 +155,9 @@ export class AddCardComponent {
             selected: false,
           })
           .subscribe(
-            () => {
+            (cars) => {
               this.isSubmitting = false;
               this.cancel.emit();
-              this.data.userCardsGet(this.id).subscribe();
             },
             (error) => {
               this.isSubmitting = false;
@@ -172,8 +171,6 @@ export class AddCardComponent {
   }
 
   ngOnInit() {
-    console.log(this.SelectedCarIdForEdit[0] as unknown as number);
-
     // let cardId: number = this.userSelectedCard;
     if (this.SelectedCarIdForEdit.length === 1) {
       this.isLoadingOnEdit = true;

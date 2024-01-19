@@ -1,0 +1,33 @@
+{
+  "Upload": "Upload",
+  "Home": "Home",
+  "About": "About",
+  "Cars": "Cars",
+  "Sign_In": "Sign In",
+  "Sign_up": "Sign up",
+  "Sign_out": "Sign out",
+
+  "Home_pg_t1": "Rev Up Your Ride: Buy and Sell Cars Made Easy!",
+  "Home_pg_t2": "Your Dream Car Awaits – Effortless Buying, Seamless Selling.",
+  "Home_pg_t3": "Search cars",
+
+  "About_pg_t1": "Welcome to Versalo: Your Car Journey Begins Here!",
+  "About_pg_t2": "Discover and drive your dream car or sell your old faithful on Versalo. Our platform connects buyers and sellers for a seamless car-shopping experience. Find the perfect ride or turn your wheels into cash – Versalo, where every car has a story, and yours is waiting to be written!",
+  "About_pg_t3": "Explore Versalo's marketplace for a diverse range of cars. From classics to daily drivers, find your ideal ride or list your car for sale effortlessly.",
+  "About_pg_t4": "Your new dream car is waiting for you.",
+  "About_pg_t5": "Explore Cars",
+
+  "Profile_pg_t3": "Name",
+  "Profile_pg_t4": "Lastname",
+  "Profile_pg_t5": "Email",
+  "Profile_pg_t6": "Password",
+  "Profile_pg_t7": "Edit",
+  "Profile_pg_t8": "Add card",
+  "Profile_pg_t9": "Delete",
+  "Profile_pg_t10": "Save",
+  "Profile_pg_t11": "Cancel",
+  "Profile_pg_t12": "Submit",
+
+  "card_Delete_pg_t1": "Delete Card",
+  "card_Delete_pg_t2": "Are you sure you want to delete this card?"
+}

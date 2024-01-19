@@ -1,5 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-page',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
+
+  ngOnInit() {
+    const currentLang = this.translate.currentLang;
+    console.log(`Current Language in OtherComponent: ${currentLang}`);
+  }
 }

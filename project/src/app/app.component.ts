@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { LocalStorageService } from './local-storage-service/local-storage.service';
 import { userInterface } from './data-service/registerInterface';
 import { UserService } from './user-service/user.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,17 @@ export class AppComponent {
   isLogged: boolean = false;
   user: userInterface | null = null;
   activeRoute: string = '';
+  lang: any;
+
+  selectedLang(lang: any) {
+    localStorage.setItem('lang', lang);
+    this.translate.use(lang);
+  }
 
   ngOnInit(): void {
+    this.lang = localStorage.getItem('lang') || 'en';
+    this.translate.use(this.lang);
+
     this.localStorageService.isLogged$.subscribe((value) => {
       this.isLogged = value;
     });
@@ -28,8 +38,12 @@ export class AppComponent {
   constructor(
     private router: Router,
     private localStorageService: LocalStorageService,
-    private userService: UserService
+    private userService: UserService,
+    public translate: TranslateService
   ) {
+    translate.addLangs(['en', 'ge']);
+    translate.setDefaultLang('en');
+
     this.router.events.subscribe((event) => {
       event instanceof NavigationEnd ? (this.activeRoute = event.url) : null;
     });

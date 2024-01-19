@@ -206,7 +206,13 @@ nav {
   background-color: var(--navbar_links__color_hovered);
   transition: 0.25s linear;
 }
-
+.navbar ul li select {
+  padding: 0.05rem 0.125rem;
+  outline: none;
+  border: 1px solid var(--sign_btn_color);
+  border-radius: 0.3rem;
+  color: var(--sign_btn_color);
+}
 .sign-btns {
   display: flex;
   align-items: center;

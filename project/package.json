@@ -21,6 +21,8 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "angular-resize-event": "^0.4.2",
     "angular-uuid": "^0.0.4",
     "json-server": "^1.0.0-alpha.16",

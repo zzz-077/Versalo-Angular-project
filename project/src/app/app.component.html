@@ -17,7 +17,9 @@
             routerLinkActive="activeLink"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <div class="add-btn"><mat-icon>add_circle</mat-icon>Upload</div>
+            <div class="add-btn">
+              <mat-icon>add_circle</mat-icon>{{ "Upload" | translate }}
+            </div>
           </a>
         </li>
         <li>
@@ -26,18 +28,21 @@
             routerLink=""
             routerLinkActive="activeLink"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Home</a
+            >{{ "Home" | translate }}</a
           >
         </li>
         <li>
-          <a class="nav-link" routerLink="about" routerLinkActive="activeLink"
-            >About</a
+          <a
+            class="nav-link"
+            routerLink="about"
+            routerLinkActive="activeLink"
+            >{{ "About" | translate }}</a
           >
         </li>
         <li>
-          <a class="nav-link" routerLink="cars" routerLinkActive="activeLink"
-            >Cars</a
-          >
+          <a class="nav-link" routerLink="cars" routerLinkActive="activeLink">{{
+            "Cars" | translate
+          }}</a>
         </li>
         <li *ngIf="isLogged">
           <a
@@ -67,7 +72,7 @@
             "
             class="btn"
             (click)="signIn()"
-            >Sign In</a
+            >{{ "Sign_In" | translate }}</a
           >
           <a
             *ngIf="
@@ -77,14 +82,20 @@
             "
             class="btn"
             (click)="signUp()"
-            >Sign up</a
+            >{{ "Sign_up" | translate }}</a
           >
-          <a *ngIf="isLogged" class="btn" (click)="logOut()">Log out</a>
+          <a *ngIf="isLogged" class="btn" (click)="logOut()">{{
+            "Sign_out" | translate
+          }}</a>
         </li>
         <li>
-          <select name="language">
-            <option value="EN">EN</option>
-            <option value="GEO">GEO</option>
+          <select
+            name="language"
+            [(ngModel)]="lang"
+            (ngModelChange)="selectedLang($event)"
+          >
+            <option value="en">English</option>
+            <option value="ge">ქართული</option>
           </select>
         </li>
       </ul>

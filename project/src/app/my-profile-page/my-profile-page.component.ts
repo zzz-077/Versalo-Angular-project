@@ -10,6 +10,7 @@ import { DataService } from '../data-service/data.service';
 import { __values } from 'tslib';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
@@ -21,8 +22,10 @@ export class MyProfilePageComponent {
     private userService: UserService,
     private data: DataService,
     private imageCompress: NgxImageCompressService,
-    private fireStorage: AngularFireStorage
+    private fireStorage: AngularFireStorage,
+    private translate: TranslateService
   ) {}
+
   /*=================*/
   /*====VARIABLES====*/
   /*=================*/
@@ -77,6 +80,9 @@ export class MyProfilePageComponent {
   /*====INFO FUNCTIONS====*/
   /*======================*/
   ngOnInit(): void {
+    const currentLang = this.translate.currentLang;
+    console.log(`Current Language in OtherComponent: ${currentLang}`);
+
     this.localStorageService.isLogged$.subscribe((value) => {
       this.isLogged = value;
     });

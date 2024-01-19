@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
@@ -16,6 +16,7 @@ import { UserService } from './user-service/user.service';
 import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
 import { CarDetailsComponent } from './car-details/car-details.component';
 import { AddCardComponent } from './add-card/add-card.component';
+import { FormsModule } from '@angular/forms';
 //matt imports
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,7 +32,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
-
+/* Language Change imports */
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,8 +71,19 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     MatProgressSpinnerModule,
+    FormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

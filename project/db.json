@@ -1,15 +1,15 @@
 {
   "users": [
     {
-      "id": 1,
-      "userName": "vaska",
+      "id": "1",
+      "userName": "vasiko",
       "userLastName": "zardiashvili",
       "userEmail": "vaska2004@gmail.com",
       "userPassword": "12345678",
-      "userImageUrl": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/userProfileImages%2Fchamp_gsp.jpg?alt=media&token=e2f5c4cb-7e52-4509-b5ed-d7165c8a9275"
+      "userImageUrl": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/userProfileImages%2FprofileImg.avif?alt=media&token=151111d1-74cb-4c38-b620-2604322c2453"
     },
     {
-      "id": 2,
+      "id": "2",
       "userName": "guja",
       "userLastName": "gujejiani",
       "userEmail": "gujeqsdzlieri@gmail.ru",
@@ -17,7 +17,7 @@
       "userImageUrl": ""
     },
     {
-      "id": 3,
+      "id": "3",
       "userName": "sasha",
       "userLastName": "shumaxeri",
       "userEmail": "sasha@gmail.ru",
@@ -25,7 +25,7 @@
       "userImageUrl": ""
     },
     {
-      "id": 4,
+      "id": "4",
       "userName": "merab",
       "userLastName": "xomlelishvili",
       "userEmail": "xomlela2004@gmail.ru",
@@ -33,7 +33,7 @@
       "userImageUrl": ""
     },
     {
-      "id": 5,
+      "id": "5",
       "userName": "luka",
       "userLastName": "adeshidze",
       "userEmail": "lukson@gmail.com",
@@ -41,7 +41,7 @@
       "userImageUrl": ""
     },
     {
-      "id": 6,
+      "id": "6",
       "userName": "guga",
       "userLastName": "berdzenishvili",
       "userEmail": "laxalovka@gmail.com",
@@ -49,7 +49,7 @@
       "userImageUrl": ""
     },
     {
-      "id": 7,
+      "id": "7",
       "userName": "Nikvardi",
       "userLastName": "eliashvili",
       "userEmail": "gori+vashli@gmail.com",
@@ -57,7 +57,7 @@
       "userImageUrl": ""
     },
     {
-      "id": 8,
+      "id": "8",
       "userName": "Nika",
       "userLastName": "Eliashvili",
       "userEmail": "nika@gmail.com",
@@ -65,7 +65,7 @@
       "userImageUrl": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/userProfileImages%2FGRG03953.jpg?alt=media&token=57581370-0a97-4e2e-970b-5b20ed30b460"
     },
     {
-      "id": 9,
+      "id": "9",
       "userName": "nika",
       "userLastName": "Eliashvili",
       "userEmail": "b@b.com",
@@ -245,40 +245,13 @@
       "gearBox": [
         "automatic",
         "manual"
-      ]
+      ],
+      "id": "e8b9"
     }
   ],
   "carCards": [
     {
-      "id": 1,
-      "userId": 1,
-      "carModel": "toyota",
-      "carSeries": "camry",
-      "carCategory": "sedan",
-      "carYear": 2022,
-      "carPrice": 25000,
-      "carImg": "https://static.cargurus.com/images/forsale/2024/01/11/05/06/2023_toyota_camry-pic-6773326818692463280-1024x768.jpeg",
-      "carColor": "black",
-      "gearBox": "automatic",
-      "carDetails": "Spacious interior, fuel-efficient",
-      "wheel": "4-wheel drive"
-    },
-    {
-      "id": 2,
-      "userId": 1,
-      "carModel": "honda",
-      "carSeries": "civic",
-      "carCategory": "compact",
-      "carYear": 2023,
-      "carPrice": 22000,
-      "carImg": "https://www.pcarmarket.com/static/media/uploads/galleries/photos/uploads/galleries/26121-tom-white-civic/.thumbnails/F212D3D6-E699-4AC0-85C9-89E8356765DE.jpg/F212D3D6-E699-4AC0-85C9-89E8356765DE-tiny-2048x0-0.5x0.jpg",
-      "carColor": "white",
-      "gearBox": "manual",
-      "carDetails": "Sporty design, great fuel economy",
-      "wheel": "front-wheel drive"
-    },
-    {
-      "id": 3,
+      "id": "3",
       "userId": 1,
       "carModel": "ford",
       "carSeries": "mustang",
@@ -292,7 +265,7 @@
       "wheel": "rear-wheel drive"
     },
     {
-      "id": 4,
+      "id": "4",
       "userId": 1,
       "carModel": "chevrolet",
       "carSeries": "malibu",
@@ -306,7 +279,7 @@
       "wheel": "front-wheel drive"
     },
     {
-      "id": 5,
+      "id": "5",
       "userId": 1,
       "carModel": "bmw",
       "carSeries": "x5",
@@ -320,7 +293,7 @@
       "wheel": "all-wheel drive"
     },
     {
-      "id": 6,
+      "id": "6",
       "userId": 1,
       "carModel": "mercedes-benz",
       "carSeries": "e-class",
@@ -334,7 +307,7 @@
       "wheel": "rear-wheel drive"
     },
     {
-      "id": 7,
+      "id": "7",
       "userId": 1,
       "carModel": "audi",
       "carSeries": "a4",
@@ -348,7 +321,7 @@
       "wheel": "all-wheel drive"
     },
     {
-      "id": 8,
+      "id": "8",
       "userId": 6,
       "carModel": "nissan",
       "carSeries": "rogue",
@@ -362,7 +335,7 @@
       "wheel": "front-wheel drive"
     },
     {
-      "id": 9,
+      "id": "9",
       "userId": 7,
       "carModel": "hyundai",
       "carSeries": "elantra",
@@ -376,7 +349,7 @@
       "wheel": "front-wheel drive"
     },
     {
-      "id": 10,
+      "id": "10",
       "userId": 6,
       "carModel": "tesla",
       "carSeries": "model 3",
@@ -390,7 +363,7 @@
       "wheel": "all-wheel drive"
     },
     {
-      "id": 11,
+      "id": "11",
       "userId": 2,
       "carModel": "kia",
       "carSeries": "sportage",
@@ -404,7 +377,7 @@
       "wheel": "front-wheel drive"
     },
     {
-      "id": 12,
+      "id": "12",
       "userId": 3,
       "carModel": "subaru",
       "carSeries": "outback",
@@ -418,7 +391,7 @@
       "wheel": "all-wheel drive"
     },
     {
-      "id": 13,
+      "id": "13",
       "userId": 4,
       "carModel": "volkswagen",
       "carSeries": "passat",
@@ -432,7 +405,7 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 14,
+      "id": "14",
       "userId": 5,
       "carModel": "mazda",
       "carSeries": "cx-5",
@@ -446,7 +419,7 @@
       "wheel": "All-wheel drive"
     },
     {
-      "id": 16,
+      "id": "16",
       "userId": 3,
       "carModel": "bmw",
       "carSeries": "x3",
@@ -460,7 +433,7 @@
       "wheel": "All-wheel drive"
     },
     {
-      "id": 17,
+      "id": "17",
       "userId": 4,
       "carModel": "audi",
       "carSeries": "a4",
@@ -474,7 +447,7 @@
       "wheel": "All-wheel drive"
     },
     {
-      "id": 18,
+      "id": "18",
       "userId": 6,
       "carModel": "mercedes-benz",
       "carSeries": "c-class",
@@ -488,7 +461,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 19,
+      "id": "19",
       "userId": 7,
       "carModel": "kia",
       "carSeries": "sorento",
@@ -502,7 +475,7 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 21,
+      "id": "21",
       "userId": 5,
       "carModel": "lexus",
       "carSeries": "es",
@@ -516,7 +489,7 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 22,
+      "id": "22",
       "userId": 3,
       "carModel": "chrysler",
       "carSeries": "300",
@@ -530,7 +503,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 23,
+      "id": "23",
       "userId": 1,
       "carModel": "jeep",
       "carSeries": "grand cherokee",
@@ -544,7 +517,7 @@
       "wheel": "4-wheel drive"
     },
     {
-      "id": 24,
+      "id": "24",
       "userId": 2,
       "carModel": "acura",
       "carSeries": "mdx",
@@ -558,7 +531,7 @@
       "wheel": "All-wheel drive"
     },
     {
-      "id": 26,
+      "id": "26",
       "userId": 3,
       "carModel": "volvo",
       "carSeries": "xc90",
@@ -572,7 +545,7 @@
       "wheel": "All-wheel drive"
     },
     {
-      "id": 27,
+      "id": "27",
       "userId": 6,
       "carModel": "jaguar",
       "carSeries": "xf",
@@ -586,7 +559,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 29,
+      "id": "29",
       "userId": 1,
       "carModel": "ford",
       "carSeries": "mustang",
@@ -600,7 +573,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 30,
+      "id": "30",
       "userId": 5,
       "carModel": "jeep",
       "carSeries": "wrangler",
@@ -614,7 +587,7 @@
       "wheel": "4-wheel drive"
     },
     {
-      "id": 31,
+      "id": "31",
       "userId": 6,
       "carModel": "hyundai",
       "carSeries": "elantra",
@@ -628,7 +601,7 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 32,
+      "id": "32",
       "userId": 3,
       "carModel": "porsche",
       "carSeries": "911",
@@ -642,21 +615,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 33,
-      "userId": 1,
-      "carModel": "volkswagen",
-      "carSeries": "beetle",
-      "carCategory": "compact car",
-      "carYear": 1972,
-      "carPrice": 12000,
-      "carImg": "https://kars4kidsgarage.com/wp-content/uploads/2021/08/790825_01X.jpg",
-      "carColor": "Blue",
-      "gearBox": "manual",
-      "carDetails": "Quirky and iconic compact car",
-      "wheel": "Rear-wheel drive"
-    },
-    {
-      "id": 34,
+      "id": "34",
       "userId": 2,
       "carModel": "toyota",
       "carSeries": "corolla",
@@ -670,7 +629,7 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 38,
+      "id": "38",
       "userId": 9,
       "carModel": "ford",
       "carSeries": "mustang",
@@ -684,7 +643,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 39,
+      "id": "39",
       "userId": 9,
       "carModel": "jeep",
       "carSeries": "wrangler",
@@ -698,7 +657,7 @@
       "wheel": "4-wheel drive"
     },
     {
-      "id": 40,
+      "id": "40",
       "userId": 9,
       "carModel": "hyundai",
       "carSeries": "elantra",
@@ -712,7 +671,7 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 41,
+      "id": "41",
       "userId": 9,
       "carModel": "porsche",
       "carSeries": "911",
@@ -726,7 +685,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 42,
+      "id": "42",
       "userId": 9,
       "carModel": "volkswagen",
       "carSeries": "beetle",
@@ -740,7 +699,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 43,
+      "id": "43",
       "userId": 9,
       "carModel": "toyota",
       "carSeries": "corolla",
@@ -754,7 +713,7 @@
       "wheel": "Front-wheel drive"
     },
     {
-      "id": 44,
+      "id": "44",
       "userId": 9,
       "carModel": "bmw",
       "carSeries": "2002",
@@ -768,7 +727,7 @@
       "wheel": "Rear-wheel drive"
     },
     {
-      "id": 45,
+      "id": "45",
       "userId": 4,
       "carModel": "opel",
       "carSeries": "combo",
@@ -783,7 +742,7 @@
       "selected": false
     },
     {
-      "id": 50,
+      "id": "50",
       "userId": 8,
       "carModel": "porsche",
       "carSeries": "911",
@@ -795,6 +754,21 @@
       "gearBox": "manual",
       "carDetails": "Timeless design with precision engineering",
       "wheel": "Rear-wheel drive"
+    },
+    {
+      "id": "",
+      "userId": "1",
+      "carModel": "mercedes-benz",
+      "carSeries": "210",
+      "carCategory": "coupe",
+      "carYear": 2022,
+      "carPrice": "26000",
+      "carImg": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/carImages%2FcarcardImg.jfif?alt=media&token=3ea5fdfd-b32b-4cd5-8261-51a3eda9a000",
+      "carColor": "black",
+      "gearBox": "automatic",
+      "carDetails": "",
+      "wheel": "rear-wheel drive",
+      "selected": false
     }
   ]
 }

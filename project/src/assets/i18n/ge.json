@@ -22,12 +22,12 @@
   "Profile_pg_t5": "ელფოსტა",
   "Profile_pg_t6": "პაროლი",
   "Profile_pg_t7": "რედაქტირება",
-  "Profile_pg_t8": "ქარდის დამატება",
+  "Profile_pg_t8": "დამატება",
   "Profile_pg_t9": "წაშლა",
   "Profile_pg_t10": "შენახვა",
   "Profile_pg_t11": "გაუქმება",
   "Profile_pg_t12": "გაგზავნა",
 
-  "card_Delete_pg_t1": "ქარდის წაშლა",
+  "card_Delete_pg_t1": "წაშლა",
   "card_Delete_pg_t2": "დარწმუნებული ხართ, რომ გსურთ ამ ბარათის წაშლა?"
 }

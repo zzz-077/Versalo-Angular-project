@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   isLogged: boolean = false;
+  isNavBarDroped: boolean = false;
   user: userInterface | null = null;
   activeRoute: string = '';
   lang: any;
@@ -34,7 +35,9 @@ export class AppComponent {
       this.user = user;
     });
   }
-
+  navbarBtnClick() {
+    this.isNavBarDroped = !this.isNavBarDroped;
+  }
   constructor(
     private router: Router,
     private localStorageService: LocalStorageService,

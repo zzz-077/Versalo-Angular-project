@@ -4,12 +4,38 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
+main {
+  margin-top: 58px;
+}
 nav {
   background-color: var(--sign_BGcolor);
   width: 100%;
+  z-index: 1000;
+  position: fixed;
 }
-
+nav.active {
+  animation: respNavbarAnimation 0.2s linear;
+}
+nav.inactivenavbar {
+  animation: respNavbarAnimationInactive 0.2s linear;
+  height: 58px;
+}
+@keyframes respNavbarAnimation {
+  from {
+    height: 58px;
+  }
+  to {
+    height: 244px;
+  }
+}
+@keyframes respNavbarAnimationInactive {
+  from {
+    height: 244px;
+  }
+  to {
+    height: 58px;
+  }
+}
 .navbar {
   max-width: 1440px;
   display: flex;
@@ -17,6 +43,48 @@ nav {
   padding: 0.25rem 4rem;
   justify-content: space-between;
   align-items: center;
+}
+.responsive_navbar {
+  display: flex;
+  height: 0;
+  opacity: 0;
+  padding: 0.25rem 1rem;
+  transform: translateY(-300px);
+  transition: all 0.3s;
+}
+
+.responsive_navbar.active {
+  transform: translateY(0);
+  opacity: 1;
+  height: auto;
+  transition: all 0.8s;
+}
+
+.navbar_menu {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: var(--navbar_links__color_hovered);
+  gap: 0.5rem;
+}
+.navbar_menu .responsive_user_li {
+  list-style: none;
+}
+.navbar_menu .mat-icon {
+  cursor: pointer;
+  font-size: 1.875rem;
+  width: 1.875rem;
+  height: 1.875rem;
+}
+.responsive_bottom_col {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  padding-top: 0.5rem;
+}
+.responsive_bottom_col .sign-btns .btn {
+  border-radius: 0;
+  border: 1px solid #cecccc00;
 }
 
 .navbar .Homepage {
@@ -39,8 +107,20 @@ nav {
   align-items: center;
   gap: 1.25rem;
 }
-
-.navbar ul li .nav-link .user {
+.responsive_navbar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: right;
+  gap: 0.5rem;
+}
+.responsive_navbar ul .sign-btns {
+  justify-content: right;
+}
+.navbar ul li .nav-link .user,
+.responsive_navbar ul li .nav-link .user,
+.responsive_user_li .nav-link .user {
   position: relative;
   display: flex;
   justify-content: center;
@@ -49,7 +129,9 @@ nav {
   padding: 0.3rem 0.2rem 0.3rem 1rem;
 }
 
-.navbar ul li .nav-link .user::before {
+.navbar ul li .nav-link .user::before,
+.responsive_navbar ul li .nav-link .user::before,
+.responsive_user_li .nav-link .user::before {
   content: "";
   position: absolute;
   top: 100%;
@@ -61,17 +143,23 @@ nav {
   transition: 0.25s linear;
 }
 
-.navbar ul li .nav-link .user:hover::before {
+.navbar ul li .nav-link .user:hover::before,
+.responsive_navbar ul li .nav-link .user:hover::before,
+.responsive_user_li .nav-link .user:hover::before {
   width: 100%;
 }
 
-.navbar ul li .nav-link .user .user-name {
+.navbar ul li .nav-link .user .user-name,
+.responsive_navbar ul li .nav-link .user .user-name,
+.responsive_user_li .nav-link .user .user-name {
   font-weight: 500;
   font-size: 1rem;
   text-transform: capitalize;
 }
 
-.navbar ul li .nav-link .user .user-img {
+.navbar ul li .nav-link .user .user-img,
+.responsive_navbar ul li .nav-link .user .user-img,
+.responsive_user_li .nav-link .user .user-img {
   display: flex;
   align-items: center;
   justify-self: center;
@@ -79,13 +167,16 @@ nav {
   overflow: hidden;
 }
 
-.navbar ul li .nav-link .user .user-img img {
+.navbar ul li .nav-link .user .user-img img,
+.responsive_navbar ul li .nav-link .user .user-img img,
+.responsive_user_li .nav-link .user .user-img img {
   width: 30px;
   aspect-ratio: 1/1;
   object-fit: cover;
 }
 
-.navbar ul li.sign-btns a.btn {
+.navbar ul li.sign-btns a.btn,
+.responsive_navbar ul li.sign-btns a.btn {
   position: relative;
   height: fit-content;
   font-size: 1rem;
@@ -99,11 +190,13 @@ nav {
   z-index: 1;
 }
 
-.navbar ul li.sign-btns a.btn:hover {
+.navbar ul li.sign-btns a.btn:hover,
+.responsive_navbar ul li.sign-btns a.btn:hover {
   color: var(--sign_BGcolor);
 }
 
-.navbar ul li.sign-btns a.btn::before {
+.navbar ul li.sign-btns a.btn::before,
+.responsive_navbar ul li.sign-btns a.btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -116,11 +209,14 @@ nav {
   transition-delay: 0.1s;
 }
 
-.navbar ul li.sign-btns a.btn:hover::before {
+.navbar ul li.sign-btns a.btn:hover::before,
+.responsive_navbar ul li.sign-btns a.btn:hover::before {
   width: 100%;
 }
 
-.navbar ul li .nav-link {
+.navbar ul li .nav-link,
+.responsive_navbar ul li .nav-link,
+.responsive_user_li .nav-link {
   all: unset;
   font-weight: 500;
   font-size: 1.1rem;
@@ -128,9 +224,11 @@ nav {
   cursor: pointer;
   position: relative;
   transition: 0.2s linear;
+  width: 100%;
 }
 
-.navbar ul li .nav-link::before {
+.navbar ul li .nav-link::before,
+.responsive_navbar ul li .nav-link::before {
   content: "";
   position: absolute;
   top: 100%;
@@ -141,20 +239,24 @@ nav {
   transition: 0.25s linear;
 }
 
-.navbar ul li .nav-link:hover {
+.navbar ul li .nav-link:hover,
+.responsive_navbar ul li .nav-link:hover {
   color: var(--navbar_links__color_hovered);
 }
 
-.navbar ul li .nav-link:hover::before {
+.navbar ul li .nav-link:hover::before,
+.responsive_navbar ul li .nav-link:hover::before {
   width: 100%;
 }
 
-.navbar ul li .nav-link.activeLink {
+.navbar ul li .nav-link.activeLink,
+.responsive_navbar ul li .nav-link.activeLink {
   color: var(--navbar_links__color_hovered);
   position: relative;
 }
 
-.navbar ul li .nav-link.activeLink::before {
+.navbar ul li .nav-link.activeLink::before,
+.responsive_navbar ul li .nav-link.activeLink::before {
   content: "";
   position: absolute;
   top: 100%;
@@ -165,7 +267,8 @@ nav {
   transition: 0.25s linear;
 }
 
-.navbar ul li .add-btn {
+.navbar ul li .add-btn,
+.responsive_navbar ul li .add-btn {
   all: unset;
   font-size: 0.95rem;
   display: flex;
@@ -180,23 +283,28 @@ nav {
   transition: 0.15s linear;
 }
 
-.navbar ul li .add-btn .mat-icon {
+.navbar ul li .add-btn .mat-icon,
+.responsive_navbar ul li .mat-icon {
   transform: scale(0.9);
 }
 
-.navbar ul li .add-btn:hover {
+.navbar ul li .add-btn:hover,
+.responsive_navbar ul li .add-btn:hover {
   filter: brightness(1.02);
 }
 
-.navbar ul li .add-btn:active {
+.navbar ul li .add-btn:active,
+.responsive_navbar ul li .add-btn:active {
   transform: scale(0.97);
 }
 
-.navbar ul li .nav-link.activeLink .user .user-name {
+.navbar ul li .nav-link.activeLink .user .user-name,
+.responsive_navbar ul li .nav-link.activeLink .user .user-name {
   position: relative;
 }
 
-.navbar ul li .nav-link.activeLink .user::before {
+.navbar ul li .nav-link.activeLink .user::before,
+.responsive_navbar ul li .nav-link.activeLink .user::before {
   content: "";
   position: absolute;
   top: 100%;
@@ -206,7 +314,8 @@ nav {
   background-color: var(--navbar_links__color_hovered);
   transition: 0.25s linear;
 }
-.navbar ul li select {
+.navbar ul li select,
+.responsive_navbar ul li select {
   padding: 0.05rem 0.125rem;
   outline: none;
   border: 1px solid var(--sign_btn_color);
@@ -253,4 +362,17 @@ main {
   width: 100px;
   height: 100%;
   filter: brightness(0.8);
+}
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0.25rem 1rem;
+  }
+}
+@media (max-width: 880px) {
+  .navbar ul {
+    display: none;
+  }
+  .navbar_menu {
+    display: flex;
+  }
 }

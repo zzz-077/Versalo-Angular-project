@@ -69,7 +69,9 @@ export class DataService {
   private carCardsUrl = `http://localhost:${this.port}/carCards`;
 
   getCarDetailsById(id: number | null) {
-    return this.http.get<carCardInterface>(`${this.carCardsUrl}/${id}`);
+    return this.http.get<carCardInterface>(
+      `${this.carCardsUrl}/${id}`.toLocaleLowerCase()
+    );
   }
 
   getCarCardsData(): Observable<carCardInterface[]> {

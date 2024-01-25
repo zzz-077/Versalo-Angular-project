@@ -181,7 +181,7 @@ export class AddCardComponent {
             this.carcardForedit = card;
           }
           this.CardAddForm.setValue({
-            model: this.carcardForedit?.carModel || '',
+            model: this.carcardForedit?.carModel.toLowerCase() || '',
             category: this.carcardForedit?.carCategory || '',
             year: this.carcardForedit?.carYear || 2024,
             price: this.carcardForedit?.carPrice || 0,

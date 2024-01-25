@@ -149,3 +149,47 @@ form select option {
 .no-cars-found .clearFilter_btn:active {
   transform: scale(0.95);
 }
+
+@media (max-width: 1024px) {
+  .cars_container {
+    margin: 1rem 0;
+  }
+  .filter_content,
+  .cards_content {
+    width: 100%;
+  }
+  .filter_content form {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .from_to {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  form select {
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    border: none;
+    background: whitesmoke;
+    border-radius: 0.35rem;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    transition: 0.125s 0s ease-in-out;
+  }
+}
+@media (max-width: 425px) {
+  .cars_container {
+    margin: 1rem 0;
+    padding: 0 1rem;
+  }
+  .filter_content,
+  .cards_content {
+    width: 100%;
+  }
+}

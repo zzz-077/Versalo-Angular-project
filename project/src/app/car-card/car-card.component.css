@@ -141,10 +141,57 @@
 
 @media (max-width: 720px) {
   .car-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
     font-size: 0.8rem;
+    align-items: center;
   }
 
   .card-image {
-    width: 150px;
+    width: 90%;
+    height: 180px;
+    margin-bottom: 1rem;
+  }
+  .card-content {
+    padding-left: 0;
+  }
+  .car-name {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.3em;
+    width: 100%;
+  }
+  .car-name-year {
+    width: 100%;
+  }
+  .specifications .spec {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 0.9em;
+    text-transform: capitalize;
+    filter: grayscale(1) opacity(0.75);
+  }
+  .specifications .spec:nth-child(2),
+  .specifications .spec:nth-child(4) {
+    justify-content: end;
+    flex-direction: row-reverse;
+  }
+
+  .specifications .spec .icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 425px) {
+  .filter_content,
+  .cards_content {
+    width: 100%;
   }
 }

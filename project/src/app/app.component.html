@@ -1,5 +1,5 @@
 <div class="site-wrapper">
-  <nav>
+  <nav [ngClass]="isNavBarDroped ? 'active' : 'inactivenavbar'">
     <div class="navbar">
       <div class="Homepage">
         <img
@@ -94,10 +94,95 @@
             [(ngModel)]="lang"
             (ngModelChange)="selectedLang($event)"
           >
-            <option value="en">English</option>
-            <option value="ge">ქართული</option>
+            <option value="en">En</option>
+            <option value="ge">ქარ</option>
           </select>
         </li>
+      </ul>
+      <div class="navbar_menu">
+        <li class="responsive_user_li" *ngIf="isLogged">
+          <a
+            class="nav-link"
+            routerLink="profile"
+            routerLinkActive="activeLink"
+          >
+            <div class="user">
+              <span class="user-name">
+                {{ user?.userName || "Unknown" }}
+              </span>
+              <span class="user-img">
+                <img
+                  [src]="user?.userImageUrl || '/assets/user-icon.svg'"
+                  alt="{{ user?.userName }}"
+                />
+              </span>
+            </div>
+          </a>
+        </li>
+        <mat-icon (click)="navbarBtnClick()">menu</mat-icon>
+      </div>
+    </div>
+    <div [ngClass]="isNavBarDroped ? 'active' : null" class="responsive_navbar">
+      <ul>
+        <li>
+          <a
+            class="nav-link"
+            routerLink=""
+            routerLinkActive="activeLink"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >{{ "Home" | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link"
+            routerLink="about"
+            routerLinkActive="activeLink"
+            >{{ "About" | translate }}</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" routerLink="cars" routerLinkActive="activeLink">{{
+            "Cars" | translate
+          }}</a>
+        </li>
+        <div class="responsive_bottom_col">
+          <li class="sign-btns">
+            <a
+              *ngIf="
+                !isLogged &&
+                (activeRoute === '/signup' ||
+                  (activeRoute !== '/signup' && activeRoute !== '/signin'))
+              "
+              class="btn"
+              (click)="signIn()"
+              >{{ "Sign_In" | translate }}</a
+            >
+            <a
+              *ngIf="
+                !isLogged &&
+                (activeRoute === '/signin' ||
+                  (activeRoute !== '/signup' && activeRoute !== '/signin'))
+              "
+              class="btn"
+              (click)="signUp()"
+              >{{ "Sign_up" | translate }}</a
+            >
+            <a *ngIf="isLogged" class="btn" (click)="logOut()">{{
+              "Sign_out" | translate
+            }}</a>
+          </li>
+          <li>
+            <select
+              name="language"
+              [(ngModel)]="lang"
+              (ngModelChange)="selectedLang($event)"
+            >
+              <option value="en">En</option>
+              <option value="ge">ქარ</option>
+            </select>
+          </li>
+        </div>
       </ul>
     </div>
   </nav>

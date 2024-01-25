@@ -9,7 +9,6 @@
       </div>
       <div class="image"></div>
     </div>
-
     <form
       *ngIf="user"
       [formGroup]="profileEditForm"
@@ -262,11 +261,10 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
-      <div class="deleteImg_btn"></div>
     </div>
   </div>
   <div class="profile_bottom_content">
-    <div class="car_ctreate_box">
+    <div class="car_create_box">
       <div class="prf_card_btns_col1">
         <button (click)="cardAddBtn()" class="prf_card_create_btn">
           {{ "Profile_pg_t8" | translate }}
@@ -288,10 +286,6 @@
           >
             {{ "Profile_pg_t9" | translate }}
           </button>
-        </div>
-        <div class="prf_save_col">
-          <button class="prf_cards_save_btn">Save</button>
-          <button class="prf_cards_cancel_btn">Cancel</button>
         </div>
       </div>
     </div>

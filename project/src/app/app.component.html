@@ -51,9 +51,19 @@
             routerLinkActive="activeLink"
           >
             <div class="user">
-              <span class="user-name">
-                {{ user?.userName || "Unknown" }}
+              <span *ngIf="!isLoading && user" class="user-name">
+                {{ user.userName || "Unknown" }}
               </span>
+              <span *ngIf="!isLoading && !user" class="user-name">
+                {{ "Unknown" }}
+              </span>
+              <mat-spinner
+                *ngIf="isLoading"
+                mode="indeterminate"
+                diameter="20"
+                class="spinner"
+              >
+              </mat-spinner>
               <span class="user-img">
                 <img
                   [src]="user?.userImageUrl || '/assets/user-icon.svg'"
@@ -89,14 +99,23 @@
           }}</a>
         </li>
         <li>
-          <select
+          <!-- <select
             name="language"
             [(ngModel)]="lang"
             (ngModelChange)="selectedLang($event)"
           >
             <option value="en">En</option>
             <option value="ge">ქარ</option>
-          </select>
+          </select> -->
+          <mat-select
+            [(ngModel)]="lang"
+            (ngModelChange)="selectedLang($event)"
+            name="language"
+            class="select-lang"
+          >
+            <mat-option value="en">Eng</mat-option>
+            <mat-option value="ge">ქარ</mat-option>
+          </mat-select>
         </li>
       </ul>
       <div class="navbar_menu">
@@ -173,14 +192,15 @@
             }}</a>
           </li>
           <li>
-            <select
-              name="language"
+            <mat-select
               [(ngModel)]="lang"
               (ngModelChange)="selectedLang($event)"
+              name="language"
+              class="select-lang"
             >
-              <option value="en">En</option>
-              <option value="ge">ქარ</option>
-            </select>
+              <mat-option value="en">Eng</mat-option>
+              <mat-option value="ge">ქარ</mat-option>
+            </mat-select>
           </li>
         </div>
       </ul>

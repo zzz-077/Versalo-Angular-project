@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { carCardInterface } from '../data-service/registerInterface';
+import { carCardInterface } from '../../shared/services/data-service/registerInterface';
 @Component({
   selector: 'app-car-card',
   templateUrl: './car-card.component.html',

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { LocalStorageService } from './local-storage-service/local-storage.service';
-import { userInterface } from './data-service/registerInterface';
-import { UserService } from './user-service/user.service';
+import { LocalStorageService } from './shared/services/local-storage-service/local-storage.service';
+import { userInterface } from './shared/services/data-service/registerInterface';
+import { UserService } from './shared/services/user-service/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from './shared/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   isLogged: boolean = false;
+  isLoading: boolean = false;
   isNavBarDroped: boolean = false;
   user: userInterface | null = null;
   activeRoute: string = '';
@@ -27,13 +29,30 @@ export class AppComponent {
     this.lang = localStorage.getItem('lang') || 'en';
     this.translate.use(this.lang);
 
-    this.localStorageService.isLogged$.subscribe((value) => {
-      this.isLogged = value;
-    });
-    this.userService.loadUser();
-    this.userService.loggedInUser$.subscribe((user) => {
-      this.user = user;
-    });
+    this.isLoading = true;
+    this.authService.getCurrentUser().subscribe(
+      (currentUser: any) => {
+        if (currentUser && currentUser.emailVerified) {
+          this.authService.getCurrentUserFull(currentUser.email).subscribe(
+            (activeUser) => {
+              this.user = activeUser;
+              this.isLogged = true;
+              this.isLoading = false;
+            },
+            (error) => {
+              this.isLogged = false;
+              this.isLoading = false;
+              localStorage.setItem('jwt', 'false');
+            }
+          );
+        }
+      },
+      (error) => {
+        this.isLogged = false;
+        this.isLoading = false;
+        localStorage.setItem('jwt', 'false');
+      }
+    );
   }
   navbarBtnClick() {
     this.isNavBarDroped = !this.isNavBarDroped;
@@ -42,7 +61,8 @@ export class AppComponent {
     private router: Router,
     private localStorageService: LocalStorageService,
     private userService: UserService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private authService: AuthService
   ) {
     translate.addLangs(['en', 'ge']);
     translate.setDefaultLang('en');
@@ -50,8 +70,7 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       event instanceof NavigationEnd ? (this.activeRoute = event.url) : null;
     });
-    this.isLogged =
-      JSON.parse(localStorage.getItem('isLogged') as string) || false;
+    this.isLogged = JSON.parse(localStorage.getItem('jwt') as string) || false;
   }
 
   uploadLink() {

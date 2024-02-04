@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { userInterface } from '../data-service/registerInterface';
-import { DataService } from '../data-service/data.service';
+import { userInterface } from '../../shared/services/data-service/registerInterface';
+import { DataService } from '../../shared/services/data-service/data.service';
 
 import {
   FormGroup,
@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,10 +21,17 @@ import { Observable, catchError, map, of } from 'rxjs';
 export class RegisterComponent {
   RegUser: userInterface[] = [];
   emailCheck = false;
-  constructor(private router: Router, private services: DataService) {
-    this.RegisterForm.get('email')?.valueChanges.subscribe((emailvalue) => {
-      return this.emailExists(emailvalue as string);
-    });
+  hasErrors: string | boolean = false;
+  isLogging: boolean = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private services: DataService
+  ) {
+    // this.RegisterForm.get('email')?.valueChanges.subscribe((emailvalue) => {
+    //   return this.emailExists(emailvalue as string);
+    // });
   }
 
   /*==============================*/
@@ -39,10 +47,7 @@ export class RegisterComponent {
         Validators.required,
         Validators.pattern('[a-zA-Z]+$'),
       ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
         Validators.pattern(/^\S{8,}$/),
@@ -55,23 +60,7 @@ export class RegisterComponent {
     },
     { validators: this.Mustmatch('password', 'confirmPassword') }
   );
-  /*==================================*/
-  /*====IF EMAIL EXISTS LOGIC ====*/
-  /*====================================*/
-  emailExists(email: string) {
-    let emailC = false;
-    this.services.getuserData().subscribe((item) => {
-      if (Array.isArray(item)) {
-        for (let i = 0; i < item.length; i++) {
-          if (item[i].userEmail == email) {
-            emailC = true;
-            break;
-          }
-        }
-      }
-      this.emailCheck = emailC;
-    });
-  }
+
   /*==================================*/
   /*====PASSWORD CONFIRMATION LOGIC ====*/
   /*====================================*/
@@ -104,19 +93,33 @@ export class RegisterComponent {
   /*====SAVING USER DATA IN JSON====*/
   /*====================================*/
   onSignup() {
-    this.services
-      .RegisteredData({
+    if (this.RegisterForm.valid) {
+      this.isLogging = true;
+      const user = {
         id: '',
         userName: this.RegisterForm.value.name as string,
         userLastName: this.RegisterForm.value.lastname as string,
         userEmail: this.RegisterForm.value.email as string,
         userPassword: this.RegisterForm.value.password as string,
         userImageUrl: this.RegisterForm.value.userImageUrl as string,
-      })
-      .subscribe((item) => {});
-    if (this.RegisterForm.valid) {
-      localStorage.setItem('isLogged', JSON.stringify(true));
-      this.router.navigate(['/signin']);
+      };
+
+      this.authService
+        .signUp(user)
+        .then((res) => {})
+        .catch((error) => {
+          this.hasErrors = error.message.replace('Firebase:', '').split('.')[0];
+
+          if (this.hasErrors === 'invalid credential') {
+            this.hasErrors = 'This email is alraedy used!';
+          }
+        })
+        .finally(() => {
+          this.isLogging = false;
+          setTimeout(() => {
+            this.hasErrors = false;
+          }, 3000);
+        });
     }
   }
 }

@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 /* Start Imported Components */
-import { RegisterComponent } from './register/register.component';
-import { SigninComponent } from './signin/signin.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { AboutPageComponent } from './about-page/about-page.component';
-import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
-import { CarsPageComponent } from './cars-page/cars-page.component';
-import { CarDetailsComponent } from './car-details/car-details.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { MyProfilePageComponent } from './pages/my-profile-page/my-profile-page.component';
+import { CarsPageComponent } from './pages/cars-page/cars-page.component';
+import { CarDetailsComponent } from './pages/car-details/car-details.component';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 
 /*  End  Imported Components */
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   },
   { path: 'cars/cardetails/:id', component: CarDetailsComponent },
   { path: 'profile', component: MyProfilePageComponent },
+  { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'signin', component: SigninComponent },
   { path: '**', component: NotFoundComponent },

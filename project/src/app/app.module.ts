@@ -4,20 +4,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
-import { SigninComponent } from './signin/signin.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { CarCardComponent } from './car-card/car-card.component';
-import { AboutPageComponent } from './about-page/about-page.component';
-import { MyProfilePageComponent } from './my-profile-page/my-profile-page.component';
-import { CarsPageComponent } from './cars-page/cars-page.component';
-import { UserService } from './user-service/user.service';
+import { RegisterComponent } from './pages/register/register.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { CarCardComponent } from './components/car-card/car-card.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { MyProfilePageComponent } from './pages/my-profile-page/my-profile-page.component';
+import { CarsPageComponent } from './pages/cars-page/cars-page.component';
+import { UserService } from './shared/services/user-service/user.service';
 import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
-import { CarDetailsComponent } from './car-details/car-details.component';
-import { AddCardComponent } from './add-card/add-card.component';
+import { CarDetailsComponent } from './pages/car-details/car-details.component';
+import { AddCardComponent } from './components/add-card/add-card.component';
 import { FormsModule } from '@angular/forms';
 //matt imports
+import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -39,6 +40,7 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +54,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     CarsPageComponent,
     CarDetailsComponent,
     AddCardComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatInputModule,
     MatSelectModule,
     MatSliderModule,
+    MatCardModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,

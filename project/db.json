@@ -62,13 +62,21 @@
       "userLastName": "Eliashvili",
       "userEmail": "nika@gmail.com",
       "userPassword": "123123123",
-      "userImageUrl": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/userProfileImages%2FGRG03953.jpg?alt=media&token=57581370-0a97-4e2e-970b-5b20ed30b460"
+      "userImageUrl": "https://firebasestorage.googleapis.com/v0/b/versalo-6135b.appspot.com/o/userProfileImages%2FIMG_2422.JPG?alt=media&token=6fbf00e6-52e3-4a87-8562-a9f1f3921d79"
     },
     {
       "id": 9,
       "userName": "nika",
       "userLastName": "Eliashvili",
       "userEmail": "b@b.com",
+      "userPassword": "123123123",
+      "userImageUrl": ""
+    },
+    {
+      "id": 10,
+      "userName": "Anuki",
+      "userLastName": "Eliashvili",
+      "userEmail": "ana@gmail.com",
       "userPassword": "123123123",
       "userImageUrl": ""
     }

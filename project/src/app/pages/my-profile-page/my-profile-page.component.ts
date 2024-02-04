@@ -2,15 +2,16 @@ import { Component } from '@angular/core';
 import {
   carCardInterface,
   userInterface,
-} from '../data-service/registerInterface';
-import { UserService } from '../user-service/user.service';
-import { LocalStorageService } from '../local-storage-service/local-storage.service';
+} from '../../shared/services/data-service/registerInterface';
+import { UserService } from '../../shared/services/user-service/user.service';
+import { LocalStorageService } from '../../shared/services/local-storage-service/local-storage.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../data-service/data.service';
+import { DataService } from '../../shared/services/data-service/data.service';
 import { __values } from 'tslib';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
@@ -18,13 +19,18 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MyProfilePageComponent {
   constructor(
+    private router: Router,
     private localStorageService: LocalStorageService,
     private userService: UserService,
     private data: DataService,
     private imageCompress: NgxImageCompressService,
     private fireStorage: AngularFireStorage,
     private translate: TranslateService
-  ) {}
+  ) {
+    if (!JSON.parse(localStorage.getItem('jwt') as string)) {
+      this.router.navigate(['/']);
+    }
+  }
 
   /*=================*/
   /*====VARIABLES====*/
@@ -81,7 +87,6 @@ export class MyProfilePageComponent {
   /*======================*/
   ngOnInit(): void {
     const currentLang = this.translate.currentLang;
-    console.log(`Current Language in OtherComponent: ${currentLang}`);
 
     this.localStorageService.isLogged$.subscribe((value) => {
       this.isLogged = value;
@@ -139,7 +144,7 @@ export class MyProfilePageComponent {
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   loadInfo() {
-    this.data.userGet(this.id).subscribe((user) => {
+    this.data.userGet(this.id || '1').subscribe((user) => {
       if (user) {
         this.user = user;
         this.userService.setLoggedInUser(this.user);

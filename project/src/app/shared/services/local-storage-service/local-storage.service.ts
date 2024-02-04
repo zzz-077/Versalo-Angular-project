@@ -10,11 +10,11 @@ export class LocalStorageService {
   isLogged$: Observable<boolean> = this.isLoggedSubject.asObservable();
 
   getIsLogged(): boolean {
-    return JSON.parse(localStorage.getItem('isLogged') || 'false');
+    return JSON.parse(localStorage.getItem('jwt') || 'false');
   }
 
   setIsLogged(value: boolean): void {
-    localStorage.setItem('isLogged', JSON.stringify(value));
+    localStorage.setItem('jwt', JSON.stringify(value));
     this.isLoggedSubject.next(value);
   }
 

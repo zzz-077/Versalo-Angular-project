@@ -136,33 +136,6 @@ export class DataService {
     );
   }
 
-  // userCardDelete(
-  //   cardIds: number[],
-  //   userId: string
-  // ): Observable<carCardInterface[]> {
-  //   // Create an array of observables for each delete request
-  //   const deleteRequests = cardIds.map((cardId) =>
-  //     this.http.delete<void>(`${this.carCardsUrl}/${cardId}`).pipe(
-  //       delay(2000) // Add a delay of 2000 milliseconds between requests
-  //     )
-  //   );
-
-  //   // Use forkJoin to wait for all delete requests to complete
-  //   return forkJoin(deleteRequests).pipe(
-  //     // Map to void[] since forkJoin returns an array of results
-  //     concatMap(() => {
-  //       // Fetch the updated cards after all delete requests are successful
-  //       return this.http.get<carCardInterface[]>(
-  //         `${this.carCardsUrl}?userId=${userId}`
-  //       );
-  //     }),
-  //     tap((cards) => {
-  //       // Update the BehaviorSubject with the updated cards
-  //       this.updateCarCards(cards);
-  //     })
-  //   );
-  // }
-
   userCardDelete(cardIds: number[], userId: string) {
     // Create an array of observables for each delete request
     const deleteRequests = cardIds.map((cardId) =>

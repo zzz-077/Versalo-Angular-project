@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import {
   carCardInterface,
   userInterface,
-} from '../data-service/registerInterface';
-import { DataService } from '../data-service/data.service';
+} from '../../shared/services/data-service/registerInterface';
+import { DataService } from '../../shared/services/data-service/data.service';
 
 @Component({
   selector: 'app-car-details',

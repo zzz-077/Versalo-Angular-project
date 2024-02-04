@@ -154,12 +154,23 @@
       </div>
     </div>
 
+    <mat-error *ngIf="hasErrors" class="error">
+      <span>
+        {{ hasErrors }}
+      </span>
+    </mat-error>
     <button
-      [disabled]="!this.RegisterForm.valid || emailCheck"
+      [disabled]="!this.RegisterForm.valid || emailCheck || isLogging"
       class="signin-btn"
       (click)="onSignup()"
     >
-      Sign Up
+      <span> Sign Up {{ isLogging ? "..." : null }}</span>
+      <mat-spinner
+        *ngIf="isLogging"
+        mode="indeterminate"
+        diameter="25"
+        class="spinner"
+      ></mat-spinner>
     </button>
     <p class="no-account-text">
       Already have an account?

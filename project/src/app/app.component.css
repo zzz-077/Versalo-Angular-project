@@ -4,38 +4,66 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 main {
   margin-top: 58px;
 }
+
 nav {
   background-color: var(--sign_BGcolor);
   width: 100%;
   z-index: 1000;
   position: fixed;
 }
+
 nav.active {
   animation: respNavbarAnimation 0.2s linear;
 }
+
 nav.inactivenavbar {
   animation: respNavbarAnimationInactive 0.2s linear;
   height: 58px;
 }
+
+
+
+.select-lang {
+  width: fit-content;
+  min-width: 90px;
+  max-width: 100px;
+  background-color: var(--main_BGcolor);
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+}
+
+
+:host ::ng-deep .spinner.mat-mdc-progress-spinner {
+  stroke: var(--navbar_links__color_hovered);
+  --mdc-circular-progress-active-indicator-color: var(--navbar_links__color_hovered);
+  opacity: 0.8;
+}
+
+
 @keyframes respNavbarAnimation {
   from {
     height: 58px;
   }
+
   to {
     height: 244px;
   }
 }
+
 @keyframes respNavbarAnimationInactive {
   from {
     height: 244px;
   }
+
   to {
     height: 58px;
   }
 }
+
 .navbar {
   max-width: 1440px;
   display: flex;
@@ -44,6 +72,7 @@ nav.inactivenavbar {
   justify-content: space-between;
   align-items: center;
 }
+
 .responsive_navbar {
   display: flex;
   height: 0;
@@ -67,21 +96,25 @@ nav.inactivenavbar {
   color: var(--navbar_links__color_hovered);
   gap: 0.5rem;
 }
+
 .navbar_menu .responsive_user_li {
   list-style: none;
 }
+
 .navbar_menu .mat-icon {
   cursor: pointer;
   font-size: 1.875rem;
   width: 1.875rem;
   height: 1.875rem;
 }
+
 .responsive_bottom_col {
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
   padding-top: 0.5rem;
 }
+
 .responsive_bottom_col .sign-btns .btn {
   border-radius: 0;
   border: 1px solid #cecccc00;
@@ -107,6 +140,7 @@ nav.inactivenavbar {
   align-items: center;
   gap: 1.25rem;
 }
+
 .responsive_navbar ul {
   list-style: none;
   display: flex;
@@ -115,9 +149,11 @@ nav.inactivenavbar {
   text-align: right;
   gap: 0.5rem;
 }
+
 .responsive_navbar ul .sign-btns {
   justify-content: right;
 }
+
 .navbar ul li .nav-link .user,
 .responsive_navbar ul li .nav-link .user,
 .responsive_user_li .nav-link .user {
@@ -314,6 +350,7 @@ nav.inactivenavbar {
   background-color: var(--navbar_links__color_hovered);
   transition: 0.25s linear;
 }
+
 .navbar ul li select,
 .responsive_navbar ul li select {
   padding: 0.05rem 0.125rem;
@@ -322,6 +359,7 @@ nav.inactivenavbar {
   border-radius: 0.3rem;
   color: var(--sign_btn_color);
 }
+
 .sign-btns {
   display: flex;
   align-items: center;
@@ -363,15 +401,18 @@ main {
   height: 100%;
   filter: brightness(0.8);
 }
+
 @media (max-width: 1024px) {
   .navbar {
     padding: 0.25rem 1rem;
   }
 }
+
 @media (max-width: 880px) {
   .navbar ul {
     display: none;
   }
+
   .navbar_menu {
     display: flex;
   }

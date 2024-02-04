@@ -5,11 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DataService } from '../data-service/data.service';
+import { DataService } from '../../shared/services/data-service/data.service';
 import {
   carCardInterface,
   carInterface,
-} from '../data-service/registerInterface';
+} from '../../shared/services/data-service/registerInterface';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { NgxImageCompressService } from 'ngx-image-compress';
 

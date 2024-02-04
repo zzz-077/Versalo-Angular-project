@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {
   carCardInterface,
   carInterface,
-} from '../data-service/registerInterface';
-import { DataService } from '../data-service/data.service';
+} from '../../shared/services/data-service/registerInterface';
+import { DataService } from '../../shared/services/data-service/data.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({

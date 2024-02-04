@@ -1,0 +1,16 @@
+<mat-card *ngIf="!isLoading">
+  <h1 class="header">Welcome</h1>
+  <div class="content">
+    <p class="p-warning-verify">
+      Link has sent on
+      <span [ngClass]="currentUser?.email ? 'email' : null">
+        {{ currentUser?.email || "registered email" }}
+      </span>
+      . To activate your account please verify it and go to dashboard.
+    </p>
+    <div class="buttons">
+      <button (click)="reloadPage()" class="dashboard-link">Dashboard</button>
+      <button (click)="signout()" class="dashboard-link">Sign out</button>
+    </div>
+  </div>
+</mat-card>

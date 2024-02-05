@@ -493,13 +493,19 @@
 
   .profile_top_content {
     height: auto;
-    justify-content: left;
+    justify-content: space-between;
     align-items: flex-start;
     gap: 0.5rem;
   }
 
+  .profile_info_btn_col1 button {
+    width: 100%;
+  }
+
   .profile_edit_left_column {
     height: auto;
+    width: fit-content;
+    margin: auto;
   }
 
   .cell_child div mat-error {
@@ -508,6 +514,7 @@
 
   .profile_edit_right_column {
     width: 200px;
+    margin: auto;
   }
 
   .profile_btns_box {
@@ -529,6 +536,16 @@
   .editImg_btn {
     bottom: 1rem;
     left: -0.5rem;
+  }
+}
+
+@media (max-width: 610px) {
+  .profile_top_content {
+    flex-direction: column;
+  }
+
+  .profile_edit_right_column {
+    width: 200px;
   }
 }
 

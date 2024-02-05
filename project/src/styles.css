@@ -163,6 +163,7 @@ input[type="file"]::file-selector-button:hover {
   height: 38px;
   border-radius: 0.5rem;
 }
+
 .profileCard.is-loading .image,
 .profileCard.is-loading .content .header-skeleton,
 .profileCard.is-loading .content .paragraph-skeleton {
@@ -171,11 +172,13 @@ input[type="file"]::file-selector-button:hover {
   background-size: 200% 100%;
   animation: shine 1.5s linear infinite;
 }
+
 @keyframes shine {
   to {
     background-position-x: -200%;
   }
 }
+
 /*---------------------------
       Scroll Bar Design  
  ---------------------------*/
@@ -200,4 +203,18 @@ input[type="file"]::file-selector-button:hover {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+
+
+
+
+
+/*Media Queries*/
+@media (max-width: 880px) {
+
+  html,
+  body {
+    font-size: 15px;
+  }
 }

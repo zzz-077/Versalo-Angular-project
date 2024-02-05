@@ -30,29 +30,27 @@ export class AppComponent {
     this.translate.use(this.lang);
 
     this.isLoading = true;
-    this.authService.getCurrentUser().subscribe(
-      (currentUser: any) => {
+    this.authService.getCurrentUser().subscribe({
+      next: (currentUser: any) => {
         if (currentUser && currentUser.emailVerified) {
-          this.authService.getCurrentUserFull(currentUser.email).subscribe(
-            (activeUser) => {
+          this.authService
+            .getCurrentUserFull(currentUser.email)
+            .subscribe((activeUser) => {
               this.user = activeUser;
               this.isLogged = true;
               this.isLoading = false;
-            },
-            (error) => {
-              this.isLogged = false;
-              this.isLoading = false;
-              localStorage.setItem('jwt', 'false');
-            }
-          );
+              localStorage.setItem('jwt', 'true');
+            });
         }
       },
-      (error) => {
+      error: (error) => {
         this.isLogged = false;
-        this.isLoading = false;
         localStorage.setItem('jwt', 'false');
-      }
-    );
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
   navbarBtnClick() {
     this.isNavBarDroped = !this.isNavBarDroped;

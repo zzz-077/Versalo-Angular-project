@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, QueryFn } from '@angular/fire/compat/firestore';
 import { userInterface } from '../data-service/registerInterface';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -79,13 +79,18 @@ export class AuthService {
     );
   }
 
+  // Update User Info
+  updateUser(id: string, updateUser: userInterface) {
+    return this.fireStore.collection('/users').doc(id).update(updateUser);
+  }
+
   // Get Current User
   getCurrentUser() {
     return this.fireAuth.authState;
   }
 
   // Get Current User Full Information
-  getCurrentUserFull(email: string) {
+  getCurrentUserFull(email: string): Observable<userInterface> {
     const queryFn: QueryFn = (ref) => ref.where('userEmail', '==', email);
 
     return this.fireStore
@@ -101,6 +106,10 @@ export class AuthService {
           })[0];
         })
       );
+  }
+
+  getUserById(id: string) {
+    return this.fireStore.collection('/users').doc<userInterface>(id).get();
   }
 
   // Sign Out Method

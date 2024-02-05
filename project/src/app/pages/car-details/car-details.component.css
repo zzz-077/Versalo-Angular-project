@@ -181,6 +181,22 @@
 }
 
 
+.spinner-cont {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:host ::ng-deep .spinner.mat-mdc-progress-spinner {
+    stroke: var(--main_BGcolor);
+    --mdc-circular-progress-active-indicator-color: var(--main_color);
+    filter: brightness(0.7);
+}
+
+
+
 @media (max-width: 1000px) {
     .car-details {
         flex-wrap: wrap;

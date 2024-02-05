@@ -52,9 +52,12 @@
           >
             <div class="user">
               <span *ngIf="!isLoading && user" class="user-name">
-                {{ user.userName || "Unknown" }}
+                {{ user.userName }}
               </span>
-              <span *ngIf="!isLoading && !user" class="user-name">
+              <span
+                *ngIf="!isLoading && user && !user.userName"
+                class="user-name"
+              >
                 {{ "Unknown" }}
               </span>
               <mat-spinner
@@ -126,9 +129,22 @@
             routerLinkActive="activeLink"
           >
             <div class="user">
-              <span class="user-name">
-                {{ user?.userName || "Unknown" }}
+              <span *ngIf="!isLoading && user" class="user-name">
+                {{ user.userName }}
               </span>
+              <span
+                *ngIf="!isLoading && user && !user.userName"
+                class="user-name"
+              >
+                {{ "Unknown" }}
+              </span>
+              <mat-spinner
+                *ngIf="isLoading"
+                mode="indeterminate"
+                diameter="20"
+                class="spinner"
+              >
+              </mat-spinner>
               <span class="user-img">
                 <img
                   [src]="user?.userImageUrl || '/assets/user-icon.svg'"

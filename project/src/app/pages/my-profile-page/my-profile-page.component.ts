@@ -12,6 +12,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
+import { CarsService } from 'src/app/shared/services/cars-service/cars.service';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
@@ -25,7 +27,9 @@ export class MyProfilePageComponent {
     private data: DataService,
     private imageCompress: NgxImageCompressService,
     private fireStorage: AngularFireStorage,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService,
+    private carsService: CarsService
   ) {
     if (!JSON.parse(localStorage.getItem('jwt') as string)) {
       this.router.navigate(['/']);
@@ -48,6 +52,7 @@ export class MyProfilePageComponent {
   popUpCheck = false;
   CardSelectedArray: any[] = [];
   isLoadingCars: boolean = false;
+  isLoadingUser: boolean = false;
   skletonArray: number[] = new Array(2).fill(0);
   isDeleteOpen: boolean = false;
   /*==================================== */
@@ -72,10 +77,7 @@ export class MyProfilePageComponent {
       Validators.required,
       Validators.pattern('[a-zA-Z]+$'),
     ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
       Validators.pattern(/^\S{8,}$/),
@@ -91,23 +93,25 @@ export class MyProfilePageComponent {
     this.localStorageService.isLogged$.subscribe((value) => {
       this.isLogged = value;
     });
-    this.userService.loadUser();
-    this.userService.loggedInUser$.subscribe((user) => {
-      this.id = user?.id;
-    });
-
     this.loadInfo();
 
-    this.isLoadingCars = true;
-    this.data.userCardsGet(this.id).subscribe((cards) => {
-      this.usersCardsList = cards;
-      this.isLoadingCars = false;
-    });
+    // this.userService.loadUser();
+    // this.userService.loggedInUser$.subscribe((user) => {
+    //   this.id = user?.id;
+    // });
+
+    // this.loadInfo();
+
+    // this.isLoadingCars = true;
+    // this.data.userCardsGet(this.id).subscribe((cards) => {
+    //   this.usersCardsList = cards;
+    //   this.isLoadingCars = false;
+    // });
 
     // To Update userCarsData immediately after editi db.
-    this.data.carCards$.subscribe((cards) => {
-      this.usersCardsList = cards;
-    });
+    // this.data.carCards$.subscribe((cards) => {
+    //   this.usersCardsList = cards;
+    // });
   }
   passwordShow() {
     this.passwordCheck = !this.passwordCheck;
@@ -124,17 +128,17 @@ export class MyProfilePageComponent {
   }
   infoSaveBtn() {
     console.log('Save button Worked!');
-    if (this.infoEdit_btnCheck) {
-      this.data
-        .userUpdate({
-          id: this.id,
+    if (this.infoEdit_btnCheck && this.user && this.user.id) {
+      console.log('Save button Worked!');
+      this.authService
+        .updateUser(this.user.id, {
           userName: this.profileEditForm.value.name as string,
           userLastName: this.profileEditForm.value.lastname as string,
           userEmail: this.profileEditForm.value.email as string,
           userPassword: this.profileEditForm.value.password as string,
           userImageUrl: this.profileEditForm.value.userImageUrl as string,
         })
-        .subscribe(() => {
+        .finally(() => {
           this.loadInfo();
         });
     }
@@ -144,12 +148,36 @@ export class MyProfilePageComponent {
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   loadInfo() {
-    this.data.userGet(this.id || '1').subscribe((user) => {
-      if (user) {
-        this.user = user;
-        this.userService.setLoggedInUser(this.user);
-      }
-      // console.log(this.user);
+    this.isLoadingUser = true;
+    this.isLoadingCars = true;
+    this.authService.getCurrentUser().subscribe({
+      next: (currentUser: any) => {
+        if (currentUser && currentUser.emailVerified) {
+          this.authService
+            .getCurrentUserFull(currentUser.email)
+            .subscribe((activeUser) => {
+              this.user = activeUser;
+              this.isLogged = true;
+              localStorage.setItem('jwt', 'true');
+              if (this.user && this.user.id) {
+                this.carsService
+                  .getCarCollectionByUserId(this.user.id as string)
+                  .subscribe((cars) => {
+                    this.usersCardsList = cars;
+                    this.isLoadingCars = false;
+                  });
+              }
+            });
+        }
+      },
+      error: (error) => {
+        this.isLogged = false;
+        localStorage.setItem('jwt', 'false');
+      },
+      complete: () => {
+        this.isLoadingUser = false;
+        this.isLoadingCars = false;
+      },
     });
   }
 
@@ -324,13 +352,18 @@ export class MyProfilePageComponent {
   }
 
   submitNewUserImageInDB(newImageUrl: string) {
-    if (newImageUrl && this.user) {
-      this.data
-        .userUpdate({
+    if (newImageUrl && this.user && this.user.id) {
+      // this.data
+      //   .userUpdate({
+      //     ...this.user,
+      //     userImageUrl: newImageUrl as string,
+      //   })
+      this.authService
+        .updateUser(this.user.id, {
           ...this.user,
           userImageUrl: newImageUrl as string,
         })
-        .subscribe(() => {
+        .finally(() => {
           this.loadInfo();
           this.isImageUploading = false;
         });

@@ -104,7 +104,7 @@ export class AddCardComponent {
       this.data
         .userCardUpdate({
           id: this.SelectedCarIdForEdit[0] as any,
-          userId: this.id,
+          userId: this.id.toString(),
           carModel: this.CardAddForm?.value.model as string,
           carSeries: this.CardAddForm?.value.serie as string,
           carCategory: this.CardAddForm?.value.category as string,
@@ -140,7 +140,7 @@ export class AddCardComponent {
         this.data
           .userCardCreate({
             id: '',
-            userId: this.id,
+            userId: this.id.toString(),
             carModel: this.CardAddForm.value.model?.toLowerCase() as string,
             carSeries: this.CardAddForm.value.serie?.toLowerCase() as string,
             carCategory:

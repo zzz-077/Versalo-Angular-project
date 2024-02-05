@@ -1,5 +1,5 @@
 export interface userInterface {
-  id: string;
+  id?: string;
   userName: string;
   userLastName: string;
   userEmail: string;
@@ -16,7 +16,7 @@ export interface carInterface {
 }
 export interface carCardInterface {
   id: string;
-  userId: number;
+  userId: string;
   carModel: string;
   carSeries: string;
   carCategory: string;

@@ -95,14 +95,14 @@
             <h3>{{ "Profile_pg_t5" | translate }}:</h3>
           </div>
           <div class="profile_info_box_input">
-            <span [ngClass]="infoEdit_btnCheck ? 'active' : null">{{
+            <span [ngClass]="infoEdit_btnCheck ? null : null">{{
               user.userEmail
             }}</span>
-            <input
+            <!-- <input
               formControlName="email"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
               type="email"
-            />
+            /> -->
           </div>
         </div>
         <div class="cell_child">
@@ -131,27 +131,27 @@
           </div>
           <div class="profile_info_box_input">
             <span
-              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              [ngClass]="infoEdit_btnCheck ? null : null"
               style="color: rgba(128, 128, 128, 0.912)"
               *ngIf="!passwordCheck"
               >********</span
             >
             <span
-              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              [ngClass]="infoEdit_btnCheck ? null : null"
               style="color: var(--navbar_links__color)"
               *ngIf="passwordCheck"
               >{{ user.userPassword }}</span
             >
             <mat-icon
-              [ngClass]="infoEdit_btnCheck ? 'active' : null"
+              [ngClass]="infoEdit_btnCheck ? null : null"
               (click)="passwordShow()"
               >remove_red_eye</mat-icon
             >
-            <input
+            <!-- <input
               formControlName="password"
               [ngClass]="infoEdit_btnCheck ? 'active' : null"
               type="text"
-            />
+            /> -->
           </div>
         </div>
         <div class="cell_child">

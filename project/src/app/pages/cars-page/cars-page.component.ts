@@ -5,6 +5,7 @@ import {
 } from '../../shared/services/data-service/registerInterface';
 import { DataService } from '../../shared/services/data-service/data.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CarsService } from 'src/app/shared/services/cars-service/cars.service';
 
 @Component({
   selector: 'app-cars-page',
@@ -20,7 +21,10 @@ export class CarsPageComponent {
   isLoading: boolean = false;
   skletonArray: number[] = new Array(10).fill(0);
 
-  constructor(private services: DataService) {}
+  constructor(
+    private services: DataService,
+    private carsService: CarsService
+  ) {}
 
   /*============================*/
   /*====CAR FILTER FORMGROUP====*/
@@ -51,15 +55,29 @@ export class CarsPageComponent {
       }
     });
 
+    // this.isLoading = true;
+    // this.services.getCarCardsData().subscribe((item) => {
+    //   if (Array.isArray(item)) {
+    //     this.saveCarCards = item;
+    //     this.carCards = item; // Initialize carCards with all car cards initially
+    //     this.isLoading = false;
+    //   }
+    //   this.isLoading = false;
+    // });
+
     this.isLoading = true;
-    this.services.getCarCardsData().subscribe((item) => {
-      if (Array.isArray(item)) {
-        this.saveCarCards = item;
-        this.carCards = item; // Initialize carCards with all car cards initially
+    this.carsService.getCarCollection().subscribe({
+      next: (cars) => {
+        this.saveCarCards = cars;
+        this.carCards = cars; // Initialize carCards with all car cards initially
         this.isLoading = false;
-      }
-      this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
     });
+
+    // this.carsService.addAllCarsFromOldDb();
   }
 
   /*========================*/
@@ -78,24 +96,27 @@ export class CarsPageComponent {
         delete filters[key]
     );
 
-    this.services.searchData(filters).subscribe((filteredData) => {
-      if (filters?.yearFrom || filters?.yearTo) {
-        const yearFrom = filters.yearFrom || Number.MIN_SAFE_INTEGER;
-        const yearTo = filters.yearTo || Number.MAX_SAFE_INTEGER;
-        filteredData = filteredData.filter(
-          (car) => car.carYear >= yearFrom && car.carYear <= yearTo
-        );
-      }
-      if (filters?.priceFrom || filters?.priceTo) {
-        const priceFrom = filters.priceFrom || Number.MIN_SAFE_INTEGER;
-        const priceTo = filters.priceTo || Number.MAX_SAFE_INTEGER;
-        filteredData = filteredData.filter(
-          (car) => car.carPrice >= priceFrom && car.carPrice <= priceTo
-        );
-      }
-      this.carCards = filteredData;
-      this.isLoading = false;
-    });
+    // this.services.searchData(filters).subscribe((filteredData) => {
+    this.carsService
+      .getCarCollectionByFilter(filters)
+      .subscribe((filteredData) => {
+        if (filters?.yearFrom || filters?.yearTo) {
+          const yearFrom = filters.yearFrom || Number.MIN_SAFE_INTEGER;
+          const yearTo = filters.yearTo || Number.MAX_SAFE_INTEGER;
+          filteredData = filteredData.filter(
+            (car) => car.carYear >= yearFrom && car.carYear <= yearTo
+          );
+        }
+        if (filters?.priceFrom || filters?.priceTo) {
+          const priceFrom = filters.priceFrom || Number.MIN_SAFE_INTEGER;
+          const priceTo = filters.priceTo || Number.MAX_SAFE_INTEGER;
+          filteredData = filteredData.filter(
+            (car) => car.carPrice >= priceFrom && car.carPrice <= priceTo
+          );
+        }
+        this.carCards = filteredData;
+        this.isLoading = false;
+      });
   }
 
   clearFilter() {

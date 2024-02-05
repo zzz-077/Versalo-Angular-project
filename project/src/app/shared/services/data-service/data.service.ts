@@ -37,7 +37,7 @@ export class DataService {
     return this.http.post<userInterface>(this.registerUrl, user);
   }
 
-  getUserById(userId?: number) {
+  getUserById(userId?: string) {
     return this.http.get<userInterface>(`${this.registerUrl}/${userId}`);
   }
 

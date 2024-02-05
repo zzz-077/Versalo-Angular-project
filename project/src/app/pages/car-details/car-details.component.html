@@ -1,3 +1,11 @@
+<div *ngIf="!carDetails" class="spinner-cont">
+  <mat-spinner
+    [diameter]="60"
+    mode="indeterminate"
+    class="spinner"
+  ></mat-spinner>
+</div>
+
 <div *ngIf="carDetails" class="car-details">
   <div class="car-header-image">
     <h2 class="car-header">
@@ -19,11 +27,14 @@
       <div class="user-image">
         <img src="/assets/user-icon.svg" alt="" />
       </div>
-      <div class="user-details">
-        <span class="user-fullname"
-          >{{ user?.userName }} {{ user?.userLastName }}</span
-        >
-        <span class="user-email">{{ user?.userEmail }}</span>
+      <div *ngIf="user" class="user-details">
+        <span class="user-fullname">{{
+          user ? user.userName + " " + user.userLastName : "Anonimous"
+        }}</span>
+        <span class="user-email">{{ user.userEmail || "-" }}</span>
+      </div>
+      <div *ngIf="!user" class="user-details">
+        <mat-spinner diameter="25" class="spinner"></mat-spinner>
       </div>
     </div>
     <div class="car-description">

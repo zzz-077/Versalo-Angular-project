@@ -64,7 +64,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   gap: 1rem;
   padding: 3rem;
   background-color: var(--dark-bg);
@@ -88,6 +88,7 @@
 }
 
 @media (max-width: 1024px) {
+
   .about-text h1,
   .about-text p,
   .about-distination {

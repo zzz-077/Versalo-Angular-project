@@ -120,7 +120,7 @@
 
 .specifications .spec {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.4em;
   font-size: 0.9em;
@@ -163,7 +163,7 @@
   .car-name {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     gap: 0.3em;
   }
 
@@ -171,7 +171,7 @@
 
   .specifications .spec {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     gap: 0.4em;
     font-size: 0.9em;

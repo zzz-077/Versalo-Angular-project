@@ -12,8 +12,7 @@ import { CarCardComponent } from './components/car-card/car-card.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { MyProfilePageComponent } from './pages/my-profile-page/my-profile-page.component';
 import { CarsPageComponent } from './pages/cars-page/cars-page.component';
-import { UserService } from './shared/services/user-service/user.service';
-import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { CarDetailsComponent } from './pages/car-details/car-details.component';
 import { AddCardComponent } from './components/add-card/add-card.component';
 import { FormsModule } from '@angular/forms';
@@ -84,7 +83,7 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
       },
     }),
   ],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,18 +2,15 @@ import { Component } from '@angular/core';
 import {
   carCardInterface,
   userInterface,
-} from '../../shared/services/data-service/registerInterface';
-import { UserService } from '../../shared/services/user-service/user.service';
-import { LocalStorageService } from '../../shared/services/local-storage-service/local-storage.service';
+} from '../../shared/interfaces/registerInterface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../../shared/services/data-service/data.service';
-import { __values } from 'tslib';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
 import { CarsService } from 'src/app/shared/services/cars-service/cars.service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage-service/local-storage.service';
 @Component({
   selector: 'app-my-profile-page',
   templateUrl: './my-profile-page.component.html',
@@ -22,17 +19,16 @@ import { CarsService } from 'src/app/shared/services/cars-service/cars.service';
 export class MyProfilePageComponent {
   constructor(
     private router: Router,
-    private localStorageService: LocalStorageService,
-    private userService: UserService,
-    private data: DataService,
     private imageCompress: NgxImageCompressService,
     private fireStorage: AngularFireStorage,
     private translate: TranslateService,
     private authService: AuthService,
-    private carsService: CarsService
+    private carsService: CarsService,
+    private localStorageService: LocalStorageService
   ) {
-    if (!JSON.parse(localStorage.getItem('jwt') as string)) {
-      this.router.navigate(['/']);
+    const isLogged = this.localStorageService.getIsLogged();
+    if (!isLogged) {
+      this.router.navigate(['']);
     }
   }
 
@@ -89,29 +85,10 @@ export class MyProfilePageComponent {
   /*======================*/
   ngOnInit(): void {
     const currentLang = this.translate.currentLang;
-
-    this.localStorageService.isLogged$.subscribe((value) => {
-      this.isLogged = value;
-    });
+    // this.localStorageService.isLogged$.subscribe((value) => {
+    //   this.isLogged = value;
+    // });
     this.loadInfo();
-
-    // this.userService.loadUser();
-    // this.userService.loggedInUser$.subscribe((user) => {
-    //   this.id = user?.id;
-    // });
-
-    // this.loadInfo();
-
-    // this.isLoadingCars = true;
-    // this.data.userCardsGet(this.id).subscribe((cards) => {
-    //   this.usersCardsList = cards;
-    //   this.isLoadingCars = false;
-    // });
-
-    // To Update userCarsData immediately after editi db.
-    // this.data.carCards$.subscribe((cards) => {
-    //   this.usersCardsList = cards;
-    // });
   }
   passwordShow() {
     this.passwordCheck = !this.passwordCheck;
@@ -127,9 +104,7 @@ export class MyProfilePageComponent {
     this.infoEdit_btnCheck = !this.infoEdit_btnCheck;
   }
   infoSaveBtn() {
-    console.log('Save button Worked!');
     if (this.infoEdit_btnCheck && this.user && this.user.id) {
-      console.log('Save button Worked!');
       this.authService
         .updateUser(this.user.id, {
           userName: this.profileEditForm.value.name as string,
@@ -188,15 +163,14 @@ export class MyProfilePageComponent {
     this.CardsAdd_btnCheck = true;
   }
   closeAddCardOverlay() {
+    this.CardSelectedArray = [];
+    this.usersCardsList = this.usersCardsList.map((car: carCardInterface) => {
+      return { ...car, selected: false };
+    });
     this.CardsAdd_btnCheck = false;
     this.CardsEdit_btnCheck = false;
   }
-  UserCards() {
-    this.data.userCardsGet(this.id).subscribe((cards) => {
-      this.usersCardsList = cards;
-      this.isLoadingCars = false;
-    });
-  }
+
   deleteCard() {
     this.popUpCheck = true;
   }
@@ -207,23 +181,20 @@ export class MyProfilePageComponent {
     this.popUpCheck = false;
   }
   popUpDelete() {
-    // console.log('Card deleted!');
     this.isLoadingCars = true;
     this.popUpCheck = false;
-    this.data.userCardDelete(this.CardSelectedArray, this.id).subscribe(
-      () => {
-        console.log('Succsfully Deleted');
-        this.data.userCardsGet(this.id).subscribe((cards) => {
-          console.log({ cards });
-
-          this.usersCardsList = cards;
-          this.isLoadingCars = false;
-        });
-      },
-      (error) => {
+    this.carsService
+      .deleteCarsById(this.CardSelectedArray)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    );
+      })
+      .finally(() => {
+        this.isLoadingCars = false;
+      });
+
     // Clear Selected Array after deleting
     this.CardSelectedArray = [];
   }
@@ -353,11 +324,6 @@ export class MyProfilePageComponent {
 
   submitNewUserImageInDB(newImageUrl: string) {
     if (newImageUrl && this.user && this.user.id) {
-      // this.data
-      //   .userUpdate({
-      //     ...this.user,
-      //     userImageUrl: newImageUrl as string,
-      //   })
       this.authService
         .updateUser(this.user.id, {
           ...this.user,
@@ -371,17 +337,19 @@ export class MyProfilePageComponent {
   }
 
   deleteProfileImage() {
-    if (this.user) {
-      this.data
-        .userUpdate({
+    if (this.user && this.user.id) {
+      this.authService
+        .updateUser(this.user.id, {
           ...this.user,
           userImageUrl: '',
         })
-        .subscribe(async () => {
+        .then(async () => {
           await this.fireStorage.storage
             .refFromURL(this.saveUserImageUrl)
             .delete();
           this.saveUserImageUrl = '';
+        })
+        .finally(() => {
           this.cancelDeleting();
           this.loadInfo();
         });

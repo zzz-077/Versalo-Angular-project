@@ -164,6 +164,7 @@
             class="nav-link"
             routerLink=""
             routerLinkActive="activeLink"
+            (click)="navbarBtnClick()"
             [routerLinkActiveOptions]="{ exact: true }"
             >{{ "Home" | translate }}</a
           >
@@ -173,13 +174,18 @@
             class="nav-link"
             routerLink="about"
             routerLinkActive="activeLink"
+            (click)="navbarBtnClick()"
             >{{ "About" | translate }}</a
           >
         </li>
         <li>
-          <a class="nav-link" routerLink="cars" routerLinkActive="activeLink">{{
-            "Cars" | translate
-          }}</a>
+          <a
+            class="nav-link"
+            routerLink="cars"
+            routerLinkActive="activeLink"
+            (click)="navbarBtnClick()"
+            >{{ "Cars" | translate }}</a
+          >
         </li>
         <div class="responsive_bottom_col">
           <li class="sign-btns">

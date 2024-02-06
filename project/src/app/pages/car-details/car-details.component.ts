@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   carCardInterface,
   userInterface,
-} from '../../shared/services/data-service/registerInterface';
-import { DataService } from '../../shared/services/data-service/data.service';
+} from '../../shared/interfaces/registerInterface';
 import { CarsService } from 'src/app/shared/services/cars-service/cars.service';
 import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
 
@@ -20,7 +19,6 @@ export class CarDetailsComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private services: DataService,
     private carsService: CarsService,
     private authService: AuthService
   ) {}

@@ -8,7 +8,7 @@ import { filter, map } from 'rxjs';
 import {
   carCardInterface,
   userInterface,
-} from '../data-service/registerInterface';
+} from '../../interfaces/registerInterface';
 @Injectable({
   providedIn: 'root',
 })
@@ -83,6 +83,28 @@ export class CarsService {
   getCarById(carId: string) {
     return this.fireStore.collection('/Cars').doc(carId).get();
   }
+
+  // Add New Car
+  async addNewCar(newCar: carCardInterface) {
+    return await this.fireStore.collection('/Cars').add(newCar);
+  }
+
+  // Update Car
+  async updateCar(carId: string, updatedCar: carCardInterface) {
+    return await this.fireStore
+      .collection('Cars')
+      .doc(carId)
+      .update(updatedCar);
+  }
+
+  // Delete Cars By IDs
+  async deleteCarsById(selectedIds: string[]) {
+    console.log(selectedIds);
+
+    selectedIds.forEach(async (id) => {
+      return await this.fireStore.collection('/Cars').doc(id).delete();
+    });
+  }
   async addAllCarsFromOldDb() {
     for await (const car of carsDB) {
       this.fireStore.collection('/Cars').add(car);
@@ -92,7 +114,7 @@ export class CarsService {
 
 const carsDB = [
   {
-    userId: '82SOeKtY3A9ulO8jTfPL',
+    userId: 'HilCpWkntT0T8ZEPQPO8',
     carModel: 'toyota',
     carSeries: 'camry',
     carCategory: 'sedan',
@@ -120,7 +142,7 @@ const carsDB = [
     wheel: 'front-wheel drive',
   },
   {
-    userId: '82SOeKtY3A9ulO8jTfPL',
+    userId: 'HilCpWkntT0T8ZEPQPO8',
     carModel: 'ford',
     carSeries: 'mustang',
     carCategory: 'sports car',
@@ -148,7 +170,7 @@ const carsDB = [
     wheel: 'front-wheel drive',
   },
   {
-    userId: '82SOeKtY3A9ulO8jTfPL',
+    userId: 'HilCpWkntT0T8ZEPQPO8',
     carModel: 'bmw',
     carSeries: 'x5',
     carCategory: 'suv',
@@ -176,7 +198,7 @@ const carsDB = [
     wheel: 'rear-wheel drive',
   },
   {
-    userId: '82SOeKtY3A9ulO8jTfPL',
+    userId: 'HilCpWkntT0T8ZEPQPO8',
     carModel: 'audi',
     carSeries: 'a4',
     carCategory: 'sedan',
@@ -203,7 +225,7 @@ const carsDB = [
     wheel: 'front-wheel drive',
   },
   {
-    userId: '82SOeKtY3A9ulO8jTfPL',
+    userId: 'HilCpWkntT0T8ZEPQPO8',
     carModel: 'hyundai',
     carSeries: 'elantra',
     carCategory: 'compact',

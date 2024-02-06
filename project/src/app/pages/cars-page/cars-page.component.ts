@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import {
   carCardInterface,
   carInterface,
-} from '../../shared/services/data-service/registerInterface';
-import { DataService } from '../../shared/services/data-service/data.service';
+} from '../../shared/interfaces/registerInterface';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CarsService } from 'src/app/shared/services/cars-service/cars.service';
+import { FilterService } from 'src/app/shared/services/filters-service/filter.service';
 
 @Component({
   selector: 'app-cars-page',
@@ -22,9 +22,11 @@ export class CarsPageComponent {
   skletonArray: number[] = new Array(10).fill(0);
 
   constructor(
-    private services: DataService,
-    private carsService: CarsService
-  ) {}
+    private carsService: CarsService,
+    private filterService: FilterService
+  ) {
+    this.getFilters();
+  }
 
   /*============================*/
   /*====CAR FILTER FORMGROUP====*/
@@ -43,17 +45,19 @@ export class CarsPageComponent {
   /*====GETTING CAR DATA====*/
   /*========================*/
   ngOnInit() {
-    this.services.getCarComponentsData().subscribe((items) => {
-      if (Array.isArray(items)) {
-        this.carList = items;
+    this.getFilters();
 
-        this.carList[0]?.carCategory.sort();
-        this.carList[0]?.carModel.sort();
+    // this.services.getCarComponentsData().subscribe((items) => {
+    //   if (Array.isArray(items)) {
+    //     this.carList = items;
 
-        this.priceToArr = this.carList[0]?.carPrice;
-        this.yearToArr = this.carList[0]?.carYear;
-      }
-    });
+    //     this.carList[0]?.carCategory.sort();
+    //     this.carList[0]?.carModel.sort();
+
+    //     this.priceToArr = this.carList[0]?.carPrice;
+    //     this.yearToArr = this.carList[0]?.carYear;
+    //   }
+    // });
 
     // this.isLoading = true;
     // this.services.getCarCardsData().subscribe((item) => {
@@ -76,8 +80,6 @@ export class CarsPageComponent {
         this.isLoading = false;
       },
     });
-
-    // this.carsService.addAllCarsFromOldDb();
   }
 
   /*========================*/
@@ -182,5 +184,20 @@ export class CarsPageComponent {
           break;
       }
     }
+  }
+
+  // Get Filters
+  getFilters() {
+    this.isLoading = true;
+    this.filterService.getFilters().subscribe((filters) => {
+      this.carList = filters;
+
+      this.carList[0]?.carCategory.sort();
+      this.carList[0]?.carModel.sort();
+
+      this.priceToArr = this.carList[0]?.carPrice;
+      this.yearToArr = this.carList[0]?.carYear;
+      this.isLoading = false;
+    });
   }
 }

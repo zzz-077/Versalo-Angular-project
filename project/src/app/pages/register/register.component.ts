@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { userInterface } from '../../shared/services/data-service/registerInterface';
-import { DataService } from '../../shared/services/data-service/data.service';
+import { userInterface } from '../../shared/interfaces/registerInterface';
 
 import {
   FormGroup,
@@ -8,11 +7,10 @@ import {
   Validators,
   ValidatorFn,
   AbstractControl,
-  AsyncValidatorFn,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Observable, catchError, map, of } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage-service/local-storage.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -25,13 +23,14 @@ export class RegisterComponent {
   isLogging: boolean = false;
 
   constructor(
-    private router: Router,
     private authService: AuthService,
-    private services: DataService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {
-    // this.RegisterForm.get('email')?.valueChanges.subscribe((emailvalue) => {
-    //   return this.emailExists(emailvalue as string);
-    // });
+    const isLogged = this.localStorageService.getIsLogged();
+    if (isLogged) {
+      this.router.navigate(['']);
+    }
   }
 
   /*==============================*/

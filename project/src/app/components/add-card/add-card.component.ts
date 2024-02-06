@@ -5,13 +5,14 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DataService } from '../../shared/services/data-service/data.service';
 import {
   carCardInterface,
   carInterface,
-} from '../../shared/services/data-service/registerInterface';
+} from '../../shared/interfaces/registerInterface';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { CarsService } from 'src/app/shared/services/cars-service/cars.service';
+import { FilterService } from 'src/app/shared/services/filters-service/filter.service';
 
 @Component({
   selector: 'app-add-card',
@@ -24,13 +25,14 @@ export class AddCardComponent {
   /*=================*/
   @Input() IsCardsAdd = false;
   @Input() IsCardsEdit = false;
-  @Input() id = 0;
+  @Input() id: string = '';
   @Input() SelectedCarIdForEdit: any[] = [];
   @Output() cancel = new EventEmitter<void>();
   saveCarImageUrl: string = '';
   oldSavedCarImageName: string | null = null;
   isSubmitting = false;
   isImageCompressing: boolean = false;
+  isImageUploading: boolean = false;
   imageUploadProgressBar: number = 0;
   carcardForedit: carCardInterface | null = null;
   carList: carInterface[] = [];
@@ -39,16 +41,37 @@ export class AddCardComponent {
   userSelectedCard: number = this.SelectedCarIdForEdit[0];
   constructor(
     private fireStorage: AngularFireStorage,
-    private data: DataService,
-    private imageCompress: NgxImageCompressService
-  ) {
-    this.isLoading = true;
-    this.data.getCarComponentsData().subscribe((items) => {
-      if (Array.isArray(items)) {
-        this.carList = items;
-        this.isLoading = false;
-      }
-    });
+    private carsService: CarsService,
+    private imageCompress: NgxImageCompressService,
+    private filterService: FilterService
+  ) {}
+
+  ngOnInit() {
+    this.getFilters();
+    if (this.SelectedCarIdForEdit.length === 1) {
+      this.isLoadingOnEdit = true;
+      this.carsService
+        .getCarById(this.SelectedCarIdForEdit[0])
+        .subscribe((card) => {
+          if (card) {
+            this.carcardForedit = card.data() as carCardInterface;
+
+            this.CardAddForm.setValue({
+              model: this.carcardForedit?.carModel.toLowerCase() || '',
+              category: this.carcardForedit?.carCategory || '',
+              year: this.carcardForedit?.carYear || 2024,
+              price: this.carcardForedit?.carPrice || 0,
+              serie: this.carcardForedit?.carSeries || '',
+              color: this.carcardForedit?.carColor || '',
+              gearBox: this.carcardForedit?.gearBox.toLowerCase() || 'GearBox',
+              details: this.carcardForedit?.carDetails.toLowerCase() || '',
+              wheel: this.carcardForedit?.wheel.toLowerCase() || 'Wheel',
+            });
+            this.saveCarImageUrl = this.carcardForedit.carImg;
+            this.isLoadingOnEdit = false;
+          }
+        });
+    }
   }
   /*=====================*/
   /*====CARD ADD FORM====*/
@@ -72,7 +95,6 @@ export class AddCardComponent {
     gearBox: new FormControl('GearBox', [Validators.required]),
     details: new FormControl(''),
     wheel: new FormControl('Wheel', [Validators.required]),
-    // carImageUrl: new FormControl(this.saveCarImageUrl),
   });
   validateCategory(control: AbstractControl): { [key: string]: any } | null {
     const selectedCategory = control.value;
@@ -100,10 +122,8 @@ export class AddCardComponent {
   cardSaveBtn() {
     if (this.IsCardsEdit && !this.IsCardsAdd) {
       console.log('Updated');
-
-      this.data
-        .userCardUpdate({
-          id: this.SelectedCarIdForEdit[0] as any,
+      this.carsService
+        .updateCar(this.SelectedCarIdForEdit[0], {
           userId: this.id.toString(),
           carModel: this.CardAddForm?.value.model as string,
           carSeries: this.CardAddForm?.value.serie as string,
@@ -117,29 +137,27 @@ export class AddCardComponent {
           wheel: this.CardAddForm?.value.wheel as string,
           selected: false,
         })
-        .subscribe(
-          (item) => {
-            this.isSubmitting = false;
-            this.cancel.emit();
-            this.data.userCardsGet(this.id).subscribe();
-          },
-          (error) => {
-            this.isSubmitting = false;
-            console.error('Error loading user data:', error);
-          }
-        );
+        .then((item) => {
+          this.isSubmitting = false;
+        })
+        .catch((error) => {
+          console.error('Error loading user data:', error);
+        })
+        .finally(() => {
+          this.isSubmitting = false;
+          this.cancel.emit();
+        });
     } else if (this.IsCardsAdd && !this.IsCardsEdit) {
       console.log('Added');
       if (
         (this.id && this.CardAddForm.valid) ||
         this.imageUploadProgressBar !== 0 ||
-        this.isImageCompressing
+        !this.isImageCompressing
       ) {
         this.IsCardsAdd = false;
         this.isSubmitting = true;
-        this.data
-          .userCardCreate({
-            id: '',
+        this.carsService
+          .addNewCar({
             userId: this.id.toString(),
             carModel: this.CardAddForm.value.model?.toLowerCase() as string,
             carSeries: this.CardAddForm.value.serie?.toLowerCase() as string,
@@ -154,48 +172,33 @@ export class AddCardComponent {
             wheel: this.CardAddForm.value.wheel?.toLowerCase() as string,
             selected: false,
           })
-          .subscribe(
-            (cars) => {
-              this.isSubmitting = false;
-              this.cancel.emit();
-            },
-            (error) => {
-              this.isSubmitting = false;
-              console.error('Error loading user data:', error);
-            }
-          );
+          .catch((error) => {
+            console.error('Error loading user data:', error);
+          })
+          .finally(() => {
+            this.isSubmitting = false;
+            this.cancel.emit();
+            this.SelectedCarIdForEdit = [];
+          });
       } else {
         console.log('not requested to server');
       }
     }
   }
 
-  ngOnInit() {
-    // let cardId: number = this.userSelectedCard;
-    if (this.SelectedCarIdForEdit.length === 1) {
-      this.isLoadingOnEdit = true;
-      this.data
-        .getCarDetailsById(this.SelectedCarIdForEdit[0] as unknown as number)
-        .subscribe((card) => {
-          if (card) {
-            this.carcardForedit = card;
-          }
-          this.CardAddForm.setValue({
-            model: this.carcardForedit?.carModel.toLowerCase() || '',
-            category: this.carcardForedit?.carCategory || '',
-            year: this.carcardForedit?.carYear || 2024,
-            price: this.carcardForedit?.carPrice || 0,
-            serie: this.carcardForedit?.carSeries || '',
-            color: this.carcardForedit?.carColor || '',
-            gearBox: this.carcardForedit?.gearBox.toLowerCase() || 'GearBox',
-            details: this.carcardForedit?.carDetails.toLowerCase() || '',
-            wheel: this.carcardForedit?.wheel.toLowerCase() || 'Wheel',
-          });
-          this.saveCarImageUrl = card.carImg;
-          this.isLoadingOnEdit = false;
-        });
-    }
+  // Get Filters
+  getFilters() {
+    this.isLoading = true;
+    this.filterService.getFilters().subscribe((filters) => {
+      this.carList = filters;
+
+      this.carList[0]?.carCategory.sort();
+      this.carList[0]?.carModel.sort();
+
+      this.isLoading = false;
+    });
   }
+
   /*=========================*/
   /*====IMAGE TO FIREBASE====*/
   /*=========================*/
@@ -233,6 +236,8 @@ export class AddCardComponent {
   }
 
   async compressAndUpload(file: File) {
+    this.isImageCompressing = true;
+
     const reader = new FileReader();
 
     reader.onload = async (event: any) => {
@@ -248,9 +253,9 @@ export class AddCardComponent {
 
       // Convert base64 compressed image to Blob
       const blob = this.dataURItoBlob(compressedImage);
-      this.isImageCompressing = false;
       // Uploading Compressed Image
       await this.uploadImage(blob, file.name);
+      this.isImageCompressing = false;
     };
 
     reader.readAsDataURL(file);
@@ -273,7 +278,7 @@ export class AddCardComponent {
 
   async uploadImage(file: Blob, fileName: string) {
     // Upload the file to Firebase or perform other actions
-
+    this.isImageUploading = true;
     const path = `carImages/${fileName}`;
     const uploadTask = this.fireStorage.upload(path, file);
     uploadTask.then(async (res) => {
@@ -283,9 +288,11 @@ export class AddCardComponent {
     });
     uploadTask.percentageChanges().subscribe((percentage) => {
       this.imageUploadProgressBar = percentage || 0;
+
       if (this.imageUploadProgressBar === 100) {
         setTimeout(() => {
           this.imageUploadProgressBar = 0;
+          this.isImageUploading = false;
         }, 1500);
       }
     });

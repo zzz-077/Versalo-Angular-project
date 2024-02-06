@@ -219,16 +219,40 @@
             <label class="label">Photo</label>
             <div class="image_display_box">
               <img [src]="saveCarImageUrl || '/assets/no-image.svg'" alt="" />
-              <mat-progress-bar
-                *ngIf="imageUploadProgressBar || isImageCompressing"
-                [mode]="
-                  imageUploadProgressBar ? 'determinate' : 'indeterminate'
+              <div
+                [ngClass]="
+                  isImageUploading || isImageCompressing
+                    ? 'mat-spinner-container uploading'
+                    : 'mat-spinner-container'
                 "
-                [value]="imageUploadProgressBar"
-              ></mat-progress-bar>
+              >
+                <mat-spinner
+                  *ngIf="isImageUploading || isImageCompressing"
+                  [mode]="
+                    isImageCompressing
+                      ? 'indeterminate'
+                      : isImageUploading
+                      ? 'determinate'
+                      : 'indeterminate'
+                  "
+                  [value]="imageUploadProgressBar"
+                  class="mat-spinner"
+                  diameter="65"
+                ></mat-spinner>
+                <p
+                  *ngIf="isImageCompressing || isImageUploading"
+                  class="percentage"
+                >
+                  {{ imageUploadProgressBar + "%" }}
+                </p>
+              </div>
             </div>
 
-            <input type="file" (change)="onFileChange($event)" />
+            <input
+              type="file"
+              (change)="onFileChange($event)"
+              accept="image/png, image/gif, image/jpeg,  image/jpg, image/webp"
+            />
           </div>
         </div>
         <div class="profile_btns_box">

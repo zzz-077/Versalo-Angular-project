@@ -215,6 +215,14 @@ input[type="file"]::file-selector-button:hover {
 
   html,
   body {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  html,
+  body {
     font-size: 15px;
   }
 }

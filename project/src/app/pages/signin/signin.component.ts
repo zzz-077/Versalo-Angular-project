@@ -1,16 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { userInterface } from '../../shared/services/data-service/registerInterface';
-import { DataService } from '../../shared/services/data-service/data.service';
-import { Router } from '@angular/router';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
-import { LocalStorageService } from '../../shared/services/local-storage-service/local-storage.service';
-import { UserService } from '../../shared/services/user-service/user.service';
+import { Component } from '@angular/core';
+import { userInterface } from '../../shared/interfaces/registerInterface';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth-service/auth.service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage-service/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -22,14 +15,11 @@ export class SigninComponent {
   hasErrors: string | boolean = false;
 
   constructor(
-    private router: Router,
-    private services: DataService,
     private authService: AuthService,
     private localStorageService: LocalStorageService,
-    private userService: UserService
+    private router: Router
   ) {}
   user: userInterface[] = [];
-  // checkIfExists = true;
 
   //
   /*===================*/
@@ -41,45 +31,12 @@ export class SigninComponent {
   });
 
   ngOnInit() {
-    this.services.getuserData().subscribe((userList) => {
-      if (Array.isArray(userList)) {
-        this.user = userList;
-      }
-    });
+    const isLogged = this.localStorageService.getIsLogged();
+    if (isLogged) {
+      this.router.navigate(['']);
+    }
   }
-  // onSignin() {
-  //   let foundError = false;
-  //   if (Array.isArray(this.user)) {
-  //     for (let i = 0; i < this.user.length; i++) {
-  //       if (
-  //         this.user[i].userEmail == this.signinForm.value.email &&
-  //         this.user[i].userPassword == this.signinForm.value.password
-  //       ) {
-  //         foundError = true;
-  //         this.userService.setLoggedInUser(this.user[i]);
-  //         break;
-  //       } else {
-  //         foundError = false;
-  //       }
-  //     }
-  //     this.checkIfExists = foundError;
-  //     setTimeout(() => {
-  //       this.checkIfExists = true;
-  //     }, 3000);
 
-  //     if (this.checkIfExists == true) {
-  //       this.localStorageService.setIsLogged(true);
-  //       const intendedRoute = this.localStorageService.getIntendedRoute();
-  //       if (intendedRoute) {
-  //         this.localStorageService.clearIntendedRoute();
-  //         this.router.navigate([intendedRoute]);
-  //       } else {
-  //         // If no intended route, navigate to the default route
-  //         this.router.navigate(['/']);
-  //       }
-  //     }
-  //   }
-  // }
   onSignIn() {
     const { email, password } = this.signinForm.value;
     if (this.signinForm.valid && email && password) {
@@ -88,6 +45,8 @@ export class SigninComponent {
         .login(email, password)
         .then(() => {})
         .catch((error) => {
+          localStorage.removeItem('jwt');
+          console.log(error);
           this.hasErrors = error.message.replace('Firebase:', '').split('.')[0];
         })
         .finally(() => {

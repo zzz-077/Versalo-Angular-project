@@ -77,16 +77,19 @@ nav.inactivenavbar {
   display: flex;
   height: 0;
   opacity: 0;
-  padding: 0.25rem 1rem;
   transform: translateY(-300px);
   transition: all 0.3s;
+  padding: 2rem 0;
+  z-index: -1;
 }
 
 .responsive_navbar.active {
   transform: translateY(0);
   opacity: 1;
   height: auto;
-  transition: all 0.8s;
+  transition: all 0.3s;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .navbar_menu {
@@ -116,7 +119,7 @@ nav.inactivenavbar {
 }
 
 .responsive_bottom_col .sign-btns .btn {
-  border-radius: 0;
+  border-radius: 0.5rem;
   border: 1px solid #cecccc00;
 }
 
@@ -146,12 +149,12 @@ nav.inactivenavbar {
   display: flex;
   flex-direction: column;
   width: 100%;
-  text-align: right;
+  text-align: center;
   gap: 0.5rem;
 }
 
 .responsive_navbar ul .sign-btns {
-  justify-content: right;
+  justify-content: center;
 }
 
 .navbar ul li .nav-link .user,
@@ -248,6 +251,18 @@ nav.inactivenavbar {
 .navbar ul li.sign-btns a.btn:hover::before,
 .responsive_navbar ul li.sign-btns a.btn:hover::before {
   width: 100%;
+}
+
+.responsive_navbar ul li {
+  width: 100%;
+}
+
+.responsive_navbar ul li a.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .navbar ul li .nav-link,

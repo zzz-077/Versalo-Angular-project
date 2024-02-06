@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, QueryFn } from '@angular/fire/compat/firestore';
-import { userInterface } from '../data-service/registerInterface';
+import { userInterface } from '../../interfaces/registerInterface';
 import { Observable, map } from 'rxjs';
+import { LocalStorageService } from '../local-storage-service/local-storage.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,26 +12,28 @@ export class AuthService {
   constructor(
     private fireAuth: AngularFireAuth,
     private fireStore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private localStorageService: LocalStorageService
   ) {}
 
   async login(email: string, password: string) {
-    return this.fireAuth
+    return await this.fireAuth
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        localStorage.setItem('jwt', 'true');
+        this.localStorageService.setIsLogged(true);
         if (userCredential.user?.emailVerified == true) {
-          this.router.navigate(['']);
+          const savedRoute = this.localStorageService.getIntendedRoute();
+          if (savedRoute) {
+            this.router.navigate([savedRoute]);
+          } else {
+            this.router.navigate(['']);
+          }
         } else {
           if (userCredential && userCredential.user) {
             this.sendEmailForVarification(userCredential.user);
             this.router.navigate(['/verify-email']);
           }
         }
-      })
-      .catch((error) => {
-        localStorage.setItem('jwt', 'false');
-        this.router.navigate(['/']);
       });
   }
 
@@ -87,6 +90,7 @@ export class AuthService {
   // Get Current User
   getCurrentUser() {
     return this.fireAuth.authState;
+    // return this.fireAuth.currentUser;
   }
 
   // Get Current User Full Information
@@ -108,20 +112,32 @@ export class AuthService {
       );
   }
 
+  // Check if user is sign in
+  isUserSignedIn(): boolean {
+    return !!this.fireAuth.currentUser;
+  }
+
+  // Get User By Id
   getUserById(id: string) {
     return this.fireStore.collection('/users').doc<userInterface>(id).get();
   }
 
   // Sign Out Method
-  signOut() {
-    this.fireAuth.signOut().then(
-      () => {
-        localStorage.removeItem('jwt');
+  async signOut(): Promise<void> {
+    try {
+      await this.fireAuth.signOut();
+      localStorage.removeItem('jwt');
+      this.localStorageService.setIsLogged(false);
+      this.localStorageService.clearIntendedRoute();
+      this.router.navigate(['/signin']).then(() => {
+        window.location.reload();
         this.router.navigate(['/signin']);
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
+      });
+      // Optionally, set the user as not logged in after sign-out
+      // this.isLogged = false;
+      // localStorage.removeItem('jwt');
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
   }
 }

@@ -179,7 +179,11 @@
           class="profile_info_btn_col1"
           [ngClass]="infoEdit_btnCheck ? 'active' : null"
         >
-          <button (click)="infoEditBtn()" class="prf_info_edit_btn">
+          <button
+            type="button"
+            (click)="infoEditBtn()"
+            class="prf_info_edit_btn"
+          >
             {{ "Profile_pg_t7" | translate }}
           </button>
         </div>
@@ -195,7 +199,11 @@
           >
             {{ "Profile_pg_t10" | translate }}
           </button>
-          <button (click)="infoCancelBtn()" class="prf_info_cancel_btn">
+          <button
+            type="button"
+            (click)="infoCancelBtn()"
+            class="prf_info_cancel_btn"
+          >
             {{ "Profile_pg_t11" | translate }}
           </button>
         </div>
@@ -265,13 +273,13 @@
   </div>
   <div class="profile_bottom_content">
     <div class="car_create_box">
-      <div class="prf_card_btns_col1">
+      <div *ngIf="'Profile_pg_t7' | translate" class="prf_card_btns_col1">
         <button (click)="cardAddBtn()" class="prf_card_create_btn">
           {{ "Profile_pg_t8" | translate }}
         </button>
       </div>
       <div class="prf_card_btns_col2">
-        <div class="prf_edit_col">
+        <div *ngIf="'Profile_pg_t7' | translate" class="prf_edit_col">
           <button
             [disabled]="CardSelectedArray.length !== 1"
             class="prf_cards_edit_btn"
@@ -323,26 +331,26 @@
 </div>
 
 <div
-  *ngIf="CardsAdd_btnCheck"
+  *ngIf="CardsAdd_btnCheck && user && user.id"
   [ngClass]="!CardsAdd_btnCheck ? 'hide' : null"
   class="overlay-container"
 >
   <app-add-card
     [IsCardsAdd]="CardsAdd_btnCheck"
-    [id]="id"
+    [id]="user.id"
     (cancel)="closeAddCardOverlay()"
   ></app-add-card>
 </div>
 
 <div
-  *ngIf="CardsEdit_btnCheck"
+  *ngIf="CardsEdit_btnCheck && user && user.id"
   [ngClass]="!CardsEdit_btnCheck ? 'hide' : null"
   class="overlay-container"
 >
   <app-add-card
     [IsCardsEdit]="CardsEdit_btnCheck"
     [SelectedCarIdForEdit]="CardSelectedArray"
-    [id]="id"
+    [id]="user.id"
     (cancel)="closeAddCardOverlay()"
   ></app-add-card>
 </div>
@@ -357,7 +365,12 @@
       <p>{{ "card_Delete_pg_t2" | translate }}</p>
       <div class="delete_popUp_btns">
         <button (click)="popUpDelete()" class="popUp_deleteBtn">
-          {{ "Profile_pg_t9" | translate }}
+          <span *ngIf="isLoadingCars">
+            <mat-spinner class="spinner" diameter="25"> </mat-spinner>
+          </span>
+          <span *ngIf="!isLoadingCars">
+            {{ "Profile_pg_t9" | translate }}
+          </span>
         </button>
         <button (click)="popUpCancel()" class="popUp_cancelBtn">
           {{ "Profile_pg_t11" | translate }}

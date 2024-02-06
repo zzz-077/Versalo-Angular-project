@@ -97,16 +97,22 @@ export class AppComponent {
   }
 
   signIn() {
-    this.navbarBtnClick();
+    if (this.isNavBarDroped) {
+      this.navbarBtnClick();
+    }
     this.router.navigate(['/signin']);
   }
   signUp() {
-    this.navbarBtnClick();
+    if (this.isNavBarDroped) {
+      this.navbarBtnClick();
+    }
     this.router.navigate(['/signup']);
   }
   logOut() {
     // this.localStorageService.setIsLogged(false);
-    this.navbarBtnClick();
+    if (this.isNavBarDroped) {
+      this.navbarBtnClick();
+    }
     this.authService
       .signOut()
       .then(() => {

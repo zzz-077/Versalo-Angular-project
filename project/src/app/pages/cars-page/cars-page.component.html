@@ -32,6 +32,7 @@
       </div>
       <div class="from_to">
         <select (click)="choosePrice()" formControlName="priceFrom">
+          <div class="arrow"></div>
           <option value="priceFrom" selected>Price From</option>
           <option
             *ngFor="let price of carList[0]?.carPrice"

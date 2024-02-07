@@ -47,28 +47,6 @@ export class CarsPageComponent {
   ngOnInit() {
     this.getFilters();
 
-    // this.services.getCarComponentsData().subscribe((items) => {
-    //   if (Array.isArray(items)) {
-    //     this.carList = items;
-
-    //     this.carList[0]?.carCategory.sort();
-    //     this.carList[0]?.carModel.sort();
-
-    //     this.priceToArr = this.carList[0]?.carPrice;
-    //     this.yearToArr = this.carList[0]?.carYear;
-    //   }
-    // });
-
-    // this.isLoading = true;
-    // this.services.getCarCardsData().subscribe((item) => {
-    //   if (Array.isArray(item)) {
-    //     this.saveCarCards = item;
-    //     this.carCards = item; // Initialize carCards with all car cards initially
-    //     this.isLoading = false;
-    //   }
-    //   this.isLoading = false;
-    // });
-
     this.isLoading = true;
     this.carsService.getCarCollection().subscribe({
       next: (cars) => {

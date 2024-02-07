@@ -214,6 +214,38 @@ mat-error {
 }
 
 
+form select {
+  all: unset;
+  position: relative;
+  padding: 0.65rem 0.8rem;
+  font-size: 1rem;
+  border: none;
+  background: whitesmoke;
+  color: var(--navbar_links__color);
+  border-radius: 0.35rem;
+  width: 100%;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: 0.125s 0s ease-in-out;
+}
+
+
+form select:hover {
+  filter: brightness(0.9);
+}
+
+form select option:first-child {
+  color: black;
+  font-weight: 600;
+}
+
+form select option {
+  height: 20px;
+  text-transform: capitalize;
+}
+
+
 
 
 @media (max-width: 768px) {

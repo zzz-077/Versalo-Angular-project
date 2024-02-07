@@ -216,7 +216,7 @@ export class AddCardComponent {
       }
       if (this.oldSavedCarImageName !== file.name) {
         const width = await this.getImageWidth(file);
-        if (width > 2000) {
+        if (width > 1300) {
           // Resize and Upload the image
           await this.compressAndUpload(file);
         } else {
@@ -246,9 +246,9 @@ export class AddCardComponent {
         event.target.result,
         1, // Orientation
         50, // Ratio
-        90, // Quality
-        2000, //maxWidth
-        2000 //maxHeight
+        75, // Quality
+        1000, //maxWidth
+        1000 //maxHeight
       );
 
       // Convert base64 compressed image to Blob

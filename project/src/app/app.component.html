@@ -12,7 +12,7 @@
       <ul>
         <li>
           <a
-            class="nav-link"
+            class="button"
             (click)="uploadLink()"
             routerLinkActive="activeLink"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -154,11 +154,34 @@
             </div>
           </a>
         </li>
-        <mat-icon (click)="navbarBtnClick()">menu</mat-icon>
+        <li>
+          <a
+            class="nav-link"
+            (click)="uploadLink()"
+            routerLinkActive="activeLink"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <div class="add-btn">
+              <mat-icon>add_circle</mat-icon>
+            </div>
+          </a>
+        </li>
+        <mat-icon class="menu-icon" (click)="navbarBtnClick()">menu</mat-icon>
       </div>
     </div>
     <div [ngClass]="isNavBarDroped ? 'active' : null" class="responsive_navbar">
       <ul>
+        <li>
+          <mat-select
+            [(ngModel)]="lang"
+            (ngModelChange)="selectedLang($event)"
+            name="language"
+            class="select-lang"
+          >
+            <mat-option style="font-size: 0.9rem" value="en">Eng</mat-option>
+            <mat-option style="font-size: 0.9rem" value="ge">ქარ</mat-option>
+          </mat-select>
+        </li>
         <li>
           <a
             class="nav-link"
@@ -212,17 +235,6 @@
             <a *ngIf="isLogged" class="btn" (click)="logOut()">{{
               "Sign_out" | translate
             }}</a>
-          </li>
-          <li>
-            <mat-select
-              [(ngModel)]="lang"
-              (ngModelChange)="selectedLang($event)"
-              name="language"
-              class="select-lang"
-            >
-              <mat-option value="en">Eng</mat-option>
-              <mat-option value="ge">ქარ</mat-option>
-            </mat-select>
           </li>
         </div>
       </ul>

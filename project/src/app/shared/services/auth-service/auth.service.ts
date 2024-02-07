@@ -82,6 +82,13 @@ export class AuthService {
     );
   }
 
+  // Forgot Password Recovery
+  async forgotPassword(email: string) {
+    return this.fireAuth.sendPasswordResetEmail(email).then(() => {
+      this.router.navigate(['/verify-email']);
+    });
+  }
+
   // Update User Info
   updateUser(id: string, updateUser: userInterface) {
     return this.fireStore.collection('/users').doc(id).update(updateUser);

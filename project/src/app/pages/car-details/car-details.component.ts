@@ -31,11 +31,10 @@ export class CarDetailsComponent {
       }
     });
 
-    // this.services
-    //   .getCarDetailsById(this.carId)
     if (this.carId) {
       this.carsService.getCarById(this.carId.toString()).subscribe((res) => {
         this.carDetails = res.data() as carCardInterface;
+
         if (this.carDetails.userId) {
           this.authService
             .getUserById(this.carDetails.userId)

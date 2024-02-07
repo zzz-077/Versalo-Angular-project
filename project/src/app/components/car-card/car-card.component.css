@@ -140,7 +140,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 700px) {
   .car-card {
     display: flex;
     flex-direction: column;
@@ -152,12 +152,14 @@
 
   .card-image {
     width: 100%;
-    height: 180px;
+    height: 40%;
+    max-height: 200px;
     margin-bottom: 1rem;
   }
 
   .card-content {
     padding-left: 0;
+    height: 100%;
   }
 
   .car-name {
@@ -168,16 +170,6 @@
   }
 
 
-
-  .specifications .spec {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.4em;
-    font-size: 0.9em;
-    text-transform: capitalize;
-    filter: grayscale(1) opacity(0.75);
-  }
 
   .specifications .spec:nth-child(2),
   .specifications .spec:nth-child(4) {
@@ -198,4 +190,14 @@
   .cards_content {
     width: 100%;
   }
+
+  .specifications {
+    box-sizing: border-box;
+    height: fit-content;
+
+  }
+
+
+
+
 }

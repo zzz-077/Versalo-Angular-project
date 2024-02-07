@@ -17,8 +17,9 @@ export class CarsService {
 
   // Get Aall Cars
   getCarCollection() {
+    const queryFn: QueryFn = (ref) => ref.orderBy('createdAt', 'desc');
     return this.fireStore
-      .collection('/Cars')
+      .collection('/Cars', queryFn)
       .snapshotChanges()
       .pipe(
         map((actions) => {
@@ -46,7 +47,7 @@ export class CarsService {
           }
         }
       }
-      return query;
+      return query.orderBy('createdAt', 'desc');
     };
     return this.fireStore
       .collection('/Cars', queryFn)
@@ -63,7 +64,8 @@ export class CarsService {
   }
 
   getCarCollectionByUserId(id: string) {
-    const queryFn: QueryFn = (ref) => ref.where('userId', '==', id);
+    const queryFn: QueryFn = (ref) =>
+      ref.where('userId', '==', id).orderBy('createdAt', 'desc');
 
     return this.fireStore
       .collection('/Cars', queryFn)
@@ -86,15 +88,15 @@ export class CarsService {
 
   // Add New Car
   async addNewCar(newCar: carCardInterface) {
-    return await this.fireStore.collection('/Cars').add(newCar);
+    const modifyCar = { ...newCar, createdAt: new Date(), updatedAt: null };
+    return await this.fireStore.collection('/Cars').add(modifyCar);
   }
 
   // Update Car
   async updateCar(carId: string, updatedCar: carCardInterface) {
-    return await this.fireStore
-      .collection('Cars')
-      .doc(carId)
-      .update(updatedCar);
+    const modifyCar = { ...updatedCar, updatedAt: new Date() };
+
+    return await this.fireStore.collection('Cars').doc(carId).update(modifyCar);
   }
 
   // Delete Cars By IDs

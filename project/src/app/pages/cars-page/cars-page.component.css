@@ -27,16 +27,21 @@
 }
 
 form select {
+  all: unset;
+  position: relative;
   padding: 0.65rem 0.8rem;
   font-size: 1rem;
   border: none;
   background: whitesmoke;
+  color: var(--navbar_links__color);
   border-radius: 0.35rem;
   width: 100%;
   outline: none;
+  box-sizing: border-box;
   cursor: pointer;
   transition: 0.125s 0s ease-in-out;
 }
+
 
 form select:hover {
   filter: brightness(0.9);
@@ -44,7 +49,7 @@ form select:hover {
 
 form select option:first-child {
   color: black;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 form select option {
@@ -154,10 +159,12 @@ form select option {
   .cars_container {
     margin: 1rem 0;
   }
+
   .filter_content,
   .cards_content {
     width: 100%;
   }
+
   .filter_content form {
     display: grid;
     grid-template-columns: auto;
@@ -183,11 +190,13 @@ form select option {
     transition: 0.125s 0s ease-in-out;
   }
 }
+
 @media (max-width: 425px) {
   .cars_container {
     margin: 1rem 0;
     padding: 0 1rem;
   }
+
   .filter_content,
   .cards_content {
     width: 100%;

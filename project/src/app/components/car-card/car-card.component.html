@@ -9,9 +9,10 @@
     class="card-image"
   >
     <img
-      ngSrc="{{ carObj.carImg || '/assets/no-image.svg' }}"
+      src="{{ carObj.carImg || '/assets/no-image.svg' }}"
+      onerror="this.src='/assets/no-image.svg'"
       fill
-      loading="eager"
+      loading="lazy"
     />
   </a>
   <div class="card-content">

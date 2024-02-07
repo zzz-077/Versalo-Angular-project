@@ -1,3 +1,5 @@
+import { Timestamp } from '@angular/fire/firestore';
+
 export interface userInterface {
   id?: string;
   userName: string;
@@ -27,5 +29,7 @@ export interface carCardInterface {
   gearBox: string;
   carDetails: string;
   wheel: string;
+  createdAt?: Timestamp;
+  updatedAt?: Timestamp | null;
   selected: boolean;
 }

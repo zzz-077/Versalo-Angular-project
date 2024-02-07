@@ -15,10 +15,11 @@
         {{ carDetails.carPrice | currency : "USD" }}
       </span>
     </h2>
-    <div class="car-image">
+    <div class="car-image s">
       <img
-        [src]="carDetails.carImg"
-        [alt]="carDetails.carModel + ' ' + carDetails.carSeries"
+        src="{{ carDetails.carImg || '/assets/no-image.svg' }}"
+        onerror="this.src='/assets/no-image.svg'"
+        alt=""
       />
     </div>
   </div>
@@ -32,6 +33,12 @@
           user ? user.userName + " " + user.userLastName : "Anonimous"
         }}</span>
         <span class="user-email">{{ user.userEmail || "-" }}</span>
+      </div>
+      <div *ngIf="carDetails.createdAt" class="publish-date">
+        <!-- <span>Published:</span> -->
+        <span class="date">
+          {{ carDetails.createdAt.seconds * 1000 | date }}
+        </span>
       </div>
       <div *ngIf="!user" class="user-details">
         <mat-spinner diameter="25" class="spinner"></mat-spinner>

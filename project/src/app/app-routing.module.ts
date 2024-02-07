@@ -11,6 +11,7 @@ import { MyProfilePageComponent } from './pages/my-profile-page/my-profile-page.
 import { CarsPageComponent } from './pages/cars-page/cars-page.component';
 import { CarDetailsComponent } from './pages/car-details/car-details.component';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 /*  End  Imported Components */
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'profile', component: MyProfilePageComponent },
   { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'signup', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'signin', component: SigninComponent },
   { path: '**', component: NotFoundComponent },
 ];

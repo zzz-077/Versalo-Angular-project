@@ -17,24 +17,26 @@ nav {
 }
 
 nav.active {
-  animation: respNavbarAnimation 0.2s linear;
+  animation: respNavbarAnimation 0.18s ease-out;
 }
 
 nav.inactivenavbar {
-  animation: respNavbarAnimationInactive 0.2s linear;
+  animation: respNavbarAnimationInactive 0.3s linear;
   height: 58px;
 }
 
-
-
 .select-lang {
+  margin-left: auto;
   width: fit-content;
-  min-width: 90px;
+  min-width: 80px;
   max-width: 100px;
   background-color: var(--main_BGcolor);
   padding: 0.5rem 1rem;
   border-radius: 0.4rem;
+  font-size: 0.9rem;
+
 }
+
 
 
 :host ::ng-deep .spinner.mat-mdc-progress-spinner {
@@ -64,6 +66,34 @@ nav.inactivenavbar {
   }
 }
 
+@keyframes respMenuAnimation {
+  from {
+    opacity: 0;
+    filter: opacity(0);
+    transform: translateY(-40%);
+  }
+
+  to {
+    opacity: 1;
+    filter: opacity(1);
+    transform: translateY(0);
+  }
+}
+
+@keyframes respMenuAnimationInactive {
+  from {
+    opacity: 1;
+    filter: opacity(1);
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    filter: opacity(0);
+    transform: translateY(-100%);
+  }
+}
+
 .navbar {
   max-width: 1440px;
   display: flex;
@@ -75,21 +105,25 @@ nav.inactivenavbar {
 
 .responsive_navbar {
   display: flex;
-  height: 0;
+  height: auto;
   opacity: 0;
-  transform: translateY(-300px);
-  transition: all 0.3s;
+  visibility: hidden;
+  transition: all 0s;
   padding: 2rem 0;
   z-index: -1;
+
+  /* animation: respMenuAnimationInactive 0.1s 0 linear; */
 }
 
+
 .responsive_navbar.active {
-  transform: translateY(0);
+  visibility: visible;
   opacity: 1;
   height: auto;
-  transition: all 0.3s;
+  transition: all 0.25s linear;
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0 0 0.5rem 0.5rem;
+  /* animation: respMenuAnimation 0.2s 0 linear; */
 }
 
 .navbar_menu {
@@ -100,7 +134,7 @@ nav.inactivenavbar {
   gap: 0.5rem;
 }
 
-.navbar_menu .responsive_user_li {
+.navbar_menu li {
   list-style: none;
 }
 
@@ -150,7 +184,7 @@ nav.inactivenavbar {
   flex-direction: column;
   width: 100%;
   text-align: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .responsive_navbar ul .sign-btns {
@@ -209,7 +243,7 @@ nav.inactivenavbar {
 .navbar ul li .nav-link .user .user-img img,
 .responsive_navbar ul li .nav-link .user .user-img img,
 .responsive_user_li .nav-link .user .user-img img {
-  width: 30px;
+  width: 35px;
   aspect-ratio: 1/1;
   object-fit: cover;
 }
@@ -319,7 +353,8 @@ nav.inactivenavbar {
 }
 
 .navbar ul li .add-btn,
-.responsive_navbar ul li .add-btn {
+.navbar_menu .add-btn,
+.responsive_navbar .add-btn {
   all: unset;
   font-size: 0.95rem;
   display: flex;
@@ -332,30 +367,49 @@ nav.inactivenavbar {
   color: var(--sign_BGcolor);
   filter: hue-rotate(-5deg);
   transition: 0.15s linear;
+  cursor: pointer;
+}
+
+.navbar_menu .add-btn {
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.4rem;
 }
 
 .navbar ul li .add-btn .mat-icon,
-.responsive_navbar ul li .mat-icon {
+.responsive_navbar .mat-icon {
   transform: scale(0.9);
 }
 
+.navbar_menu .add-btn .mat-icon {
+  transform: scale(0.8);
+}
+
+.navbar_menu .add-btn {
+  width: fit-content;
+  height: fit-content;
+
+}
+
+
 .navbar ul li .add-btn:hover,
-.responsive_navbar ul li .add-btn:hover {
+.navbar_menu .add-btn:hover,
+.responsive_navbar .add-btn:hover {
   filter: brightness(1.02);
 }
 
 .navbar ul li .add-btn:active,
-.responsive_navbar ul li .add-btn:active {
+.navbar_menu .add-btn:active,
+.responsive_navbar .add-btn:active {
   transform: scale(0.97);
 }
 
 .navbar ul li .nav-link.activeLink .user .user-name,
-.responsive_navbar ul li .nav-link.activeLink .user .user-name {
+.responsive_navbar .nav-link.activeLink .user .user-name {
   position: relative;
 }
 
 .navbar ul li .nav-link.activeLink .user::before,
-.responsive_navbar ul li .nav-link.activeLink .user::before {
+.responsive_navbar .nav-link.activeLink .user::before {
   content: "";
   position: absolute;
   top: 100%;
@@ -367,7 +421,7 @@ nav.inactivenavbar {
 }
 
 .navbar ul li select,
-.responsive_navbar ul li select {
+.responsive_navbar li select {
   padding: 0.05rem 0.125rem;
   outline: none;
   border: 1px solid var(--sign_btn_color);
@@ -426,6 +480,14 @@ main {
 @media (max-width: 880px) {
   .navbar ul {
     display: none;
+  }
+
+  .menu-icon {
+    transform: scale(1.25);
+    background: var(--main_BGcolor);
+    border-radius: 0.125rem;
+    margin-left: 0.5rem;
+
   }
 
   .navbar_menu {

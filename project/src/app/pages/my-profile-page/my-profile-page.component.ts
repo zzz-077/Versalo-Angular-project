@@ -192,11 +192,12 @@ export class MyProfilePageComponent {
         console.log(error);
       })
       .finally(() => {
+        this.CardClickCheck = false;
         this.isLoadingCars = false;
+        this.CardSelectedArray = [];
       });
 
     // Clear Selected Array after deleting
-    this.CardSelectedArray = [];
   }
   cardSelect(card: carCardInterface) {
     card.selected = !card.selected;

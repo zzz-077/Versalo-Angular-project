@@ -40,6 +40,7 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
     CarDetailsComponent,
     AddCardComponent,
     VerifyEmailComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

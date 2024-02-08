@@ -19,7 +19,8 @@ export class CarsPageComponent {
   priceToArr: number[] = [];
   yearToArr: number[] = [];
   isLoading: boolean = false;
-  skletonArray: number[] = new Array(10).fill(0);
+  skletonArray: number[] = new Array(3).fill(0);
+  hasFieldsValue: boolean = false;
 
   constructor(
     private carsService: CarsService,
@@ -32,26 +33,29 @@ export class CarsPageComponent {
   /*====CAR FILTER FORMGROUP====*/
   /*============================*/
   carForm = new FormGroup({
-    Model: new FormControl('carModel'),
-    category: new FormControl('carCategory'),
-    yearFrom: new FormControl('yearFrom'),
-    yearTo: new FormControl('yearTo'),
-    priceFrom: new FormControl('priceFrom'),
-    priceTo: new FormControl('priceTo'),
-    gearBox: new FormControl('gearBox'),
+    Model: new FormControl(''),
+    category: new FormControl(''),
+    yearFrom: new FormControl(''),
+    yearTo: new FormControl(''),
+    priceFrom: new FormControl(''),
+    priceTo: new FormControl(''),
+    gearBox: new FormControl(''),
   });
 
   /*========================*/
   /*====GETTING CAR DATA====*/
   /*========================*/
   ngOnInit() {
-    this.getFilters();
+    this.carFormOnChange();
 
     this.isLoading = true;
     this.carsService.getCarCollection().subscribe({
       next: (cars) => {
         this.saveCarCards = cars;
         this.carCards = cars; // Initialize carCards with all car cards initially
+        this.isLoading = false;
+      },
+      error: (error) => {
         this.isLoading = false;
       },
       complete: () => {
@@ -77,9 +81,8 @@ export class CarsPageComponent {
     );
 
     // this.services.searchData(filters).subscribe((filteredData) => {
-    this.carsService
-      .getCarCollectionByFilter(filters)
-      .subscribe((filteredData) => {
+    this.carsService.getCarCollectionByFilter(filters).subscribe({
+      next: (filteredData) => {
         if (filters?.yearFrom || filters?.yearTo) {
           const yearFrom = filters.yearFrom || Number.MIN_SAFE_INTEGER;
           const yearTo = filters.yearTo || Number.MAX_SAFE_INTEGER;
@@ -96,20 +99,56 @@ export class CarsPageComponent {
         }
         this.carCards = filteredData;
         this.isLoading = false;
-      });
+      },
+      error: (error) => {
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  carFormOnChange() {
+    this.carForm.valueChanges.subscribe((res) => {
+      const { Model, category, gearBox, priceFrom, priceTo, yearFrom, yearTo } =
+        res;
+
+      if (!!res.priceFrom) {
+        this.choosePrice();
+      }
+      if (!!res.yearFrom) {
+        this.chooseYear();
+      }
+
+      if (
+        Model ||
+        category ||
+        gearBox ||
+        priceFrom ||
+        priceTo ||
+        yearFrom ||
+        yearTo
+      ) {
+        this.hasFieldsValue = true;
+      } else if (
+        !Model &&
+        !category &&
+        !gearBox &&
+        !priceFrom &&
+        !priceTo &&
+        !yearFrom &&
+        !yearTo
+      ) {
+        this.hasFieldsValue = false;
+      }
+    });
   }
 
   clearFilter() {
     this.isLoading = true;
-    this.carForm = new FormGroup({
-      Model: new FormControl('carModel'),
-      category: new FormControl('carCategory'),
-      yearFrom: new FormControl('yearFrom'),
-      yearTo: new FormControl('yearTo'),
-      priceFrom: new FormControl('priceFrom'),
-      priceTo: new FormControl('priceTo'),
-      gearBox: new FormControl('gearBox'),
-    });
+
+    this.carForm.reset();
     this.carCards = this.saveCarCards;
     this.isLoading = false;
   }
@@ -117,7 +156,6 @@ export class CarsPageComponent {
   choosePrice() {
     const filters: any = this.carForm.value;
     if (Number(filters.priceFrom)) {
-      console.log(this.carList);
       this.priceToArr = this.carList[0]?.carPrice.filter(
         (price) => price >= filters.priceFrom
       );

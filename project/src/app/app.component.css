@@ -484,10 +484,31 @@ main {
 
   .menu-icon {
     transform: scale(1.25);
-    background: var(--main_BGcolor);
-    border-radius: 0.125rem;
+    /* background: var(--main_BGcolor); */
+    /* filter: brightness(0.9); */
+    border-radius: 0.25rem;
     margin-left: 0.5rem;
+    transition: 0.125s 0.1s ease;
+  }
 
+  .menu-icon:hover,
+  .menu-icon:active {
+    transform: scale(1.1);
+  }
+
+  .menu-icon.active {
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    /*  */
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    filter: saturate(0.7);
   }
 
   .navbar_menu {

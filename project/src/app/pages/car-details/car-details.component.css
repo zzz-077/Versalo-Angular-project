@@ -17,7 +17,7 @@
 .car-details .car-header {
     width: 100%;
     position: absolute;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 600;
     text-transform: capitalize;
     bottom: 100%;
@@ -27,7 +27,8 @@
 }
 
 .car-details .car-header .car-year {
-    margin-left: 0.7em;
+    margin-left: 0.3em;
+    font-weight: 500;
     filter: opacity(0.6);
 }
 
@@ -228,4 +229,21 @@
     .car-details {
         font-size: 0.93rem;
     }
+
+    .car-details .car-header {
+        font-size: 1.2em;
+    }
+
+}
+
+@media (max-width: 410px) {
+
+    .car-details {
+        font-size: 1rem;
+    }
+
+    .car-details .car-header {
+        font-size: 1.2em;
+    }
+
 }

@@ -43,11 +43,8 @@ export class AppComponent {
     this.translate.use(this.lang);
 
     this.localStorageService.isLogged$.subscribe((value) => {
-      console.log('IsLogged:', value);
-
       this.isLogged = value;
     });
-    // if (this.isLogged) {
     this.isLoading = true;
     this.authService.getCurrentUser().subscribe({
       next: (currentUser: any) => {
@@ -80,8 +77,15 @@ export class AppComponent {
         this.isLoading = false;
       },
     });
-    // }
   }
+
+  goToHome() {
+    if (this.isNavBarDroped) {
+      this.navbarBtnClick();
+    }
+    this.router.navigate(['/']);
+  }
+
   navbarBtnClick() {
     this.isNavBarDroped = !this.isNavBarDroped;
   }

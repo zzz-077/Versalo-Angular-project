@@ -29,5 +29,13 @@
   "Profile_pg_t12": "Submit",
 
   "card_Delete_pg_t1": "Delete Card",
-  "card_Delete_pg_t2": "Are you sure you want to delete this?"
+  "card_Delete_pg_t2": "Are you sure you want to delete this?",
+
+  "manufacturer": "Manufacturer",
+  "category": "Category",
+  "year_from": "Year -from",
+  "year_to": "Year -to",
+  "price_from": "price -from",
+  "price_to": "price -to",
+  "gear_box": "Gear box"
 }

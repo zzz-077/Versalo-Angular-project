@@ -1,85 +1,97 @@
 <div class="cars_container">
   <div class="filter_content">
     <form [formGroup]="carForm">
-      <select value="Carmodel" formControlName="Model">
-        <option value="carModel" selected>Car Manufacturer</option>
-        <option *ngFor="let model of carList[0]?.carModel" [ngValue]="model">
-          {{ model }}
-        </option>
-      </select>
-      <select formControlName="category">
-        <option value="carCategory" selected>Car Category</option>
-        <option
-          *ngFor="let category of carList[0]?.carCategory"
-          [ngValue]="category"
-        >
-          {{ category }}
-        </option>
-      </select>
-      <div class="from_to">
-        <select (click)="chooseYear()" formControlName="yearFrom">
-          <option value="yearFrom" selected>Year From</option>
-          <option *ngFor="let year of carList[0]?.carYear" [ngValue]="year">
-            {{ year }}
-          </option>
-        </select>
-        <select formControlName="yearTo">
-          <option value="yearTo" selected>Year To</option>
-          <option *ngFor="let year of yearToArr" [ngValue]="year">
-            {{ year }}
-          </option>
-        </select>
-      </div>
-      <div class="from_to">
-        <select (click)="choosePrice()" formControlName="priceFrom">
-          <div class="arrow"></div>
-          <option value="priceFrom" selected>Price From</option>
-          <option
-            *ngFor="let price of carList[0]?.carPrice"
-            value="price"
-            [ngValue]="price"
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "manufacturer" | translate }}</mat-label>
+        <mat-select formControlName="Model">
+          <mat-option>None</mat-option>
+          <mat-option
+            *ngFor="let model of carList[0]?.carModel"
+            [value]="model"
           >
-            {{ price }}
-          </option>
-        </select>
-        <select formControlName="priceTo">
-          <option value="priceTo" selected>Price To</option>
-          <option
-            *ngFor="let price of priceToArr"
-            value="price"
-            [ngValue]="price"
+            {{ model | uppercase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "category" | translate }}</mat-label>
+        <mat-select formControlName="category">
+          <mat-option>None</mat-option>
+          <mat-option
+            *ngFor="let category of carList[0]?.carCategory"
+            [value]="category"
           >
-            {{ price }}
-          </option>
-        </select>
-      </div>
-      <select formControlName="gearBox">
-        <option value="gearBox" selected>Gear Box</option>
-        <option
-          *ngFor="let gearbox of carList[0]?.gearBox"
-          value="gearbox"
-          [ngValue]="gearbox"
-        >
-          {{ gearbox }}
-        </option>
-      </select>
+            {{ category | uppercase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <div class="Filter_button">
-        <button
-          class="filter_btn"
-          [disabled]="!carForm.valid"
-          (click)="filterClick()"
-        >
-          Search
-        </button>
-        <button
-          class="clearFilter_btn"
-          [disabled]="!carForm.valid"
-          (click)="clearFilter()"
-        >
-          <mat-icon>delete_sweep </mat-icon>
-        </button>
-      </div>
+      <!-- <div class="from_to"> -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "year_from" | translate }}</mat-label>
+        <mat-select formControlName="yearFrom">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let year of carList[0]?.carYear" [value]="year">
+            {{ year }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "year_to" | translate }}</mat-label>
+        <mat-select formControlName="yearTo">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let year of yearToArr" [value]="year">
+            {{ year }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- </div> -->
+      <!-- <div class="from_to"> -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "price_from" | translate }}</mat-label>
+        <mat-select formControlName="priceFrom">
+          <mat-option>None</mat-option>
+          <mat-option
+            *ngFor="let price of carList[0]?.carPrice"
+            [value]="price"
+          >
+            {{ price }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "price_to" | translate }}</mat-label>
+        <mat-select formControlName="priceTo">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let price of priceToArr" [value]="price">
+            {{ price }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- </div> -->
+      <mat-form-field id="gearbox" appearance="outline">
+        <mat-label>{{ "gear_box" | translate }}</mat-label>
+        <mat-select formControlName="gearBox">
+          <mat-option>None</mat-option>
+          <mat-option
+            *ngFor="let gearbox of carList[0]?.gearBox"
+            [value]="gearbox"
+          >
+            {{ gearbox | uppercase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <div class="Filter_button"> -->
+      <button class="filter_btn" (click)="filterClick()">Search</button>
+      <button
+        class="clearFilter_btn"
+        [disabled]="!hasFieldsValue"
+        (click)="clearFilter()"
+      >
+        <mat-icon>delete_sweep </mat-icon>
+      </button>
+      <!-- </div> -->
     </form>
   </div>
   <div class="cards_content">

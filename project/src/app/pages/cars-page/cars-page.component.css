@@ -14,11 +14,13 @@
 }
 
 .filter_content form {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  padding: 1rem 0;
+  /* display: grid;
+  grid-template-columns: auto auto auto; */
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
   gap: 1rem;
-  width: 90%;
+  width: 100%;
 }
 
 .from_to {
@@ -26,7 +28,10 @@
   gap: 0.5rem;
 }
 
-form select {
+
+
+
+/* form select {
   all: unset;
   position: relative;
   padding: 0.65rem 0.8rem;
@@ -55,43 +60,90 @@ form select option:first-child {
 form select option {
   height: 20px;
   text-transform: capitalize;
+} */
+
+::ng-deep mat-form-field {
+  width: 30%;
+  margin: auto;
+  flex-grow: 1;
 }
+
+
+#gearbox {
+  width: 100%;
+}
+
+.filter_btn,
+.clearFilter_btn {
+  width: 75%;
+  flex-grow: 1;
+  padding: 0.6rem;
+}
+
+.clearFilter_btn {
+  width: 20%;
+}
+
+
+::ng-deep mat-form-field .mdc-text-field--outlined {
+  background: var(--main_BGcolor);
+  filter: brightness(1.03);
+  transition: 0.1s ease-in-out;
+}
+
+::ng-deep mat-form-field .mdc-text-field--outlined:hover {
+  filter: brightness(0.98);
+}
+
+::ng-deep mat-form-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
 
 .Filter_button {
   display: flex;
   gap: 0.5rem;
-  width: 100%;
+  /* width: 100%; */
 }
 
-.Filter_button .filter_btn {
+
+
+
+
+
+.filter_btn {
   background-color: var(--navbar_links__color_hovered);
   border: var(--navbar_links__color_hovered);
-  width: 100%;
+  /* width: 100%; */
   font-size: 1.125rem;
   font-weight: 600;
 }
 
-.Filter_button .filter_btn:hover {
+.filter_btn:hover {
   filter: none;
   background-color: rgb(190, 17, 52);
 }
 
-.Filter_button .filter_btn:active {
+.filter_btn:active {
   transform: scale(0.95);
 }
 
-.Filter_button .filter_btn:disabled:hover {
+.filter_btn:disabled {
+  filter: opacity(0.85);
+}
+
+.filter_btn:disabled:hover {
   background-color: var(--navbar_links__color_hovered);
-  filter: opacity(0.7);
+  filter: opacity(0.85);
   cursor: default;
 }
 
-.Filter_button .filter_btn:disabled:active {
+.filter_btn:disabled:active {
   transform: none;
 }
 
-.Filter_button .clearFilter_btn {
-  width: 15%;
+.clearFilter_btn {
+  /* width: 15%; */
   min-width: fit-content;
   display: flex;
   align-items: center;
@@ -99,13 +151,25 @@ form select option {
   background-color: #fceaeaf7;
   border: 2px solid #f06a6a;
   color: #ff1818;
-  transition: all 0.2s;
+  transition: all 0.125s linear;
 }
 
-.Filter_button .clearFilter_btn:hover {
+.clearFilter_btn:hover {
   background-color: #ff1818;
   border: 2px solid #ff1818;
   color: var(--main_BGcolor);
+}
+
+.clearFilter_btn:disabled {
+  filter: opacity(0.45) saturate(0.6);
+  border-color: transparent;
+}
+
+.clearFilter_btn:disabled:hover {
+  background-color: #fceaeaf7;
+  border-color: transparent;
+  color: #ff1818;
+  transition: all 0.2s linear;
 }
 
 .cards_content {
@@ -165,18 +229,22 @@ form select option {
     width: 100%;
   }
 
-  .filter_content form {
+  /* .filter_content form {
     display: grid;
     grid-template-columns: auto;
     gap: 1rem;
     width: 100%;
     padding: 1rem;
-  }
+  } */
 
   .from_to {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 0.5rem;
   }
+
+
 
   form select {
     padding: 0.65rem 0.8rem;
@@ -191,6 +259,26 @@ form select option {
   }
 }
 
+@media (max-width: 750px) {
+  ::ng-deep mat-form-field {
+    width: 45%;
+    margin: auto;
+    flex-grow: 1;
+  }
+
+  ::ng-deep mat-form-field mat-label {
+    font-size: 0.9rem;
+  }
+
+  .filter_btn,
+  .clearFilter_btn {
+    padding: 0.8rem;
+  }
+}
+
+
+
+
 @media (max-width: 425px) {
   .cars_container {
     margin: 1rem 0;
@@ -201,4 +289,25 @@ form select option {
   .cards_content {
     width: 100%;
   }
+
+
+
+}
+
+@media (max-width: 365px) {
+  .cars_container {
+    margin: 1rem 0;
+    padding: 0 1rem;
+  }
+
+  .filter_content,
+  .cards_content {
+    width: 100%;
+  }
+
+  ::ng-deep mat-form-field {
+    width: 100%;
+  }
+
+
 }

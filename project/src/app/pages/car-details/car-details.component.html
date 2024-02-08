@@ -9,13 +9,13 @@
 <div *ngIf="carDetails" class="car-details">
   <div class="car-header-image">
     <h2 class="car-header">
-      {{ carDetails.carModel }} {{ carDetails.carSeries }}
-      <span class="car-year">{{ carDetails.carYear }}</span>
+      <span> {{ carDetails.carModel }} {{ carDetails.carSeries }} </span>
+      <span class="car-year">{{ "/ " + carDetails.carYear }}</span>
       <span class="car-price">
         {{ carDetails.carPrice | currency : "USD" }}
       </span>
     </h2>
-    <div class="car-image s">
+    <div class="car-image">
       <img
         src="{{ carDetails.carImg || '/assets/no-image.svg' }}"
         onerror="this.src='/assets/no-image.svg'"

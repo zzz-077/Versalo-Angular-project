@@ -4,6 +4,7 @@
       <div class="Homepage">
         <img
           routerLink="/"
+          (click)="goToHome()"
           class="logo"
           src="/assets/full-logo.svg"
           alt="Versalo"
@@ -102,14 +103,6 @@
           }}</a>
         </li>
         <li>
-          <!-- <select
-            name="language"
-            [(ngModel)]="lang"
-            (ngModelChange)="selectedLang($event)"
-          >
-            <option value="en">En</option>
-            <option value="ge">ქარ</option>
-          </select> -->
           <mat-select
             [(ngModel)]="lang"
             (ngModelChange)="selectedLang($event)"
@@ -122,6 +115,18 @@
         </li>
       </ul>
       <div class="navbar_menu">
+        <li>
+          <a
+            class="nav-link"
+            (click)="uploadLink()"
+            routerLinkActive="activeLink"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <div class="add-btn">
+              <mat-icon>add_circle</mat-icon>
+            </div>
+          </a>
+        </li>
         <li class="responsive_user_li" *ngIf="isLogged">
           <a
             class="nav-link"
@@ -154,19 +159,13 @@
             </div>
           </a>
         </li>
-        <li>
-          <a
-            class="nav-link"
-            (click)="uploadLink()"
-            routerLinkActive="activeLink"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <div class="add-btn">
-              <mat-icon>add_circle</mat-icon>
-            </div>
-          </a>
-        </li>
-        <mat-icon class="menu-icon" (click)="navbarBtnClick()">menu</mat-icon>
+
+        <mat-icon
+          class="menu-icon"
+          [ngClass]="isNavBarDroped ? 'active' : null"
+          (click)="navbarBtnClick()"
+          >menu</mat-icon
+        >
       </div>
     </div>
     <div [ngClass]="isNavBarDroped ? 'active' : null" class="responsive_navbar">
